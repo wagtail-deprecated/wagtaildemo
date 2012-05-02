@@ -1,5 +1,7 @@
 $project_name = "myproject"
 
+$database_name = $project_name
+
 # http://groups.google.com/group/vagrant-up/browse_thread/thread/0fbd824efcce973f
 group { "puppet":
 	ensure => "present",
@@ -23,4 +25,8 @@ include environment
 
 class {'virtualenv':
 	virtualenv_name => $project_name
+}
+
+postgresql::database { $database_name:
+  owner => "postgres",
 }
