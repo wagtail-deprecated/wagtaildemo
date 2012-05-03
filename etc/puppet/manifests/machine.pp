@@ -1,4 +1,4 @@
-$project_name = "myproject"
+$project_name = "{{ project_name }}"
 
 $database_name = $project_name
 $virtualenv_name = $project_name
@@ -33,6 +33,7 @@ postgresql::database { $database_name:
 }
 
 exec {'pip-install-requirements':
-	command => "pip install -E /home/vagrant/.virtualenvs/$virtualenv_name -r /home/vagrant/project/requirements.txt",
+	command => "pip install -E /home/vagrant/.virtualenvs/$virtualenv_name -r /home/vagrant/$project_name/requirements.txt",
 	user => vagrant,
+	path => "/usr/local/bin:/usr/bin:/bin",
 }
