@@ -5,6 +5,7 @@ class python2 {
 		"python-dev",
 		"python-setuptools",
 		"python-pip",
+		"libpq-dev",
 	]
 
 	package {
