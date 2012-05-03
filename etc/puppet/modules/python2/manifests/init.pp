@@ -1,9 +1,10 @@
 class python2 {
 	$packages = [
-			"build-essential",
-			"python",
-			"python-dev",
-			"python-setuptools",
+		"build-essential",
+		"python",
+		"python-dev",
+		"python-setuptools",
+		"python-pip",
 	]
 
 	package {

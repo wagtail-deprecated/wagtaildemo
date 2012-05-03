@@ -1,6 +1,7 @@
 $project_name = "myproject"
 
 $database_name = $project_name
+$virtualenv_name = $project_name
 
 # http://groups.google.com/group/vagrant-up/browse_thread/thread/0fbd824efcce973f
 group { "puppet":
@@ -24,9 +25,14 @@ include postgresql::server
 include environment
 
 class {'virtualenv':
-	virtualenv_name => $project_name
+	virtualenv_name => $virtualenv_name
 }
 
 postgresql::database { $database_name:
-  owner => "postgres",
+	owner => "postgres",
+}
+
+exec {'pip-install-requirements':
+	command => "pip install -E /home/vagrant/.virtualenvs/$virtualenv_name -r /home/vagrant/project/requirements.txt",
+	user => vagrant,
 }
