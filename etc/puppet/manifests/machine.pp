@@ -36,4 +36,5 @@ exec {'pip-install-requirements':
 	command => "pip install -E /home/vagrant/.virtualenvs/$virtualenv_name -r /home/vagrant/$project_name/requirements.txt",
 	user => vagrant,
 	path => "/usr/local/bin:/usr/bin:/bin",
+	require => Class["python2"],
 }
