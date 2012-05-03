@@ -22,7 +22,10 @@ Exec["apt-update"] -> Package <| |>
 
 include python2
 include postgresql::server
-include environment
+
+class {'environment':
+	virtualenv_name => $virtualenv_name
+}
 
 class {'virtualenv':
 	virtualenv_name => $virtualenv_name
