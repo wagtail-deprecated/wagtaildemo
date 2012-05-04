@@ -12,6 +12,7 @@ class virtualenv ($virtualenv_name, $project_dir=undef) {
 		file { "$virtualenv_path/.project":
 			ensure => present,
 			content => $project_dir,
+			require => Exec["mkvirtualenv $virtualenv_name"]
 		}
 	}
 }
