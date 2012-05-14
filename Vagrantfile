@@ -3,7 +3,8 @@
 
 Vagrant::Config.run do |config|
 	# Every Vagrant virtual environment requires a box to build off of.
-	config.vm.box = "django-base"
+	#config.vm.box = "django-base"
+	config.vm.box = "lucid32"
 	
 	# The url from where the 'config.vm.box' box will be fetched if it
 	# doesn't already exist on the user's system.
@@ -25,27 +26,6 @@ Vagrant::Config.run do |config|
 	# folder, and the third is the path on the host to the actual folder.
 	config.vm.share_folder "project", "/home/vagrant/{{ project_name }}", "."
 	
-	# Enable provisioning with Puppet stand alone.  Puppet manifests
-	# are contained in a directory path relative to this Vagrantfile.
-	# You will need to create the manifests directory and a manifest in
-	# the file lucid32.pp in the manifests_path directory.
-	#
-	# An example Puppet manifest to provision the message of the day:
-	#
-	# # group { "puppet":
-	# #   ensure => "present",
-	# # }
-	# #
-	# # File { owner => 0, group => 0, mode => 0644 }
-	# #
-	# # file { '/etc/motd':
-	# #   content => "Welcome to your Vagrant-built virtual machine!
-	# #               Managed by Puppet.\n"
-	# # }
-	#
-	config.vm.provision :puppet, :options => "--verbose --debug" do |puppet|
-		puppet.manifests_path = "etc/puppet/manifests"
-		puppet.module_path = "etc/puppet/modules"
-		puppet.manifest_file = "machine.pp"
-	end
+	# Enable provisioning with a shell script.
+	config.vm.provision :shell, :path => "etc/install.sh", :args => "{{ project_name }}"
 end
