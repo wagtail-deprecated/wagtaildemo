@@ -1,3 +1,2 @@
 .vagrant
-etc/puppet/manifests/pip-log.txt
 settings/local.py
