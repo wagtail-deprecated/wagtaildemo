@@ -27,5 +27,5 @@ Vagrant::Config.run do |config|
 	config.vm.share_folder "project", "/home/vagrant/{{ project_name }}", "."
 	
 	# Enable provisioning with a shell script.
-	config.vm.provision :shell, :path => "etc/install.sh", :args => "{{ project_name }}"
+	config.vm.provision :shell, :path => "etc/install/install.sh", :args => "{{ project_name }}"
 end
