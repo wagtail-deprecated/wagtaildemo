@@ -1,8 +1,14 @@
 # Django settings for {{ project_name }} project.
 
 import os
+import sys
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
+
+# Modify sys.path to include the lib directory
+sys.path.append(os.path.join(PROJECT_ROOT, "lib"))
+# also include django_compressor (hosted locally as there are blocking bugfixes which aren't in a stable release yet)
+sys.path.append(os.path.join(PROJECT_ROOT, "lib", "django_compressor"))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -83,6 +89,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -126,6 +133,7 @@ INSTALLED_APPS = (
 
     'south',
     'devserver',
+    'compressor',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
