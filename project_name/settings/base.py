@@ -7,8 +7,6 @@ PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
 
 # Modify sys.path to include the lib directory
 sys.path.append(os.path.join(PROJECT_ROOT, "lib"))
-# also include django_compressor (hosted locally as there are blocking bugfixes which aren't in a stable release yet)
-sys.path.append(os.path.join(PROJECT_ROOT, "lib", "django_compressor"))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
