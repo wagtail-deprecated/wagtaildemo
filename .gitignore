@@ -1,2 +1,3 @@
 .vagrant
 settings/local.py
+static
