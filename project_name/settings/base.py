@@ -107,6 +107,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -132,6 +134,8 @@ INSTALLED_APPS = (
     'south',
     'devserver',
     'compressor',
+    'debug_toolbar',
+
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -139,6 +143,11 @@ INSTALLED_APPS = (
 )
 
 EMAIL_SUBJECT_PREFIX = '[{ project_name }] '
+
+INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
+
+# django-debug-toolbar settings
+INTERCEPT_REDIRECTS = False
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
