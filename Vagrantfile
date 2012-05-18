@@ -2,13 +2,15 @@
 # vi: set ft=ruby :
 
 Vagrant::Config.run do |config|
-	# Every Vagrant virtual environment requires a box to build off of.
-	#config.vm.box = "django-base"
-	config.vm.box = "lucid32"
-	
-	# The url from where the 'config.vm.box' box will be fetched if it
-	# doesn't already exist on the user's system.
+	# Base box to build off, and download URL for when it doesn't exist on the user's system already
+	config.vm.box = "django-base"
 	config.vm.box_url = "http://vmimages.torchbox.com/django-base.box"
+
+	# As an alternative (particularly for users outside the Torchbox office network),
+	# lucid32 should work just as well (because our provisioning script includes the steps
+	# to get from lucid32 to django-base):
+	#config.vm.box = "lucid32"
+	#config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
 	
 	# Boot with a GUI so you can see the screen. (Default is headless)
 	# config.vm.boot_mode = :gui
