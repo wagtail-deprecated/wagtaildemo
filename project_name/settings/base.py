@@ -147,7 +147,9 @@ EMAIL_SUBJECT_PREFIX = '[{ project_name }] '
 INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
 
 # django-debug-toolbar settings
-INTERCEPT_REDIRECTS = False
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
