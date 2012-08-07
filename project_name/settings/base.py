@@ -144,7 +144,7 @@ INSTALLED_APPS = (
     'core',
 )
 
-EMAIL_SUBJECT_PREFIX = '[{ project_name }] '
+EMAIL_SUBJECT_PREFIX = '[{{ project_name }}] '
 
 INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
 
