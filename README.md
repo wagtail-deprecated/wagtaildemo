@@ -25,7 +25,7 @@ build scripts for getting from lucid32 to django-base are bundled in this projec
 To start a new project, run the following commands (from the place where you would usually create projects - not within
 the vagrant-django-template checkout), changing /path/to/vagrant-django-template and myproject as appropriate:
 
-    django-admin.py startproject --template /path/to/vagrant-django-template --name=Vagrantfile myproject
+    django-admin.py startproject --template https://github.com/torchbox/vagrant-django-template/zipball/master --name=Vagrantfile myproject
     cd myproject
     vagrant up
     vagrant ssh
