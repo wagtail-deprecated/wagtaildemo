@@ -3,14 +3,15 @@
 
 Vagrant::Config.run do |config|
 	# Base box to build off, and download URL for when it doesn't exist on the user's system already
-	config.vm.box = "django-base"
-	config.vm.box_url = "http://vmimages.torchbox.com/django-base.box"
+	config.vm.box = "lucid32"
+	config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
 
-	# As an alternative (particularly for users outside the Torchbox office network),
-	# lucid32 should work just as well (because our provisioning script includes the steps
-	# to get from lucid32 to django-base):
-	#config.vm.box = "lucid32"
-	#config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+	# As an alternative to lucid32, VMs can be built from the 'django-base' box as defined at
+	# https://github.com/torchbox/vagrant-django-base , which has more of the necessary server config
+	# baked in and thus takes less time to initialise. To go down this route, you will need to build
+	# and host django-base.box yourself, and substitute your own URL below.
+	#config.vm.box = "django-base"
+	#config.vm.box_url = "http://example.com/path/to/your/django-base.box"
 	
 	# Boot with a GUI so you can see the screen. (Default is headless)
 	# config.vm.boot_mode = :gui
