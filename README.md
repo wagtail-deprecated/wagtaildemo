@@ -15,15 +15,14 @@ Setup
 -----
 Install Django 1.4 on your host machine. (Be sure to explicitly uninstall earlier versions first, or use a virtualenv -
 having earlier versions around seems to cause pre-1.4-style settings.py and urls.py files to be generated alongside the
-new ones.) Check out the vagrant-django-template repository to some known location.
+new ones.)
 
 *Note to users outside Torchbox:* The Vagrantfile references http://vmimages.torchbox.com/django-base.box, an
 internal-only URL to a prebuilt Vagrant box built according to https://github.com/torchbox/vagrant-django-base . You
 should either build and host this yourself, or simply use http://files.vagrantup.com/lucid32.box instead (all of the
 build scripts for getting from lucid32 to django-base are bundled in this project too).
 
-To start a new project, run the following commands (from the place where you would usually create projects - not within
-the vagrant-django-template checkout), changing /path/to/vagrant-django-template and myproject as appropriate:
+To start a new project, run the following commands:
 
     django-admin.py startproject --template https://github.com/torchbox/vagrant-django-template/zipball/master --name=Vagrantfile myproject
     cd myproject
