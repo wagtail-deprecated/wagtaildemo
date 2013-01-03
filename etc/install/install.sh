@@ -24,7 +24,7 @@ cp $PROJECT_DIR/etc/install/pg_hba.conf /etc/postgresql/$PGSQL_VERSION/main/
 createdb -Upostgres $DB_NAME
 
 # virtualenv setup
-easy_install virtualenvwrapper
+easy_install virtualenv virtualenvwrapper
 sudo -u vagrant -s -- /usr/local/bin/virtualenv $VIRTUALENV_DIR
 sudo -u vagrant -s -- echo $PROJECT_DIR > $VIRTUALENV_DIR/.project
 
