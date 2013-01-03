@@ -32,5 +32,8 @@ cp -p $PROJECT_DIR/etc/install/bashrc /home/vagrant/.bashrc
 echo "workon $VIRTUALENV_NAME" >> /home/vagrant/.bashrc
 sudo -u vagrant -s -- /usr/bin/pip install -E $VIRTUALENV_DIR -r $PROJECT_DIR/requirements.txt
 
+# Set execute permissions on manage.py, as they get lost if we build from a zip file
+chmod a+x $PROJECT_DIR/manage.py
+
 # Django project setup
 sudo -u vagrant -i -- "source $VIRTUALENV_DIR/bin/activate && cd $PROJECT_DIR && ./manage.py syncdb --noinput && ./manage.py migrate"
