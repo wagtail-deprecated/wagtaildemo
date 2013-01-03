@@ -17,11 +17,6 @@ Install Django 1.4 on your host machine. (Be sure to explicitly uninstall earlie
 having earlier versions around seems to cause pre-1.4-style settings.py and urls.py files to be generated alongside the
 new ones.)
 
-*Note to users outside Torchbox:* The Vagrantfile references http://vmimages.torchbox.com/django-base.box, an
-internal-only URL to a prebuilt Vagrant box built according to https://github.com/torchbox/vagrant-django-base . You
-should either build and host this yourself, or simply use http://files.vagrantup.com/lucid32.box instead (all of the
-build scripts for getting from lucid32 to django-base are bundled in this project too).
-
 To start a new project, run the following commands:
 
     django-admin.py startproject --template https://github.com/torchbox/vagrant-django-template/zipball/master --name=Vagrantfile myproject
@@ -33,3 +28,9 @@ To start a new project, run the following commands:
 
 This will make the app accessible on the host machine as http://localhost:8111/ . The codebase is located on the host
 machine, exported to the VM as a shared folder; code editing and Git operations will generally be done on the host.
+
+See also
+--------
+https://github.com/torchbox/vagrant-django-base - a recipe for a Vagrant base box that can be used in place of lucid32
+in the Vagrantfile - this has more of the server setup baked in, so that we can save time by not having to re-run those
+steps every time we create a new VM instance.
