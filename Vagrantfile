@@ -6,7 +6,7 @@ Vagrant::Config.run do |config|
 	config.vm.box = "precise32"
 	config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
-	# As an alternative to lucid32, VMs can be built from the 'django-base' box as defined at
+	# As an alternative to precise32, VMs can be built from the 'django-base' box as defined at
 	# https://github.com/torchbox/vagrant-django-base , which has more of the necessary server config
 	# baked in and thus takes less time to initialise. To go down this route, you will need to build
 	# and host django-base.box yourself, and substitute your own URL below.

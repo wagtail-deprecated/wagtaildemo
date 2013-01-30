@@ -3,7 +3,7 @@ vagrant-django-template
 
 A template for new Django 1.4 projects developed under Vagrant. Features offered include:
 
-* A Vagrantfile for building an Ubuntu Lucid based VM
+* A Vagrantfile for building an Ubuntu Precise based VM
 * A virtualenv (configured to be active on login), with project dependencies managed through a requirements.txt file
 * A PostgreSQL database (with the same name as the project, pre-configured in the project settings file)
 * Separation of configuration settings into base.py, dev.py and production.py (and optionally local.py, kept outside
@@ -31,6 +31,6 @@ machine, exported to the VM as a shared folder; code editing and Git operations 
 
 See also
 --------
-https://github.com/torchbox/vagrant-django-base - a recipe for a Vagrant base box that can be used in place of lucid32
+https://github.com/torchbox/vagrant-django-base - a recipe for a Vagrant base box that can be used in place of precise32
 in the Vagrantfile - this has more of the server setup baked in, so that we can save time by not having to re-run those
 steps every time we create a new VM instance.
