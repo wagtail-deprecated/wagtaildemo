@@ -12,7 +12,7 @@ VIRTUALENV_NAME=$PROJECT_NAME
 PROJECT_DIR=/home/vagrant/$PROJECT_NAME
 VIRTUALENV_DIR=/home/vagrant/.virtualenvs/$PROJECT_NAME
 
-PGSQL_VERSION=8.4
+PGSQL_VERSION=9.1
 
 # Install essential packages from Apt
 apt-get update -y
@@ -20,11 +20,11 @@ apt-get install -y build-essential python python-dev python-setuptools python-pi
 
 # postgresql setup
 cp $PROJECT_DIR/etc/install/pg_hba.conf /etc/postgresql/$PGSQL_VERSION/main/
-/etc/init.d/postgresql-$PGSQL_VERSION reload
+/etc/init.d/postgresql reload
 createdb -Upostgres $DB_NAME
 
 # virtualenv setup
-easy_install virtualenv virtualenvwrapper
+easy_install virtualenv virtualenvwrapper stevedore virtualenv-clone
 sudo -u vagrant -s -- /usr/local/bin/virtualenv $VIRTUALENV_DIR
 sudo -u vagrant -s -- echo $PROJECT_DIR > $VIRTUALENV_DIR/.project
 
@@ -36,4 +36,4 @@ sudo -u vagrant -s -- /usr/bin/pip install -E $VIRTUALENV_DIR -r $PROJECT_DIR/re
 chmod a+x $PROJECT_DIR/manage.py
 
 # Django project setup
-sudo -u vagrant -i -- "source $VIRTUALENV_DIR/bin/activate && cd $PROJECT_DIR && ./manage.py syncdb --noinput && ./manage.py migrate"
+su - vagrant -c "source $VIRTUALENV_DIR/bin/activate && cd $PROJECT_DIR && ./manage.py syncdb --noinput && ./manage.py migrate"
