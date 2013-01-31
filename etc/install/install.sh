@@ -37,10 +37,12 @@ cp $PROJECT_DIR/etc/install/pg_hba.conf /etc/postgresql/$PGSQL_VERSION/main/
 /etc/init.d/postgresql reload
 
 # virtualenv global setup
+easy_install -U pip
 easy_install virtualenv virtualenvwrapper stevedore virtualenv-clone
 
 # bash environment global setup
 cp -p $PROJECT_DIR/etc/install/bashrc /home/vagrant/.bashrc
+su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache"
 
 # ---
 
@@ -48,11 +50,11 @@ cp -p $PROJECT_DIR/etc/install/bashrc /home/vagrant/.bashrc
 createdb -Upostgres $DB_NAME
 
 # virtualenv setup for project
-sudo -u vagrant -s -- /usr/local/bin/virtualenv $VIRTUALENV_DIR
-sudo -u vagrant -s -- echo $PROJECT_DIR > $VIRTUALENV_DIR/.project
+su - vagrant -c "/usr/local/bin/virtualenv $VIRTUALENV_DIR && \
+    echo $PROJECT_DIR > $VIRTUALENV_DIR/.project && \
+    PIP_DOWNLOAD_CACHE=/home/vagrant/.pip_download_cache $VIRTUALENV_DIR/bin/pip install -r $PROJECT_DIR/requirements.txt"
 
 echo "workon $VIRTUALENV_NAME" >> /home/vagrant/.bashrc
-sudo -u vagrant -s -- /usr/bin/pip install -E $VIRTUALENV_DIR -r $PROJECT_DIR/requirements.txt
 
 # Set execute permissions on manage.py, as they get lost if we build from a zip file
 chmod a+x $PROJECT_DIR/manage.py

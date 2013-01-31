@@ -99,4 +99,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 export WORKON_HOME=$HOME/.virtualenvs
+export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 source /usr/local/bin/virtualenvwrapper.sh
