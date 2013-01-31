@@ -25,7 +25,12 @@ export LC_ALL=en_GB.UTF-8
 
 # Install essential packages from Apt
 apt-get update -y
-apt-get install -y build-essential python python-dev python-setuptools python-pip postgresql-$PGSQL_VERSION libpq-dev
+# Python dev packages
+apt-get install -y build-essential python python-dev python-setuptools python-pip
+# Postgresql
+apt-get install -y postgresql-$PGSQL_VERSION libpq-dev
+# Dependencies for image processing with PIL
+apt-get install -y libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev
 
 # postgresql global setup
 cp $PROJECT_DIR/etc/install/pg_hba.conf /etc/postgresql/$PGSQL_VERSION/main/
