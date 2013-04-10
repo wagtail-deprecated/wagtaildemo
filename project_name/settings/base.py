@@ -138,8 +138,7 @@ INSTALLED_APPS = (
     'compressor',
     'debug_toolbar',
 
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
