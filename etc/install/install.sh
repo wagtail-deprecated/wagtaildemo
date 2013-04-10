@@ -27,22 +27,45 @@ export LC_ALL=en_GB.UTF-8
 apt-get update -y
 # Python dev packages
 apt-get install -y build-essential python python-dev python-setuptools python-pip
-# Postgresql
-apt-get install -y postgresql-$PGSQL_VERSION libpq-dev
 # Dependencies for image processing with PIL
 apt-get install -y libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev
+# Git (we'd rather avoid people keeping credentials for git commits in the repo, but sometimes we need it for pip requirements that aren't in PyPI)
+apt-get install -y git
 
-# postgresql global setup
-cp $PROJECT_DIR/etc/install/pg_hba.conf /etc/postgresql/$PGSQL_VERSION/main/
-/etc/init.d/postgresql reload
+# Postgresql
+if ! command -v psql; then
+    apt-get install -y postgresql-$PGSQL_VERSION libpq-dev
+    cp $PROJECT_DIR/etc/install/pg_hba.conf /etc/postgresql/$PGSQL_VERSION/main/
+    /etc/init.d/postgresql reload
+fi
 
 # virtualenv global setup
-easy_install -U pip
-easy_install virtualenv virtualenvwrapper stevedore virtualenv-clone
+if ! command -v pip; then
+    easy_install -U pip
+fi
+if [[ ! -f /usr/local/bin/virtualenv ]]; then
+    easy_install virtualenv virtualenvwrapper stevedore virtualenv-clone
+fi
 
 # bash environment global setup
 cp -p $PROJECT_DIR/etc/install/bashrc /home/vagrant/.bashrc
 su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache"
+
+# Node.js, CoffeeScript and LESS
+if ! command -v npm; then
+    wget http://nodejs.org/dist/v0.10.0/node-v0.10.0.tar.gz
+    tar xzf node-v0.10.0.tar.gz
+    cd node-v0.10.0/
+    ./configure && make && make install
+    cd ..
+    rm -rf node-v0.10.0/ node-v0.10.0.tar.gz
+fi
+if ! command -v coffee; then
+    npm install -g coffee-script
+fi
+if ! command -v lessc; then
+    npm install -g less
+fi
 
 # ---
 

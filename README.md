@@ -1,7 +1,7 @@
 vagrant-django-template
 =======================
 
-A template for new Django 1.4 projects developed under Vagrant. Features offered include:
+A template for new Django 1.5 projects developed under Vagrant. Features offered include:
 
 * A Vagrantfile for building an Ubuntu Precise based VM
 * A virtualenv (configured to be active on login), with project dependencies managed through a requirements.txt file
@@ -13,7 +13,7 @@ A template for new Django 1.4 projects developed under Vagrant. Features offered
 
 Setup
 -----
-Install Django 1.4 on your host machine. (Be sure to explicitly uninstall earlier versions first, or use a virtualenv -
+Install Django 1.5 on your host machine. (Be sure to explicitly uninstall earlier versions first, or use a virtualenv -
 having earlier versions around seems to cause pre-1.4-style settings.py and urls.py files to be generated alongside the
 new ones.)
 
