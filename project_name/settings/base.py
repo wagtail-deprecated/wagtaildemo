@@ -157,7 +157,7 @@ DEBUG_TOOLBAR_CONFIG = {
 # django-compressor settings
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
-    ('text/less', 'lessc {infile} {outfile}'),
+    ('text/less', 'lessc --no-color {infile} {outfile}'),
 )
 
 # A sample logging configuration. The only tangible logging
