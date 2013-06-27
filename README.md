@@ -19,7 +19,7 @@ new ones.)
 
 To start a new project, run the following commands:
 
-    django-admin.py startproject --template https://github.com/torchbox/vagrant-django-template/zipball/torchbox --name=Vagrantfile myproject
+    django-admin.py startproject --template https://github.com/torchbox/vagrant-django-template/zipball/master --name=Vagrantfile myproject
     cd myproject
     vagrant up
     vagrant ssh
