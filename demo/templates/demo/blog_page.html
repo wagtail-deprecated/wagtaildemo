@@ -1,0 +1,27 @@
+{% extends "demo/base.html" %}
+
+
+{% if self.date %}
+    {% block heading %}
+        <div class="page-header">
+            <h2>{{ self.title }} {{ self.date|date:"j F Y" }}</h2>
+        </div>
+    {% endblock %}
+{% endif %}
+
+{% block content %}
+    {% include "demo/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+
+    {% include "demo/includes/body.html" with body=self.body only %}
+
+    {% if self.tags.all.count > 0 %}
+        <div class="page-header"><h3>Tags</h3></div>
+        {% with self.tags.all as tags %}
+            {% for tag in tags %}
+                <a href="{{ global_blogs_index_url }}?tag={{ tag }}"><button class="btn btn-primary" type="button">{{ tag }}</button></a>
+            {% endfor %}
+        {% endwith %}
+    {% endif %}
+
+    {% include "demo/includes/related_links.html" with related_links=self.related_links.all only %}
+{% endblock %}
