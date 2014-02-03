@@ -111,7 +111,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
+
+    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+
+from django.conf import global_settings
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+    'demo.context_processors.global_vars',
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -137,10 +147,26 @@ INSTALLED_APPS = (
     'devserver',
     'compressor',
     'debug_toolbar',
+    'treebeard',
+    'taggit',
+    'modelcluster',
+    'gunicorn',
+    'djcelery',
+    'kombu.transport.django',
 
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+
+    'wagtail.wagtailcore',
+    'wagtail.wagtailadmin',
+    'wagtail.wagtaildocs',
+    'wagtail.wagtailsnippets',
+    'wagtail.wagtailusers',
+    'wagtail.wagtailimages',
+    'wagtail.wagtailembeds',
+    'wagtail.wagtailsearch',
+    'wagtail.wagtailredirects',
 
     'core',
 )
@@ -157,7 +183,7 @@ DEBUG_TOOLBAR_CONFIG = {
 # django-compressor settings
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
-    ('text/less', 'lessc --no-color {infile} {outfile}'),
+    ('text/less', 'lesspress.LessCompiler'),
 )
 
 # A sample logging configuration. The only tangible logging
@@ -188,3 +214,34 @@ LOGGING = {
         },
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+        }
+    }
+}
+
+
+# CELERY SETTINGS
+
+import djcelery
+djcelery.setup_loader()
+
+BROKER_URL = 'redis://'
+CELERY_SEND_TASK_ERROR_EMAILS = True
+CELERYD_LOG_COLOR = False
+
+
+# WAGTAIL SETTINGS
+
+WAGTAIL_SITE_NAME = '{{ project_name }}'
+
+# Override the search results template for wagtailsearch
+WAGTAILSEARCH_RESULTS_TEMPLATE = 'core/search_results.html'
+WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'core/includes/search_listing.html'
+
+WAGTAILSEARCH_ES_INDEX = '{{ project_name }}'
