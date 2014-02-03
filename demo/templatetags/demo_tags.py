@@ -26,7 +26,7 @@ def top_menu(context, parent, calling_page=None):
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,
-        'request': context['request'], #required by the {% pageurl %} tag that we want to use within this template
+        'request': context['request'], #required by the pageurl tag that we want to use within this template
     }
 
 
@@ -37,7 +37,7 @@ def top_menu_children(context, parent):
     return {
         'parent': parent,
         'menuitems_children': menuitems_children,
-        'request': context['request'], #required by the {% pageurl %} tag that we want to use within this template
+        'request': context['request'], #required by the pageurl tag that we want to use within this template
     }
 
 
@@ -53,7 +53,7 @@ def secondary_menu(context, calling_page=None):
             pages = calling_page.get_other_siblings().filter(live=True, show_in_menus=True)
     return {
         'pages': pages,
-        'request': context['request'],  #required by the {% pageurl %} tag that we want to use within this template
+        'request': context['request'],  #required by the pageurl tag that we want to use within this template
     }
 
 
@@ -63,7 +63,7 @@ def standard_index_listing(context, calling_page):
     pages = calling_page.get_children().filter(live=True)
     return {
         'pages': pages,
-        'request': context['request'],  # required by the {% pageurl %} tag that we want to use within this template
+        'request': context['request'],  # required by the pageurl tag that we want to use within this template
     }
 
 
@@ -73,7 +73,7 @@ def person_listing_homepage(context, count=2):
     people = PersonPage.objects.filter(live=True).order_by('?')
     return {
         'people': people[:count],
-        'request': context['request'],  # required by the {% pageurl %} tag that we want to use within this template
+        'request': context['request'],  # required by the pageurl tag that we want to use within this template
     }
 
 
@@ -83,7 +83,7 @@ def blog_listing_homepage(context, count=2):
     blogs = BlogPage.objects.filter(live=True).order_by('-date')
     return {
         'blogs': blogs[:count],
-        'request': context['request'],  # required by the {% pageurl %} tag that we want to use within this template
+        'request': context['request'],  # required by the pageurl tag that we want to use within this template
     }
 
 
@@ -93,7 +93,7 @@ def event_listing_homepage(context, count=2):
     events = EventPage.objects.filter(live=True).filter(date_from__gte=date.today()).order_by('date_from')
     return {
         'events': events[:count],
-        'request': context['request'],  # required by the {% pageurl %} tag that we want to use within this template
+        'request': context['request'],  # required by the pageurl tag that we want to use within this template
     }
 
 
