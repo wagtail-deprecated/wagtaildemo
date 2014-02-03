@@ -144,7 +144,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'south',
-    'devserver',
     'compressor',
     'debug_toolbar',
     'treebeard',
@@ -168,7 +167,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
 
-    'core',
+    'demo',
 )
 
 EMAIL_SUBJECT_PREFIX = '[{{ project_name }}] '
@@ -185,6 +184,10 @@ COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
     ('text/less', 'lesspress.LessCompiler'),
 )
+
+# Auth settings
+LOGIN_URL = 'django.contrib.auth.views.login'
+LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
