@@ -18,3 +18,5 @@ django-redis-cache==0.10.2
 django-taggit==0.11.2
 Pillow==2.3.0
 beautifulsoup4==4.3.2
+lxml==3.3.0
+BeautifulSoup==3.2.1
