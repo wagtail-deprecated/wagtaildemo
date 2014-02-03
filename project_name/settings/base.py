@@ -121,7 +121,7 @@ MIDDLEWARE_CLASSES = (
 from django.conf import global_settings
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
-    'demo.context_processors.global_vars',
+    'core.context_processors.global_vars',
 )
 
 ROOT_URLCONF = '{{ project_name }}.urls'
@@ -167,7 +167,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
 
-    'demo',
+    'core',
 )
 
 EMAIL_SUBJECT_PREFIX = '[{{ project_name }}] '

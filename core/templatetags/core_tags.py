@@ -1,5 +1,5 @@
 from django import template
-from demo.models import *
+from core.models import *
 
 register = template.Library()
 
@@ -18,7 +18,7 @@ def has_menu_children(page):
 
 # Retrieves the top menu items - the immediate children of the parent page
 # The has_menu_children method is necessary because the bootstrap menu requires a dropdown class to be applied to a parent
-@register.inclusion_tag('demo/tags/top_menu.html', takes_context=True)
+@register.inclusion_tag('core/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().filter(live=True, show_in_menus=True)
     for menuitem in menuitems:
@@ -31,7 +31,7 @@ def top_menu(context, parent, calling_page=None):
 
 
 # Retrieves the children of the top menu items for the drop downs
-@register.inclusion_tag('demo/tags/top_menu_children.html', takes_context=True)
+@register.inclusion_tag('core/tags/top_menu_children.html', takes_context=True)
 def top_menu_children(context, parent):
     menuitems_children = parent.get_children().filter(live=True, show_in_menus=True)
     return {
@@ -42,7 +42,7 @@ def top_menu_children(context, parent):
 
 
 # Retrieves the secondary links for the 'also in this section' links - either the children or siblings of the current page
-@register.inclusion_tag('demo/tags/secondary_menu.html', takes_context=True)
+@register.inclusion_tag('core/tags/secondary_menu.html', takes_context=True)
 def secondary_menu(context, calling_page=None):
     pages = []
     if calling_page:
@@ -58,7 +58,7 @@ def secondary_menu(context, calling_page=None):
 
 
 # Retrieves all live pages which are children of the calling page - for standard index listing
-@register.inclusion_tag('demo/tags/standard_index_listing.html', takes_context=True)
+@register.inclusion_tag('core/tags/standard_index_listing.html', takes_context=True)
 def standard_index_listing(context, calling_page):
     pages = calling_page.get_children().filter(live=True)
     return {
@@ -68,7 +68,7 @@ def standard_index_listing(context, calling_page):
 
 
 # Person feed for home page
-@register.inclusion_tag('demo/tags/person_listing_homepage.html', takes_context=True)
+@register.inclusion_tag('core/tags/person_listing_homepage.html', takes_context=True)
 def person_listing_homepage(context, count=2):
     people = PersonPage.objects.filter(live=True).order_by('?')
     return {
@@ -78,7 +78,7 @@ def person_listing_homepage(context, count=2):
 
 
 # Blog feed for home page
-@register.inclusion_tag('demo/tags/blog_listing_homepage.html', takes_context=True)
+@register.inclusion_tag('core/tags/blog_listing_homepage.html', takes_context=True)
 def blog_listing_homepage(context, count=2):
     blogs = BlogPage.objects.filter(live=True).order_by('-date')
     return {
@@ -88,7 +88,7 @@ def blog_listing_homepage(context, count=2):
 
 
 # Events feed for home page
-@register.inclusion_tag('demo/tags/event_listing_homepage.html', takes_context=True)
+@register.inclusion_tag('core/tags/event_listing_homepage.html', takes_context=True)
 def event_listing_homepage(context, count=2):
     events = EventPage.objects.filter(live=True).filter(date_from__gte=date.today()).order_by('date_from')
     return {
@@ -98,7 +98,7 @@ def event_listing_homepage(context, count=2):
 
 
 # Advert snippets
-@register.inclusion_tag('demo/tags/adverts.html', takes_context=True)
+@register.inclusion_tag('core/tags/adverts.html', takes_context=True)
 def adverts(context):
     return {
         'adverts': Advert.objects.all(),

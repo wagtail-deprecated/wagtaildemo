@@ -1,8 +1,8 @@
-{% extends "demo/base.html" %}
+{% extends "core/base.html" %}
 {% load pageurl image_tags %}
 
 {% block content %}
-    {% include "demo/includes/intro.html" with intro=self.intro only %}
+    {% include "core/includes/intro.html" with intro=self.intro only %}
 
     {# Uses method defined in models.py to retrieve all upcoming events #}
     {# See also standard index for creating a listing with a tag #}
@@ -10,11 +10,11 @@
         {% if events %}    
             <div class="list-group">
                 {% for event in events %}
-                    {% include "demo/includes/event_list_item.html" %}
+                    {% include "core/includes/event_list_item.html" %}
                 {% endfor %}
             </div>
         {% endif %}
     {% endwith %}
 
-    {% include "demo/includes/related_links.html" with related_links=self.related_links.all only %}
+    {% include "core/includes/related_links.html" with related_links=self.related_links.all only %}
 {% endblock %}

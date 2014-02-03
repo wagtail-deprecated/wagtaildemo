@@ -1,7 +1,7 @@
-{% extends "demo/base.html" %}
+{% extends "core/base.html" %}
 
 {% block content %}
-    {% include "demo/includes/intro.html" with intro=self.intro only %}
+    {% include "core/includes/intro.html" with intro=self.intro only %}
 
     {% if request.GET.tag|length %}
         <h4>Showing posts tagged as {{ request.GET.tag|safe }} <a href="{{ global_blogs_index_url }}">Show all</a></h4>
@@ -11,7 +11,7 @@
         {# Uses serve method defined in models.py - allows for paging if required #}
         {# See also standard index for creating a listing with a tag #}
         {% for blog in blogs %}
-            {% include "demo/includes/blog_list_item.html" %}
+            {% include "core/includes/blog_list_item.html" %}
         {% empty %}
             No blogs found
         {% endfor %}
@@ -35,5 +35,5 @@
         </div>
     </div>
 
-    {% include "demo/includes/related_links.html" with related_links=self.related_links.all only %}
+    {% include "core/includes/related_links.html" with related_links=self.related_links.all only %}
 {% endblock %}

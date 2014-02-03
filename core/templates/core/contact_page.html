@@ -1,0 +1,7 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    {% include "core/includes/body.html" with body=self.body only %}
+
+    {% include "core/includes/contact.html" with contact=self only %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    {% include "core/includes/intro.html" with intro=self.intro only %}
+
+    {% include "core/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+
+    {% include "core/includes/body.html" with body=self.body only %}
+
+    {% include "core/includes/related_links.html" with related_links=self.related_links.all only %}
+{% endblock %}

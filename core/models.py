@@ -119,7 +119,7 @@ class RelatedLink(LinkFields):
 
 class AdvertPlacement(models.Model):
     page = ParentalKey('wagtailcore.Page', related_name='advert_placements')
-    advert = models.ForeignKey('demo.Advert', related_name='+')
+    advert = models.ForeignKey('core.Advert', related_name='+')
 
 class Advert(models.Model):
     page = models.ForeignKey('wagtailcore.Page', related_name='adverts', null=True, blank=True)
@@ -141,10 +141,10 @@ register_snippet(Advert)
 # Home Page
 
 class HomePageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('demo.HomePage', related_name='carousel_items')
+    page = ParentalKey('core.HomePage', related_name='carousel_items')
 
 class HomePageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.HomePage', related_name='related_links')
+    page = ParentalKey('core.HomePage', related_name='related_links')
 
 class HomePage(Page):
     body = RichTextField(blank=True)
@@ -170,7 +170,7 @@ HomePage.promote_panels = [
 # Standard index page
 
 class StandardIndexPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.StandardIndexPage', related_name='related_links')
+    page = ParentalKey('core.StandardIndexPage', related_name='related_links')
 
 class StandardIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -194,10 +194,10 @@ StandardIndexPage.promote_panels = [
 # Standard page
 
 class StandardPageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('demo.StandardPage', related_name='carousel_items')
+    page = ParentalKey('core.StandardPage', related_name='carousel_items')
 
 class StandardPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.StandardPage', related_name='related_links')
+    page = ParentalKey('core.StandardPage', related_name='related_links')
 
 class StandardPage(Page):
     intro = RichTextField(blank=True)
@@ -224,7 +224,7 @@ StandardPage.promote_panels = [
 # Blog index page
 
 class BlogIndexPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.BlogIndexPage', related_name='related_links')
+    page = ParentalKey('core.BlogIndexPage', related_name='related_links')
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -273,13 +273,13 @@ BlogIndexPage.promote_panels = [
 # Blog page
 
 class BlogPageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('demo.BlogPage', related_name='carousel_items')
+    page = ParentalKey('core.BlogPage', related_name='carousel_items')
 
 class BlogPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.BlogPage', related_name='related_links')
+    page = ParentalKey('core.BlogPage', related_name='related_links')
 
 class BlogPageTag(TaggedItemBase):
-    content_object = ParentalKey('demo.BlogPage', related_name='tagged_items')
+    content_object = ParentalKey('core.BlogPage', related_name='tagged_items')
 
 class BlogPage(Page):
     body = RichTextField()
@@ -308,7 +308,7 @@ BlogPage.promote_panels = [
 # Person page
 
 class PersonPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.PersonPage', related_name='related_links')
+    page = ParentalKey('core.PersonPage', related_name='related_links')
 
 class PersonPage(Page, ContactFields):
     first_name = models.CharField(max_length=255)
@@ -362,7 +362,7 @@ ContactPage.promote_panels = [
 # Event index page
 
 class EventIndexPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.EventIndexPage', related_name='related_links')
+    page = ParentalKey('core.EventIndexPage', related_name='related_links')
 
 class EventIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -397,13 +397,13 @@ EventIndexPage.promote_panels = [
 # Event page
 
 class EventPageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('demo.EventPage', related_name='carousel_items')
+    page = ParentalKey('core.EventPage', related_name='carousel_items')
 
 class EventPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.EventPage', related_name='related_links')
+    page = ParentalKey('core.EventPage', related_name='related_links')
 
 class EventPageSpeaker(Orderable, LinkFields):
-    page = ParentalKey('demo.EventPage', related_name='speakers')
+    page = ParentalKey('core.EventPage', related_name='speakers')
     first_name = models.CharField("Name", max_length=255, blank=True)
     last_name = models.CharField("Surname", max_length=255, blank=True)
     image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
