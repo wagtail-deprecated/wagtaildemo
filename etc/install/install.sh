@@ -26,15 +26,14 @@ export LC_ALL=en_GB.UTF-8
 # Install essential packages from Apt
 apt-get update -y
 # Python dev packages
-apt-get install -y build-essential python python-dev
-# python-setuptools being installed manually
-wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python
-# Dependencies for image processing with Pillow (drop-in replacement for PIL)
-# supporting: jpeg, tiff, png, freetype, littlecms
-# (pip install pillow to get pillow itself, it is not in requirements.txt)
-apt-get install -y libjpeg62-dev libtiff4-dev zlib1g-dev libfreetype6-dev liblcms2-dev
+apt-get install -y build-essential python python-dev python-setuptools python-pip
+# Dependencies for image processing with PIL
+apt-get install -y libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev
 # Git (we'd rather avoid people keeping credentials for git commits in the repo, but sometimes we need it for pip requirements that aren't in PyPI)
 apt-get install -y git
+
+apt-get install -y redis-server
+
 
 # Postgresql
 if ! command -v psql; then
@@ -48,7 +47,7 @@ if ! command -v pip; then
     easy_install -U pip
 fi
 if [[ ! -f /usr/local/bin/virtualenv ]]; then
-    pip install virtualenv virtualenvwrapper stevedore virtualenv-clone
+    easy_install virtualenv virtualenvwrapper stevedore virtualenv-clone
 fi
 
 # bash environment global setup
@@ -73,8 +72,23 @@ fi
 
 # ---
 
+# ElasticSearch
+if ! command -v elasticsearch; then
+    apt-get install -y openjdk-6-jre-headless
+    echo "Downloading ElasticSearch..."
+    wget -q https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.deb
+    dpkg -i elasticsearch-0.90.5.deb
+    service elasticsearch start
+fi
+
 # postgresql setup for project
 createdb -Upostgres $DB_NAME
+
+# use YAML for test fixtures
+apt-get install -y libyaml-dev
+
+# dependencies for lxml (for HTML whitelisting)
+apt-get install -y libxml2-dev libxslt-dev
 
 # virtualenv setup for project
 su - vagrant -c "/usr/local/bin/virtualenv $VIRTUALENV_DIR && \
@@ -87,4 +101,4 @@ echo "workon $VIRTUALENV_NAME" >> /home/vagrant/.bashrc
 chmod a+x $PROJECT_DIR/manage.py
 
 # Django project setup
-su - vagrant -c "source $VIRTUALENV_DIR/bin/activate && cd $PROJECT_DIR && ./manage.py syncdb --noinput && ./manage.py migrate"
+su - vagrant -c "source $VIRTUALENV_DIR/bin/activate && cd $PROJECT_DIR && ./manage.py syncdb --noinput && ./manage.py migrate --noinput"
