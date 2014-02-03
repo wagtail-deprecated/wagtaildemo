@@ -4,6 +4,8 @@ Wagtail demo
 Setup
 -----
 
+Install Django 1.6 on your host machine. (Be sure to explicitly uninstall earlier versions first, or use a virtualenv - having earlier versions around seems to cause pre-1.4-style settings.py and urls.py files to be generated alongside the new ones.)
+
 To start a new project, run the following commands:
 
     django-admin.py startproject --template https://github.com/torchbox/wagtaildemo/zipball/master --name=Vagrantfile myproject
