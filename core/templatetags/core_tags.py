@@ -11,13 +11,14 @@ def get_site_root(context):
 
 def has_menu_children(page):
     if page.get_children().filter(live=True, show_in_menus=True):
-        return True;
+        return True
     else:
-        return False;
+        return False
 
 
 # Retrieves the top menu items - the immediate children of the parent page
-# The has_menu_children method is necessary because the bootstrap menu requires a dropdown class to be applied to a parent
+# The has_menu_children method is necessary because the bootstrap menu requires
+# a dropdown class to be applied to a parent
 @register.inclusion_tag('core/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().filter(live=True, show_in_menus=True)
@@ -26,22 +27,26 @@ def top_menu(context, parent, calling_page=None):
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,
-        'request': context['request'], #required by the pageurl tag that we want to use within this template
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
     }
 
 
 # Retrieves the children of the top menu items for the drop downs
 @register.inclusion_tag('core/tags/top_menu_children.html', takes_context=True)
 def top_menu_children(context, parent):
-    menuitems_children = parent.get_children().filter(live=True, show_in_menus=True)
+    menuitems_children = parent.get_children()
+    menuitems_children = menuitems_children.filter(live=True, show_in_menus=True)
     return {
         'parent': parent,
         'menuitems_children': menuitems_children,
-        'request': context['request'], #required by the pageurl tag that we want to use within this template
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
     }
 
 
-# Retrieves the secondary links for the 'also in this section' links - either the children or siblings of the current page
+# Retrieves the secondary links for the 'also in this section' links
+# - either the children or siblings of the current page
 @register.inclusion_tag('core/tags/secondary_menu.html', takes_context=True)
 def secondary_menu(context, calling_page=None):
     pages = []
@@ -53,17 +58,20 @@ def secondary_menu(context, calling_page=None):
             pages = calling_page.get_other_siblings().filter(live=True, show_in_menus=True)
     return {
         'pages': pages,
-        'request': context['request'],  #required by the pageurl tag that we want to use within this template
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
     }
 
 
-# Retrieves all live pages which are children of the calling page - for standard index listing
+# Retrieves all live pages which are children of the calling page
+#for standard index listing
 @register.inclusion_tag('core/tags/standard_index_listing.html', takes_context=True)
 def standard_index_listing(context, calling_page):
     pages = calling_page.get_children().filter(live=True)
     return {
         'pages': pages,
-        'request': context['request'],  # required by the pageurl tag that we want to use within this template
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
     }
 
 
@@ -73,7 +81,8 @@ def person_listing_homepage(context, count=2):
     people = PersonPage.objects.filter(live=True).order_by('?')
     return {
         'people': people[:count],
-        'request': context['request'],  # required by the pageurl tag that we want to use within this template
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
     }
 
 
@@ -83,7 +92,8 @@ def blog_listing_homepage(context, count=2):
     blogs = BlogPage.objects.filter(live=True).order_by('-date')
     return {
         'blogs': blogs[:count],
-        'request': context['request'],  # required by the pageurl tag that we want to use within this template
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
     }
 
 
@@ -93,7 +103,8 @@ def event_listing_homepage(context, count=2):
     events = EventPage.objects.filter(live=True).filter(date_from__gte=date.today()).order_by('date_from')
     return {
         'events': events[:count],
-        'request': context['request'],  # required by the pageurl tag that we want to use within this template
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
     }
 
 

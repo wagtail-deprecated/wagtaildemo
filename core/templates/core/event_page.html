@@ -18,7 +18,7 @@
         {% endif %}
 
         {% if self.signup_link %}
-            <p>Sign up: <a href="{% pageurl self %}">{% pageurl self %}</a></p>
+            <p>Sign up: <a href="{{ self.signup_link }}">{{ self.signup_link }}</a></p>
         {% endif %}
     </div>
 
