@@ -1,4 +1,4 @@
-# Django settings for {{ project_name }} project.
+# Django settings for wagtaildemo project.
 
 import os
 import sys
@@ -20,7 +20,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '{{ project_name }}',
+        'NAME': 'wagtaildemo',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': '',  # Set to empty string for localhost.
@@ -94,7 +94,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '{{ secret_key }}'
+SECRET_KEY = 'wq21wtjo3@d_qfjvd-#td!%7gfy2updj2z+nev^k$iy%=m4_tr'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -124,10 +124,10 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'core.context_processors.global_vars',
 )
 
-ROOT_URLCONF = '{{ project_name }}.urls'
+ROOT_URLCONF = 'wagtaildemo.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
+WSGI_APPLICATION = 'wagtaildemo.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -170,7 +170,7 @@ INSTALLED_APPS = (
     'core',
 )
 
-EMAIL_SUBJECT_PREFIX = '[{{ project_name }}] '
+EMAIL_SUBJECT_PREFIX = '[wagtaildemo] '
 
 INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
 
@@ -241,10 +241,10 @@ CELERYD_LOG_COLOR = False
 
 # WAGTAIL SETTINGS
 
-WAGTAIL_SITE_NAME = '{{ project_name }}'
+WAGTAIL_SITE_NAME = 'wagtaildemo'
 
 # Override the search results template for wagtailsearch
 WAGTAILSEARCH_RESULTS_TEMPLATE = 'core/search_results.html'
 WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'core/includes/search_listing.html'
 
-WAGTAILSEARCH_ES_INDEX = '{{ project_name }}'
+WAGTAILSEARCH_ES_INDEX = 'wagtaildemo'
