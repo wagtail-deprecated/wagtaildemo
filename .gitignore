@@ -1,5 +1,5 @@
 /.vagrant
-/settings/local.py
+/wagtaildemo/settings/local.py
 /static
 *.pyc
 /media
