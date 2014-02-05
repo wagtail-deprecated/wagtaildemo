@@ -242,7 +242,7 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
 class StandardPage(Page):
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
-    postcode = models.CharField(max_length=255)
+    postcode = models.CharField(max_length=255, null=True, blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -257,6 +257,7 @@ class StandardPage(Page):
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
+    FieldPanel('postcode'),
     InlinePanel(StandardPage, 'carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
     InlinePanel(StandardPage, 'related_links', label="Related links"),
