@@ -6,7 +6,7 @@
             <li>
                 <a href="{{ carousel_item.link }}">
                     {% if carousel_item.embed_url %}
-                        {# Embedded video - requires an embedly key to be stored in verdant/settings/local.py #}
+                        {# Embedded video - requires an embedly key to be stored in wagtaildemo/settings/local.py #}
                         {{ carousel_item.embed_url|embed:1000 }}
                     {% else %}
                         {# Carousel image - first store image as a variable in order to construct an image tag with a title applied (title is used by bxslider js to construct the caption) #}
