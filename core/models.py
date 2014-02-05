@@ -281,17 +281,27 @@ class BlogIndexPage(Page):
     indexed_fields = ('intro', )
     search_name = "Blog"
 
+    @property
+    def blogs(self):
+        # Get list of blog pages that are descendants of this page
+        blogs = BlogPage.objects.filter(
+            live=True,
+            path__startswith=self.path
+        )
+
+        # Order by most recent date first
+        blogs = blogs.order_by('-date')
+
+        return blogs
+
     def serve(self, request):
-        # Return list of blog pages that are descendants of this page
-        blogs = BlogPage.objects.filter(live=True, path__startswith=self.path)
+        # Get blogs
+        blogs = self.blogs
 
         # Filter by tag
         tag = request.GET.get('tag')
         if tag:
             blogs = blogs.filter(tags__name=tag)
-
-        # Order by most recent date first
-        blogs = blogs.distinct().order_by('-date')
 
         # Pagination
         page = request.GET.get('page')
@@ -347,6 +357,16 @@ class BlogPage(Page):
 
     indexed_fields = ('body', )
     search_name = "Blog Entry"
+
+    @property
+    def blog_index(self):
+        # Find blog index in ancestors
+        for ancestor in reversed(self.get_ancestors()):
+            if isinstance(ancestor.specific, BlogIndexPage):
+                return ancestor
+
+        # No ancestors are blog indexes, just return first blog index in database
+        return BlogIndexPage.objects.first()
 
 BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -536,7 +556,15 @@ class EventPage(Page):
     indexed_fields = ('get_audience_display', 'location', 'body')
     search_name = "Event"
 
-    # Serve method to generate the ical format for events
+    @property
+    def event_index(self):
+        # Find blog index in ancestors
+        for ancestor in reversed(self.get_ancestors()):
+            if isinstance(ancestor.specific, EventIndexPage):
+                return ancestor
+
+        # No ancestors are blog indexes, just return first blog index in database
+        return EventIndexPage.objects.first()
 
     def serve(self, request):
         if "format" in request.GET:

@@ -121,7 +121,6 @@ MIDDLEWARE_CLASSES = (
 from django.conf import global_settings
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
-    'core.context_processors.global_vars',
 )
 
 ROOT_URLCONF = 'wagtaildemo.urls'
