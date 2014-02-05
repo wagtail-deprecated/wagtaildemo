@@ -20,6 +20,12 @@
         {% if self.signup_link %}
             <p>Sign up: <a href="{{ self.signup_link }}">{{ self.signup_link }}</a></p>
         {% endif %}
+
+        <p>
+            <a class='calendar' href= "{{ url }}?format=ical">
+                Add to calendar
+            </a>
+        </p>
     </div>
 
     {% include "core/includes/carousel.html" with carousel_items=self.carousel_items.all only %}

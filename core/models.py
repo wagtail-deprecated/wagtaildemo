@@ -19,6 +19,12 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from datetime import date
+from datetime import timedelta
+import datetime
+
+import hashlib
+
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 EVENT_AUDIENCE_CHOICES = (
@@ -236,6 +242,7 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
 class StandardPage(Page):
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
+    postcode = models.CharField(max_length=255)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -527,6 +534,95 @@ class EventPage(Page):
 
     indexed_fields = ('get_audience_display', 'location', 'body')
     search_name = "Event"
+
+    # Serve method to generate the ical format for events
+
+    def serve(self, request):
+        if "format" in request.GET:
+            if request.GET['format'] == 'ical':
+                # Begin event
+                # VEVENT format: http://www.kanzaki.com/docs/ical/vevent.html
+                ical_components = [
+                    'BEGIN:VCALENDAR',
+                    'VERSION:2.0',
+                    'PRODID:-//Torchbox//verdant//EN',
+                ]
+
+                # Work out number of days the event lasts
+                if self.date_to is not None:
+                    days = (self.date_to - self.date_from).days + 1
+                else:
+                    days = 1
+
+                for day in range(days):
+                    # Get date
+                    date = self.date_from + timedelta(days=day)
+
+                    # Get times
+                    if self.time_from is not None:
+                        start_time = self.time_from
+                    else:
+                        start_time = datetime.time.min
+                    if self.time_to is not None:
+                        end_time = self.time_to
+                    else:
+                        end_time = datetime.time.max
+
+                    # Combine dates and times
+                    start_datetime = datetime.datetime.combine(
+                        date,
+                        start_time
+                    )
+                    end_datetime = datetime.datetime.combine(date, end_time)
+
+                    def add_slashes(string):
+                        string.replace('"', '\\"')
+                        string.replace('\\', '\\\\')
+                        string.replace(',', '\\,')
+                        string.replace(':', '\\:')
+                        string.replace(';', '\\;')
+                        string.replace('\n', '\\n')
+                        return string
+
+                    # Make event
+                    ical_components.extend([
+                        'BEGIN:VEVENT',
+                        'UID:'
+                        + hashlib.sha1(self.url
+                        + str(start_datetime)).hexdigest()
+                        + '@{{ request.site.hostname }}',
+                        'URL:'
+                        + add_slashes(self.url),
+                        'DTSTAMP:' + start_time.strftime('%Y%m%dT%H%M%S'),
+                        'SUMMARY:' + add_slashes(self.title),
+                        'DESCRIPTION:' + add_slashes(self.search_description),
+                        'LOCATION:' + add_slashes(self.location),
+                        'DTSTART;TZID=Europe/London:'
+                        + start_datetime.strftime('%Y%m%dT%H%M%S'),
+                        'DTEND;TZID=Europe/London:'
+                        + end_datetime.strftime('%Y%m%dT%H%M%S'),
+                        'END:VEVENT',
+                    ])
+
+                # Finish event
+                ical_components.extend([
+                    'END:VCALENDAR'
+                ])
+
+                # Send response
+                response = HttpResponse(
+                    "\r".join(ical_components),
+                    content_type='text/calendar'
+                )
+                response['Content-Disposition'] = 'attachment; filename=' + self.slug + '.ics'
+                return response
+            else:
+                # Unrecognised format error
+                message = 'Could not export event\n\nUnrecognised format: ' + request.GET['format']
+                return HttpResponse(message, content_type='text/plain')
+        else:
+            # Display event page as usual
+            return super(EventPage, self).serve(request)
 
 EventPage.content_panels = [
     FieldPanel('title', classname="full title"),
