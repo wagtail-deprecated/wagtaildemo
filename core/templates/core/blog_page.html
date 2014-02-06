@@ -14,14 +14,14 @@
 
     {% include "core/includes/body.html" with body=self.body only %}
 
-    {% if self.tags.all.count > 0 %}
-        <div class="page-header"><h3>Tags</h3></div>
-        {% with self.tags.all as tags %}
+    {% with self.tags.all as tags %}
+        {% if tags %}
+            <div class="page-header"><h3>Tags</h3></div>
             {% for tag in tags %}
-                <a href="{{ global_blogs_index_url }}?tag={{ tag }}"><button class="btn btn-primary" type="button">{{ tag }}</button></a>
+                <a href="{{ self.blog_index.url }}?tag={{ tag }}"><button class="btn btn-primary" type="button">{{ tag }}</button></a>
             {% endfor %}
-        {% endwith %}
-    {% endif %}
+        {% endif %}
+    {% endwith %}
 
     {% include "core/includes/related_links.html" with related_links=self.related_links.all only %}
 {% endblock %}

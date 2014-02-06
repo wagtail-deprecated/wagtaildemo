@@ -2,3 +2,4 @@
 /wagtaildemo/settings/local.py
 /static
 *.pyc
+/media
