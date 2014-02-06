@@ -12,25 +12,22 @@
 
         <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
 
-        {% block css %} {# Block defined for timing breakdowns in django debug toolbar - not expected to be overridden #}
-            
-            {# External stylesheets #}
-            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+        {# External stylesheets #}
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
 
-            {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
-            {% compress css %}
-                {# Vendor stylesheets stored locally #}
-                <link rel="stylesheet" href="{% static "core/css/vendor/jquery.bxslider.css" %}" />
+        {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
+        {% compress css %}
+            {# Vendor stylesheets stored locally #}
+            <link rel="stylesheet" href="{% static "core/css/vendor/jquery.bxslider.css" %}" />
 
-                {# Custom stylesheets #}
-                {# Less compilation relies on django compressor #}
-                <link rel="stylesheet" type="text/less" href="{% static "core/css/main.less" %}" />
+            {# Custom stylesheets #}
+            {# Less compilation relies on django compressor #}
+            <link rel="stylesheet" type="text/less" href="{% static "core/css/main.less" %}" />
 
-            {% endcompress %}
+        {% endcompress %}
 
-            {% block extra_css %}{% endblock %} {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
-        {% endblock %}
+        {% block extra_css %}{% endblock %} {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
 
         {# Javascript that needs to be called from head e.g. google analytics snippet and bootstrap shivs #}
         <script type="text/javascript">
@@ -92,21 +89,19 @@
 
         </div>
 
-        {% block js %}{# Block defined for timing breakdowns in django debug toolbar - not expected to be overridden #}
-            {# External javascript #}
-            <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-            <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        {# External javascript #}
+        <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
-            {% compress js %}
-                <script src="{% static "core/js/vendor/jquery.bxslider.min.js" %}"></script>
-                <script src="{% static "core/js/vendor/fluidvids.js" %}"></script>
-                {# Custom javascript #}
-                {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
-                <script src="{% static "core/js/main.js" %}"></script>
-            {% endcompress %}
+        {% compress js %}
+            <script src="{% static "core/js/vendor/jquery.bxslider.min.js" %}"></script>
+            <script src="{% static "core/js/vendor/fluidvids.js" %}"></script>
+            {# Custom javascript #}
+            {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
+            <script src="{% static "core/js/main.js" %}"></script>
+        {% endcompress %}
 
-            {% block extra_js %}{% endblock %} {# Override this block in individual templates in order to add javascript on a template by template basis #}
-        {% endblock %}
+        {% block extra_js %}{% endblock %} {# Override this block in individual templates in order to add javascript on a template by template basis #}
         
     </body>
 </html>
