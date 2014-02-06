@@ -1,7 +1,14 @@
 from django import template
 from core.models import *
+from django.conf import settings
 
 register = template.Library()
+
+
+# settings value
+@register.assignment_tag
+def get_googe_maps_key():
+    return getattr(settings, 'GOOGLE_MAPS_KEY', "")
 
 
 @register.assignment_tag(takes_context=True)
