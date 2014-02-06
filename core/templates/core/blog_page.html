@@ -1,4 +1,5 @@
 {% extends "core/base.html" %}
+{% load pageurl %}
 
 
 {% if self.date %}
@@ -18,7 +19,7 @@
         {% if tags %}
             <div class="page-header"><h3>Tags</h3></div>
             {% for tag in tags %}
-                <a href="{{ self.blog_index.url }}?tag={{ tag }}"><button class="btn btn-primary" type="button">{{ tag }}</button></a>
+                <a href="{% pageurl self.blog_index %}?tag={{ tag }}"><button class="btn btn-primary" type="button">{{ tag }}</button></a>
             {% endfor %}
         {% endif %}
     {% endwith %}
