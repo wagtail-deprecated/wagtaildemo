@@ -242,7 +242,6 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
 class StandardPage(Page):
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
-    postcode = models.CharField(max_length=255, null=True, blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -257,7 +256,6 @@ class StandardPage(Page):
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    FieldPanel('postcode'),
     InlinePanel(StandardPage, 'carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
     InlinePanel(StandardPage, 'related_links', label="Related links"),
@@ -365,7 +363,8 @@ class BlogPage(Page):
             if isinstance(ancestor.specific, BlogIndexPage):
                 return ancestor
 
-        # No ancestors are blog indexes, just return first blog index in database
+        # No ancestors are blog indexes,
+        # just return first blog index in database
         return BlogIndexPage.objects.first()
 
 BlogPage.content_panels = [
@@ -558,12 +557,13 @@ class EventPage(Page):
 
     @property
     def event_index(self):
-        # Find blog index in ancestors
+        # Find event index in ancestors
         for ancestor in reversed(self.get_ancestors()):
             if isinstance(ancestor.specific, EventIndexPage):
                 return ancestor
 
-        # No ancestors are blog indexes, just return first blog index in database
+        # No ancestors are event indexes,
+        # just return first event index in database
         return EventIndexPage.objects.first()
 
     def serve(self, request):

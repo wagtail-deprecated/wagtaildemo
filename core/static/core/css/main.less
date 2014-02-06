@@ -1,3 +1,8 @@
+/* fonts */
+body {
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
 /* Carousel styling */
 .bx-wrapper {
 	width: 100%;
@@ -11,6 +16,9 @@
 
 /* body image styles - classes supplied by rich text editor */
 .body-content {
+	width: 100%;
+	overflow: hidden;
+	clear: both;
 	img {
 		margin-bottom: 2%;
 		margin-top: 2%;
@@ -31,6 +39,10 @@
 		margin-left: 5%;
 		float: right;
 	}
+
+	h2, h3, h4, h5 {
+		clear: both;
+	}
 }
 
 /* List styling - tweaks to include images */
@@ -47,4 +59,13 @@ a.list-group-item {
 			margin-bottom: 1%;
 		}
 	}
+}
+
+/* Style pager */
+.col-sm-4.pages {
+        text-align: center;
+}
+
+.col-sm-4.next {
+        text-align: right;
 }
