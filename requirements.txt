@@ -6,7 +6,6 @@ django-debug-toolbar==1.0.1
 gunicorn==18.0
 fabric==1.6.1
 django-celery==3.1.1
--e git://github.com/torchbox/django-treebeard.git#egg=django-treebeard
 -e git://github.com/torchbox/django-modelcluster.git#egg=django-modelcluster
 -e git://github.com/torchbox/wagtail.git#egg=wagtail
 elasticutils==0.8.2

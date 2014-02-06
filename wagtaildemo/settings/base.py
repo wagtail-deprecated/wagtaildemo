@@ -145,7 +145,6 @@ INSTALLED_APPS = (
     'south',
     'compressor',
     'debug_toolbar',
-    'treebeard',
     'taggit',
     'modelcluster',
     'gunicorn',
