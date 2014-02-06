@@ -8,7 +8,7 @@
                 {% if person.search_description or person.image %}
                     <p class="list-group-item-text">
                         {% if person.image %}
-                            {% image person.image width-200 %}
+                            {% image person.feed_image width-200 %}
                         {% endif %}
                         {% if person.search_description %}
                             {{ person.search_description }}
