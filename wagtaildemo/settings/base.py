@@ -1,12 +1,8 @@
 # Django settings for wagtaildemo project.
 
 import os
-import sys
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
-
-# Modify sys.path to include the lib directory
-sys.path.append(os.path.join(PROJECT_ROOT, "lib"))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -27,6 +23,8 @@ DATABASES = {
         'PORT': '',  # Set to empty string for default.
     }
 }
+
+CONN_MAX_AGE = 600  # number of seconds database connections should persist for
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -53,6 +51,9 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
+# For Wagtail, L10n needs to be disabled in order to recognise formats like
+# "24 Sep 2013" in FriendlyDateField, because Python's strptime doesn't support
+# localised month names. https://code.djangoproject.com/ticket/13339
 USE_L10N = False
 
 # If you set this to False, Django will not use timezone-aware datetimes.
@@ -141,7 +142,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    # 'django.contrib.sites',  # Wagtail uses its own site management logic
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
