@@ -169,7 +169,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
 
-    'core',
+    'demo',
 )
 
 EMAIL_SUBJECT_PREFIX = '[wagtaildemo] '
@@ -246,7 +246,7 @@ CELERYD_LOG_COLOR = False
 WAGTAIL_SITE_NAME = 'wagtaildemo'
 
 # Override the search results template for wagtailsearch
-WAGTAILSEARCH_RESULTS_TEMPLATE = 'core/search_results.html'
-WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'core/includes/search_listing.html'
+WAGTAILSEARCH_RESULTS_TEMPLATE = 'demo/search_results.html'
+WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'demo/includes/search_listing.html'
 
 WAGTAILSEARCH_ES_INDEX = 'wagtaildemo'

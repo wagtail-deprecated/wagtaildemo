@@ -9,14 +9,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding field 'StandardPage.postcode'
-        db.add_column(u'core_standardpage', 'postcode',
+        db.add_column(u'demo_standardpage', 'postcode',
                       self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
         # Deleting field 'StandardPage.postcode'
-        db.delete_column(u'core_standardpage', 'postcode')
+        db.delete_column(u'demo_standardpage', 'postcode')
 
 
     models = {
@@ -56,42 +56,42 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'core.advert': {
+        u'demo.advert': {
             'Meta': {'object_name': 'Advert'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'adverts'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
             'text': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
         },
-        u'core.advertplacement': {
+        u'demo.advertplacement': {
             'Meta': {'object_name': 'AdvertPlacement'},
-            'advert': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': u"orm['core.Advert']"}),
+            'advert': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'+'", 'to': u"orm['demo.Advert']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'advert_placements'", 'to': u"orm['wagtailcore.Page']"})
         },
-        u'core.blogindexpage': {
+        u'demo.blogindexpage': {
             'Meta': {'object_name': 'BlogIndexPage', '_ormbases': [u'wagtailcore.Page']},
             'intro': ('wagtail.wagtailcore.fields.RichTextField', [], {'blank': 'True'}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['wagtailcore.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
-        u'core.blogindexpagerelatedlink': {
+        u'demo.blogindexpagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'BlogIndexPageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.BlogIndexPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.BlogIndexPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        u'core.blogpage': {
+        u'demo.blogpage': {
             'Meta': {'object_name': 'BlogPage', '_ormbases': [u'wagtailcore.Page']},
             'body': ('wagtail.wagtailcore.fields.RichTextField', [], {}),
             'date': ('django.db.models.fields.DateField', [], {}),
             'feed_image': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['wagtailimages.Image']"}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['wagtailcore.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
-        u'core.blogpagecarouselitem': {
+        u'demo.blogpagecarouselitem': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'BlogPageCarouselItem'},
             'caption': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'embed_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
@@ -100,26 +100,26 @@ class Migration(SchemaMigration):
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['core.BlogPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['demo.BlogPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
         },
-        u'core.blogpagerelatedlink': {
+        u'demo.blogpagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'BlogPageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.BlogPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.BlogPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        u'core.blogpagetag': {
+        u'demo.blogpagetag': {
             'Meta': {'object_name': 'BlogPageTag'},
-            'content_object': ('modelcluster.fields.ParentalKey', [], {'related_name': "'tagged_items'", 'to': u"orm['core.BlogPage']"}),
+            'content_object': ('modelcluster.fields.ParentalKey', [], {'related_name': "'tagged_items'", 'to': u"orm['demo.BlogPage']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'tag': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'core_blogpagetag_items'", 'to': u"orm['taggit.Tag']"})
+            'tag': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'demo_blogpagetag_items'", 'to': u"orm['taggit.Tag']"})
         },
-        u'core.contactpage': {
+        u'demo.contactpage': {
             'Meta': {'object_name': 'ContactPage', '_ormbases': [u'wagtailcore.Page']},
             'address_1': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'address_2': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
@@ -132,22 +132,22 @@ class Migration(SchemaMigration):
             'post_code': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'}),
             'telephone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'})
         },
-        u'core.eventindexpage': {
+        u'demo.eventindexpage': {
             'Meta': {'object_name': 'EventIndexPage', '_ormbases': [u'wagtailcore.Page']},
             'intro': ('wagtail.wagtailcore.fields.RichTextField', [], {'blank': 'True'}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['wagtailcore.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
-        u'core.eventindexpagerelatedlink': {
+        u'demo.eventindexpagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'EventIndexPageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.EventIndexPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.EventIndexPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        u'core.eventpage': {
+        u'demo.eventpage': {
             'Meta': {'object_name': 'EventPage', '_ormbases': [u'wagtailcore.Page']},
             'audience': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'body': ('wagtail.wagtailcore.fields.RichTextField', [], {'blank': 'True'}),
@@ -161,7 +161,7 @@ class Migration(SchemaMigration):
             'time_from': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
             'time_to': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'})
         },
-        u'core.eventpagecarouselitem': {
+        u'demo.eventpagecarouselitem': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'EventPageCarouselItem'},
             'caption': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'embed_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
@@ -170,20 +170,20 @@ class Migration(SchemaMigration):
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['core.EventPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['demo.EventPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
         },
-        u'core.eventpagerelatedlink': {
+        u'demo.eventpagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'EventPageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.EventPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.EventPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        u'core.eventpagespeaker': {
+        u'demo.eventpagespeaker': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'EventPageSpeaker'},
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -192,15 +192,15 @@ class Migration(SchemaMigration):
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'speakers'", 'to': u"orm['core.EventPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'speakers'", 'to': u"orm['demo.EventPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
         },
-        u'core.homepage': {
+        u'demo.homepage': {
             'Meta': {'object_name': 'HomePage', '_ormbases': [u'wagtailcore.Page']},
             'body': ('wagtail.wagtailcore.fields.RichTextField', [], {'blank': 'True'}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['wagtailcore.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
-        u'core.homepagecarouselitem': {
+        u'demo.homepagecarouselitem': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'HomePageCarouselItem'},
             'caption': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'embed_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
@@ -209,20 +209,20 @@ class Migration(SchemaMigration):
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['core.HomePage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['demo.HomePage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
         },
-        u'core.homepagerelatedlink': {
+        u'demo.homepagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'HomePageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.HomePage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.HomePage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        u'core.personpage': {
+        u'demo.personpage': {
             'Meta': {'object_name': 'PersonPage', '_ormbases': [u'wagtailcore.Page']},
             'address_1': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'address_2': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
@@ -239,33 +239,33 @@ class Migration(SchemaMigration):
             'post_code': ('django.db.models.fields.CharField', [], {'max_length': '10', 'blank': 'True'}),
             'telephone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'})
         },
-        u'core.personpagerelatedlink': {
+        u'demo.personpagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'PersonPageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.PersonPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.PersonPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        u'core.standardindexpage': {
+        u'demo.standardindexpage': {
             'Meta': {'object_name': 'StandardIndexPage', '_ormbases': [u'wagtailcore.Page']},
             'feed_image': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['wagtailimages.Image']"}),
             'intro': ('wagtail.wagtailcore.fields.RichTextField', [], {'blank': 'True'}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['wagtailcore.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
-        u'core.standardindexpagerelatedlink': {
+        u'demo.standardindexpagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'StandardIndexPageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.StandardIndexPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.StandardIndexPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        u'core.standardpage': {
+        u'demo.standardpage': {
             'Meta': {'object_name': 'StandardPage', '_ormbases': [u'wagtailcore.Page']},
             'body': ('wagtail.wagtailcore.fields.RichTextField', [], {'blank': 'True'}),
             'feed_image': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['wagtailimages.Image']"}),
@@ -273,7 +273,7 @@ class Migration(SchemaMigration):
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['wagtailcore.Page']", 'unique': 'True', 'primary_key': 'True'}),
             'postcode': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
         },
-        u'core.standardpagecarouselitem': {
+        u'demo.standardpagecarouselitem': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'StandardPageCarouselItem'},
             'caption': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'embed_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
@@ -282,16 +282,16 @@ class Migration(SchemaMigration):
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['core.StandardPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'carousel_items'", 'to': u"orm['demo.StandardPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
         },
-        u'core.standardpagerelatedlink': {
+        u'demo.standardpagerelatedlink': {
             'Meta': {'ordering': "['sort_order']", 'object_name': 'StandardPageRelatedLink'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link_document': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtaildocs.Document']"}),
             'link_external': ('django.db.models.fields.URLField', [], {'max_length': '200', 'blank': 'True'}),
             'link_page': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'+'", 'null': 'True', 'to': u"orm['wagtailcore.Page']"}),
-            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['core.StandardPage']"}),
+            'page': ('modelcluster.fields.ParentalKey', [], {'related_name': "'related_links'", 'to': u"orm['demo.StandardPage']"}),
             'sort_order': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
@@ -338,4 +338,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['core']
+    complete_apps = ['demo']

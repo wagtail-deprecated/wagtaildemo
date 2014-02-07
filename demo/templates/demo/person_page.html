@@ -1,8 +1,8 @@
-{% extends "core/base.html" %}
+{% extends "demo/base.html" %}
 {% load image_tags %}
 
 {% block content %}
-    {% include "core/includes/intro.html" with intro=self.intro only %}
+    {% include "demo/includes/intro.html" with intro=self.intro only %}
 
     {% if self.image %}
         {# Person image - first store image as a variable in order to construct an image tag with a class applied #}
@@ -14,9 +14,9 @@
         <div class="page-header"><h3>Biography</h3></div>
     {% endif %}
 
-    {% include "core/includes/body.html" with body=self.biography only %}
+    {% include "demo/includes/body.html" with body=self.biography only %}
 
-    {% include "core/includes/contact.html" with contact=self only %}
+    {% include "demo/includes/contact.html" with contact=self only %}
 
-    {% include "core/includes/related_links.html" with related_links=self.related_links.all only %}
+    {% include "demo/includes/related_links.html" with related_links=self.related_links.all only %}
 {% endblock %}

@@ -1,10 +1,10 @@
-{% extends "core/base.html" %}
+{% extends "demo/base.html" %}
 {% load pageurl %}
 
 {% block title %}Search{% if search_results %} Results{% endif %}{% endblock %}
 
 {% block search_box %}
-    {% include "core/includes/search_box.html" with query_string=query_string only %}
+    {% include "demo/includes/search_box.html" with query_string=query_string only %}
 {% endblock %}
 
 {% block content %}

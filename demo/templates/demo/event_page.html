@@ -1,5 +1,5 @@
-{% extends "core/base.html" %}
-{% load core_tags image_tags pageurl %}
+{% extends "demo/base.html" %}
+{% load demo_tags image_tags pageurl %}
 
 {% block content %}
     <div class="well">
@@ -28,9 +28,9 @@
         </p>
     </div>
 
-    {% include "core/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+    {% include "demo/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
 
-    {% include "core/includes/body.html" with body=self.body only %}
+    {% include "demo/includes/body.html" with body=self.body only %}
 
     {% with self.speakers.all as speakers %}
         {% if speakers %}    
@@ -60,5 +60,5 @@
     {% endwith %}
 
 
-    {% include "core/includes/related_links.html" with related_links=self.related_links.all only %}
+    {% include "demo/includes/related_links.html" with related_links=self.related_links.all only %}
 {% endblock %}
