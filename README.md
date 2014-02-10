@@ -5,10 +5,10 @@ Wagtail demo
 Setup (with Vagrant - recommended)
 -----
 
-Dependencies
------
+### Dependencies
 [Vagrant 1.1+](http://www.vagrantup.com)
 
+### Installation
 Run the following commands:
 
     git clone https://github.com/torchbox/wagtaildemo.git
@@ -26,14 +26,15 @@ machine, exported to the VM as a shared folder; code editing and Git operations 
 Setup (without Vagrant)
 -----
 
-Dependencies
------
+### Dependencies
 [PostgreSQL](http://www.postgresql.org)
 [Redis](http://redis.io/)
 [npm](https://npmjs.org/)
 [CoffeeScript](http://coffeescript.org/)
 [LESS](http://lesscss.org/)
 [Elasticsearch](http://www.elasticsearch.org/)
+
+### Installation
 
 With postgres, redis and elastisearch running, run the following commands:
 
