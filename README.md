@@ -27,12 +27,12 @@ Setup (without Vagrant)
 -----
 
 ### Dependencies
-*[PostgreSQL](http://www.postgresql.org)
-*[Redis](http://redis.io/)
-*[npm](https://npmjs.org/)
-*[CoffeeScript](http://coffeescript.org/)
-*[LESS](http://lesscss.org/)
-*[Elasticsearch](http://www.elasticsearch.org/)
+* [PostgreSQL](http://www.postgresql.org)
+* [Redis](http://redis.io/)
+* [npm](https://npmjs.org/)
+* [CoffeeScript](http://coffeescript.org/)
+* [LESS](http://lesscss.org/)
+* [Elasticsearch](http://www.elasticsearch.org/)
 
 ### Installation
 
