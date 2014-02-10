@@ -33,6 +33,7 @@ Setup (without Vagrant)
 * [CoffeeScript](http://coffeescript.org/)
 * [LESS](http://lesscss.org/)
 * [Elasticsearch](http://www.elasticsearch.org/)
+* [PIP](https://github.com/pypa/pip)
 
 ### Installation
 
@@ -40,6 +41,7 @@ With postgres, redis and elastisearch running, run the following commands:
 
 	git clone https://github.com/torchbox/wagtaildemo.git
     cd wagtaildemo
+    pip install -r requirements.txt
     ./manage.py createdb
     ./manage.py manage.py syncdb
     ./manage.py createsuperuser
