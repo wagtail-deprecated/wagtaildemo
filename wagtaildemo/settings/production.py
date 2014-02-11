@@ -2,6 +2,15 @@ from .base import *
 
 DEBUG = False
 
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+        'INDEX': 'wagtaildemo'
+    }
+}
+
+
 INSTALLED_APPS+= (
     'djcelery',
     'kombu.transport.django',
@@ -18,6 +27,7 @@ CACHES = {
         }
     }
 }
+
 
 # CELERY SETTINGS
 import djcelery
