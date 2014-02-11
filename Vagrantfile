@@ -36,4 +36,11 @@ Vagrant::Config.run do |config|
 	
 	# Enable provisioning with a shell script.
 	config.vm.provision :shell, :path => "etc/install/install.sh", :args => "wagtaildemo"
+
+	# If a 'Vagrantfile.local' file exists, import any configuration settings
+	# defined there into here. Vagrantfile.local is ignored in version control,
+	# so this can be used to add configuration specific to this computer.
+	if File.exist? "Vagrantfile.local"
+		instance_eval File.read("Vagrantfile.local"), "Vagrantfile.local"
+	end
 end

@@ -5,5 +5,18 @@
 EMBEDLY_KEY = 'get-one-from-http://embed.ly/'
 GOOGLE_MAPS_KEY = 'get-one-from-https://code.google.com/apis/console/?noredirect'
 
-# It is strongly recommended that you define a SECRET_KEY in local.py, as it's outside of version control.
+# It is strongly recommended that you define a SECRET_KEY here, where it won't be visible
+# in your version control system.
 SECRET_KEY = 'enter-a-long-unguessable-string-here'
+
+
+# If you're developing Wagtail itself (as opposed to building a Wagtail-powered site), you'll
+# want to tweak the Python path so that it picks up your working copy of the Wagtail code
+# rather than the packaged copy - uncomment the lines below to do that.
+# Here we assume that you have it in a 'wagtail' directory at the same level as your
+# 'wagtaildemo' checkout - adjust the path as appropriate.
+
+# import sys
+# import os
+# PATH_TO_WAGTAIL = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'wagtail')
+# sys.path.insert(1, PATH_TO_WAGTAIL)
