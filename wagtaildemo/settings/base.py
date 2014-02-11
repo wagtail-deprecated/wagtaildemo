@@ -118,8 +118,6 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailcore.middleware.SiteMiddleware',
 
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 from django.conf import global_settings
@@ -148,11 +146,8 @@ INSTALLED_APPS = (
 
     'south',
     'compressor',
-    'debug_toolbar',
     'taggit',
     'modelcluster',
-    'gunicorn',
-
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -173,11 +168,6 @@ INSTALLED_APPS = (
 EMAIL_SUBJECT_PREFIX = '[wagtaildemo] '
 
 INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
-
-# django-debug-toolbar settings
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
 
 # django-compressor settings
 COMPRESS_PRECOMPILERS = (
