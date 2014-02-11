@@ -19,3 +19,4 @@ Pillow==2.3.0
 beautifulsoup4==4.3.2
 lxml==3.3.0
 BeautifulSoup==3.2.1
+pyScss==1.2.0
