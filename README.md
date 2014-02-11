@@ -55,5 +55,16 @@ If you don't want to run an Elasticsearch server in development or production, t
 * Sign up for an account at [dashboard.searchly.com/users/sign_up] (https://dashboard.searchly.com/users/sign_up)
 * Use your Searchly dashboard to create a new index, e.g. 'wagtaildemo'
 * Note the connection URL from your Searchly dashboard
-* Update **WAGTAILSEARCH_ES_URLS** and **WAGTAILSEARCH_ES_INDEX** in your local settings
+* Update **WAGTAILSEARCH_BACKENDS** in your local settings
+
+Example:
+
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+            'URLS': ['<url to elastic search here>'],
+            'INDEX': '<index name here>',
+        },
+    }   
+
 * Run **./manage.py update_index**
