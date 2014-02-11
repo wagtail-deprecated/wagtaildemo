@@ -1,15 +1,7 @@
 Django==1.6.1
 South==0.8.4
+psycopg2==2.5.2
 django-compressor==1.3
-fabric==1.6.1
 django-modelcluster==0.1
 -e git://github.com/torchbox/wagtail.git#egg=wagtail
-elasticutils==0.8.2
-pyelasticsearch==0.6.1
-requests==2.2.1
-Embedly==0.5.0
 django-taggit==0.10
-Pillow==2.3.0
-beautifulsoup4==4.3.2
-lxml==3.3.0
-BeautifulSoup==3.2.1
