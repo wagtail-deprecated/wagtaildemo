@@ -1,10 +1,8 @@
 # Django settings for wagtaildemo project.
 
-import os, sys
+import os
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
-
-sys.path.append(os.path.join(PROJECT_ROOT, 'wagtail'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
