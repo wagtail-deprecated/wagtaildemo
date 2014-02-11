@@ -118,8 +118,6 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailcore.middleware.SiteMiddleware',
 
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
-
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 from django.conf import global_settings
@@ -148,13 +146,8 @@ INSTALLED_APPS = (
 
     'south',
     'compressor',
-    'debug_toolbar',
     'taggit',
     'modelcluster',
-    'gunicorn',
-    'djcelery',
-    'kombu.transport.django',
-
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -175,11 +168,6 @@ INSTALLED_APPS = (
 EMAIL_SUBJECT_PREFIX = '[wagtaildemo] '
 
 INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
-
-# django-debug-toolbar settings
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
 
 # django-compressor settings
 COMPRESS_PRECOMPILERS = (
@@ -219,26 +207,6 @@ LOGGING = {
         },
     }
 }
-
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
-        }
-    }
-}
-
-
-# CELERY SETTINGS
-
-import djcelery
-djcelery.setup_loader()
-
-BROKER_URL = 'redis://'
-CELERY_SEND_TASK_ERROR_EMAILS = True
-CELERYD_LOG_COLOR = False
 
 
 # WAGTAIL SETTINGS
