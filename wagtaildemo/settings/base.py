@@ -1,8 +1,10 @@
 # Django settings for wagtaildemo project.
 
-import os
+import os, sys
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
+
+sys.path.append(os.path.join(PROJECT_ROOT, 'wagtail'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -248,5 +250,3 @@ WAGTAIL_SITE_NAME = 'wagtaildemo'
 # Override the search results template for wagtailsearch
 WAGTAILSEARCH_RESULTS_TEMPLATE = 'demo/search_results.html'
 WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'demo/includes/search_listing.html'
-
-WAGTAILSEARCH_ES_INDEX = 'wagtaildemo'
