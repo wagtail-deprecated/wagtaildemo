@@ -5,6 +5,7 @@ DEBUG = False
 INSTALLED_APPS+= (
     'djcelery',
     'kombu.transport.django',
+    'gunicorn',    
 )
 
 
