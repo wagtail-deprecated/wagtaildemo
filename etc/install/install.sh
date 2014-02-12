@@ -87,9 +87,6 @@ fi
 # postgresql setup for project
 createdb -Upostgres $DB_NAME
 
-# use YAML for test fixtures
-apt-get install -y libyaml-dev
-
 # dependencies for lxml (for HTML whitelisting)
 apt-get install -y libxml2-dev libxslt-dev
 
