@@ -173,7 +173,7 @@ INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
     ('text/less', 'lesspress.LessCompiler'),
-    ('text/x-scss', 'pyscss --load-path "../wagtail/wagtail/wagtailadmin/static/wagtailadmin/scss/" --output {outfile} {infile}'),
+    ('text/x-scss', 'django_pyscss.compressor.DjangoScssFilter'),
 )
 
 # Auth settings
