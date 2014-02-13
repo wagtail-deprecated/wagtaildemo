@@ -216,4 +216,3 @@ WAGTAIL_SITE_NAME = 'wagtaildemo'
 
 # Override the search results template for wagtailsearch
 WAGTAILSEARCH_RESULTS_TEMPLATE = 'demo/search_results.html'
-WAGTAILSEARCH_RESULTS_TEMPLATE_AJAX = 'demo/includes/search_listing.html'
