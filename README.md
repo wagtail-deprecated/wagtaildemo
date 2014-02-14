@@ -51,12 +51,12 @@ Don't want to set up a whole VM to try out Wagtail? No problem.
 
 ### Installation
 
-With postgres running, run the following commands:
+With PostgreSQL running (and configured to allow you to connect as the 'postgres' user - if not, you'll need to adjust the `createdb` line and the database settings in wagtaildemo/settings/base.py accordingly), run the following commands:
 
     git clone https://github.com/torchbox/wagtaildemo.git
     cd wagtaildemo
     pip install -r requirements/dev.txt
-    ./manage.py createdb
+    createdb -Upostgres wagtaildemo
     ./manage.py syncdb
     ./manage.py migrate
     ./manage.py createsuperuser
