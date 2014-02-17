@@ -66,8 +66,4 @@ With PostgreSQL running (and configured to allow you to connect as the 'postgres
 
 SQLite is supported as an alternative to PostgreSQL - update the DATABASES setting
 in wagtaildemo/settings/base.py to use 'django.db.backends.sqlite3', as you would
-with a regular Django project. However, due to [an issue with migrations](https://github.com/torchbox/wagtail/issues/24),
-you will need to run the following in place of manage.py migrate:
-
-    python manage.py migrate 0001 --all
-    python manage.py migrate
+with a regular Django project.
