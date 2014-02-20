@@ -20,6 +20,8 @@ Run the following commands:
     vagrant up
     vagrant ssh
       (then, within the SSH session:)
+    cd wagtaildemo
+    sudo pip install -r requirements/<dev|production>.txt
     ./manage.py createsuperuser
     ./manage.py runserver 0.0.0.0:8000
 
