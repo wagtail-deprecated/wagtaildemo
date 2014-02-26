@@ -1,4 +1,4 @@
-Django==1.6.1
+Django==1.6.2
 South==0.8.4
 psycopg2==2.5.2
 django-compressor==1.3
