@@ -21,10 +21,9 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '',  # Set to empty string for localhost.
         'PORT': '',  # Set to empty string for default.
+        'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
     }
 }
-
-CONN_MAX_AGE = 600  # number of seconds database connections should persist for
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
