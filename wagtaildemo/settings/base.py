@@ -172,7 +172,7 @@ INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
     ('text/less', 'lesspress.LessCompiler'),
-    ('text/x-scss', 'django_pyscss.compressor.DjangoScssFilter'),
+    ('text/x-scss', 'sassc -I ~ {infile}'),  # including ~ as an include path is redundant, but sassc breaks if there are no include paths
 )
 
 # Auth settings
