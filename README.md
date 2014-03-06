@@ -44,9 +44,6 @@ Don't want to set up a whole VM to try out Wagtail? No problem.
 
 ### Dependencies
 * [PostgreSQL](http://www.postgresql.org)
-* [npm](https://npmjs.org/)
-* [CoffeeScript](http://coffeescript.org/)
-* [LESS](http://lesscss.org/)
 * [PIP](https://github.com/pypa/pip)
 
 ### Installation
