@@ -178,7 +178,6 @@ class HomePage(Page):
     body = RichTextField(blank=True)
 
     indexed_fields = ('body', )
-    search_name = "Homepage"
 
     class Meta:
         verbose_name = "Homepage"
@@ -212,7 +211,6 @@ class StandardIndexPage(Page):
     )
 
     indexed_fields = ('intro', )
-    search_name = None
 
 StandardIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -248,7 +246,6 @@ class StandardPage(Page):
     )
 
     indexed_fields = ('intro', 'body', )
-    search_name = None
 
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -274,7 +271,6 @@ class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
-    search_name = "Blog"
 
     @property
     def blogs(self):
@@ -351,7 +347,6 @@ class BlogPage(Page):
     )
 
     indexed_fields = ('body', )
-    search_name = "Blog Entry"
 
     @property
     def blog_index(self):
@@ -406,7 +401,6 @@ class PersonPage(Page, ContactFields):
     )
 
     indexed_fields = ('first_name', 'last_name', 'intro', 'biography')
-    search_name = "Person"
 
 PersonPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -438,7 +432,6 @@ class ContactPage(Page, ContactFields):
     )
 
     indexed_fields = ('body', )
-    search_name = "Contact information"
 
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -462,7 +455,6 @@ class EventIndexPage(Page):
     intro = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
-    search_name = "Event index"
 
     @property
     def events(self):
@@ -550,7 +542,6 @@ class EventPage(Page):
     )
 
     indexed_fields = ('get_audience_display', 'location', 'body')
-    search_name = "Event"
 
     @property
     def event_index(self):
