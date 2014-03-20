@@ -29,7 +29,7 @@ def export_event(event, format='ical'):
         if event.time_from is not None:
             start_time = event.time_from
         else:
-            start_time = datetime.time.min
+            start_time = time.min
         if event.time_to is not None:
             end_time = event.time_to
         else:
@@ -75,4 +75,4 @@ def export_event(event, format='ical'):
 
     # Join components
     return '\r'.join(ical_components)
-    
+
