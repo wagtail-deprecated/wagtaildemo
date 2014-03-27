@@ -285,7 +285,7 @@ class BlogIndexPage(Page):
 
         return blogs
 
-    def serve(self, request):
+    def get_context(self, request):
         # Get blogs
         blogs = self.blogs
 
@@ -304,10 +304,10 @@ class BlogIndexPage(Page):
         except EmptyPage:
             blogs = paginator.page(paginator.num_pages)
 
-        return render(request, self.template, {
-            'self': self,
-            'blogs': blogs,
-        })
+        # Update template context
+        context = super(BlogIndexPage, self).get_context(request)
+        context['blogs'] = blogs
+        return context
 
 BlogIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
