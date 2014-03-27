@@ -4,12 +4,12 @@
 Vagrant::Config.run do |config|
 
 	# Base box to build off, and download URL for when it doesn't exist on the user's system already
-	config.vm.box = "wagtail-base-v0.1"
-	config.vm.box_url = "http://downloads.torchbox.com/wagtail-base-v0.1.box"
+	# config.vm.box = "wagtail-base-v0.1"
+	# config.vm.box_url = "http://downloads.torchbox.com/wagtail-base-v0.1.box"
 
 	# You can also build from a vanilla precise32 box, although it'll take longer
-	# config.vm.box = "precise32"
-	# config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+	config.vm.box = "precise32"
+	config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
 	# As an alternative to precise32, VMs can be built from the 'django-base' box as defined at
 	# https://github.com/torchbox/vagrant-django-base , which has more of the necessary server config
