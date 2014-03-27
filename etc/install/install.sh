@@ -26,7 +26,7 @@ export LC_ALL=en_GB.UTF-8
 # Install essential packages from Apt
 apt-get update -y
 # Python dev packages
-apt-get install -y build-essential python python-dev python-setuptools python-pip
+apt-get install -y build-essential python3 python3-dev python3-setuptools
 # Dependencies for image processing with Pillow (drop-in replacement for PIL)
 # supporting: jpeg, tiff, png, freetype, littlecms
 # (pip install pillow to get pillow itself)
@@ -47,7 +47,11 @@ if ! command -v psql; then
 fi
 
 # virtualenv global setup
-easy_install -U pip
+easy_install3 -U pip
+
+# Need to install PBR from github repo as version in pypi doesn't work on Python <3.3
+# https://github.com/openstack-dev/pbr/pull/5
+pip install -e git+https://github.com/openstack-dev/pbr.git@95c86cbed7b10ae7385b0b894600c763decd2558#egg=pbr
 pip install virtualenv virtualenvwrapper stevedore virtualenv-clone
 
 
