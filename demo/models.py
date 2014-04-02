@@ -30,14 +30,6 @@ EVENT_AUDIENCE_CHOICES = (
 )
 
 
-COMMON_PANELS = (
-    FieldPanel('slug'),
-    FieldPanel('seo_title'),
-    FieldPanel('show_in_menus'),
-    FieldPanel('search_description'),
-)
-
-
 # A couple of abstract classes that contain commonly used fields
 
 class LinkFields(models.Model):
@@ -190,7 +182,7 @@ HomePage.content_panels = [
 ]
 
 HomePage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -219,7 +211,7 @@ StandardIndexPage.content_panels = [
 ]
 
 StandardIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -256,7 +248,7 @@ StandardPage.content_panels = [
 ]
 
 StandardPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -316,7 +308,7 @@ BlogIndexPage.content_panels = [
 ]
 
 BlogIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -368,7 +360,7 @@ BlogPage.content_panels = [
 ]
 
 BlogPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
     FieldPanel('tags'),
 ]
@@ -414,7 +406,7 @@ PersonPage.content_panels = [
 ]
 
 PersonPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -440,7 +432,7 @@ ContactPage.content_panels = [
 ]
 
 ContactPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -480,7 +472,7 @@ EventIndexPage.content_panels = [
 ]
 
 EventIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -589,7 +581,7 @@ EventPage.content_panels = [
 ]
 
 EventPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
