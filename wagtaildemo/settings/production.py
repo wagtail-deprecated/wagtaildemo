@@ -29,6 +29,13 @@ CACHES = {
     }
 }
 
+# Use the cached template loader
+TEMPLATE_LOADERS = (
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
+)
 
 # CELERY SETTINGS
 import djcelery
