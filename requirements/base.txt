@@ -6,3 +6,4 @@ django-modelcluster==0.1
 -e git://github.com/torchbox/wagtail.git#egg=wagtail
 django-taggit==0.11.2
 django-libsass==0.1
+django-treebeard==2.0
