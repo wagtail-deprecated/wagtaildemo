@@ -101,3 +101,6 @@ fi
 export WORKON_HOME=$HOME/.virtualenvs
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 source /usr/local/bin/virtualenvwrapper.sh
+
+alias dj="/home/vagrant/.virtualenvs/wagtaildemo/bin/python /home/vagrant/wagtaildemo/manage.py"
+alias djrun="dj runserver 0.0.0.0:8000"
