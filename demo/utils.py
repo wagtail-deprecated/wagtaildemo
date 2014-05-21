@@ -2,13 +2,13 @@ from datetime import datetime, time, timedelta
 import hashlib
 
 
-def export_event(event, format='ical'):
-    # Only ical format supported at the moment
-    if format != 'ical':
-        return
-
+def export_event_ical(event):
+    """
+    This method converts an event page to a string in
+    ical VEVENT format described here:
+    http://www.kanzaki.com/docs/ical/vevent.html
+    """
     # Begin event
-    # VEVENT format: http://www.kanzaki.com/docs/ical/vevent.html
     ical_components = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
@@ -75,4 +75,3 @@ def export_event(event, format='ical'):
 
     # Join components
     return '\r'.join(ical_components)
-

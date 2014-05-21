@@ -19,7 +19,7 @@ from modelcluster.tags import ClusterTaggableManager
 from taggit.models import Tag, TaggedItemBase
 from south.signals import post_migrate
 
-from demo.utils import export_event
+from demo.utils import export_event_ical
 
 
 class LinkFields(models.Model):
@@ -420,19 +420,14 @@ class EventPage(Page):
         return self.get_ancestors().type(EventIndexPage).last()
 
     def serve(self, request):
-        if "format" in request.GET:
-            if request.GET['format'] == 'ical':
-                # Export to ical format
-                response = HttpResponse(
-                    export_event(self, 'ical'),
-                    content_type='text/calendar',
-                )
-                response['Content-Disposition'] = 'attachment; filename=' + self.slug + '.ics'
-                return response
-            else:
-                # Unrecognised format error
-                message = 'Could not export event\n\nUnrecognised format: ' + request.GET['format']
-                return HttpResponse(message, content_type='text/plain')
+        if 'format' in request.GET and request.GET['format'] == 'ical':
+            # Export to ical format
+            response = HttpResponse(
+                export_event_ical(self),
+                content_type='text/calendar',
+            )
+            response['Content-Disposition'] = 'attachment; filename=' + self.slug + '.ics'
+            return response
         else:
             # Display event page as usual
             return super(EventPage, self).serve(request)
