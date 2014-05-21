@@ -30,14 +30,6 @@ EVENT_AUDIENCE_CHOICES = (
 )
 
 
-COMMON_PANELS = (
-    FieldPanel('slug'),
-    FieldPanel('seo_title'),
-    FieldPanel('show_in_menus'),
-    FieldPanel('search_description'),
-)
-
-
 # A couple of abstract classes that contain commonly used fields
 
 class LinkFields(models.Model):
@@ -178,7 +170,6 @@ class HomePage(Page):
     body = RichTextField(blank=True)
 
     indexed_fields = ('body', )
-    search_name = "Homepage"
 
     class Meta:
         verbose_name = "Homepage"
@@ -191,7 +182,7 @@ HomePage.content_panels = [
 ]
 
 HomePage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -212,7 +203,6 @@ class StandardIndexPage(Page):
     )
 
     indexed_fields = ('intro', )
-    search_name = None
 
 StandardIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -221,7 +211,7 @@ StandardIndexPage.content_panels = [
 ]
 
 StandardIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -248,7 +238,6 @@ class StandardPage(Page):
     )
 
     indexed_fields = ('intro', 'body', )
-    search_name = None
 
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -259,7 +248,7 @@ StandardPage.content_panels = [
 ]
 
 StandardPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -274,7 +263,6 @@ class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
-    search_name = "Blog"
 
     @property
     def blogs(self):
@@ -289,7 +277,7 @@ class BlogIndexPage(Page):
 
         return blogs
 
-    def serve(self, request):
+    def get_context(self, request):
         # Get blogs
         blogs = self.blogs
 
@@ -308,10 +296,10 @@ class BlogIndexPage(Page):
         except EmptyPage:
             blogs = paginator.page(paginator.num_pages)
 
-        return render(request, self.template, {
-            'self': self,
-            'blogs': blogs,
-        })
+        # Update template context
+        context = super(BlogIndexPage, self).get_context(request)
+        context['blogs'] = blogs
+        return context
 
 BlogIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -320,7 +308,7 @@ BlogIndexPage.content_panels = [
 ]
 
 BlogIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -351,7 +339,6 @@ class BlogPage(Page):
     )
 
     indexed_fields = ('body', )
-    search_name = "Blog Entry"
 
     @property
     def blog_index(self):
@@ -373,7 +360,7 @@ BlogPage.content_panels = [
 ]
 
 BlogPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
     FieldPanel('tags'),
 ]
@@ -406,7 +393,6 @@ class PersonPage(Page, ContactFields):
     )
 
     indexed_fields = ('first_name', 'last_name', 'intro', 'biography')
-    search_name = "Person"
 
 PersonPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -420,7 +406,7 @@ PersonPage.content_panels = [
 ]
 
 PersonPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -438,7 +424,6 @@ class ContactPage(Page, ContactFields):
     )
 
     indexed_fields = ('body', )
-    search_name = "Contact information"
 
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -447,7 +432,7 @@ ContactPage.content_panels = [
 ]
 
 ContactPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -462,7 +447,6 @@ class EventIndexPage(Page):
     intro = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
-    search_name = "Event index"
 
     @property
     def events(self):
@@ -488,7 +472,7 @@ EventIndexPage.content_panels = [
 ]
 
 EventIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -550,7 +534,6 @@ class EventPage(Page):
     )
 
     indexed_fields = ('get_audience_display', 'location', 'body')
-    search_name = "Event"
 
     @property
     def event_index(self):
@@ -598,7 +581,7 @@ EventPage.content_panels = [
 ]
 
 EventPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
