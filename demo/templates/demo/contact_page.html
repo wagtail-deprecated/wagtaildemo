@@ -8,7 +8,7 @@
     {% include "demo/includes/contact.html" with contact=self only %}
 
     {%  if self.post_code %}
-        {% get_googe_maps_key as google_maps_key %}
+        {% get_google_maps_key as google_maps_key %}
 
         <div class="page-header"><h3>Map</h3></div>
 
