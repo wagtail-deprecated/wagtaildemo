@@ -22,7 +22,7 @@
         {% endif %}
 
         <p>
-            <a class='calendar' href= "{{ self.url }}?format=ical">
+            <a class="calendar" href="{{ self.url }}?format=ical">
                 Add to calendar
             </a>
         </p>
@@ -58,7 +58,6 @@
             {% if not speakers|length|divisibleby:'3' %}</div>{% endif %} {# Last close of row div if speakers list not exactly divisble by 3 #}      
         {% endif %}
     {% endwith %}
-
 
     {% include "demo/includes/related_links.html" with related_links=self.related_links.all only %}
 {% endblock %}
