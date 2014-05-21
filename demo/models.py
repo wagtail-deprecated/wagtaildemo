@@ -266,11 +266,8 @@ class BlogIndexPage(Page):
 
     @property
     def blogs(self):
-        # Get list of blog pages that are descendants of this page
-        blogs = BlogPage.objects.filter(
-            live=True,
-            path__startswith=self.path
-        )
+        # Get list of live blog pages that are descendants of this page
+        blogs = BlogPage.objects.live.descendant_of(self)
 
         # Order by most recent date first
         blogs = blogs.order_by('-date')
@@ -342,14 +339,8 @@ class BlogPage(Page):
 
     @property
     def blog_index(self):
-        # Find blog index in ancestors
-        for ancestor in reversed(self.get_ancestors()):
-            if isinstance(ancestor.specific, BlogIndexPage):
-                return ancestor
-
-        # No ancestors are blog indexes,
-        # just return first blog index in database
-        return BlogIndexPage.objects.first()
+        # Find closest ancestor which is a blog index
+        return self.get_ancestors().type(BlogIndexPage).last()
 
 BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -450,11 +441,8 @@ class EventIndexPage(Page):
 
     @property
     def events(self):
-        # Get list of event pages that are descendants of this page
-        events = EventPage.objects.filter(
-            live=True,
-            path__startswith=self.path
-        )
+        # Get list of live event pages that are descendants of this page
+        events = EventPage.objects.live().descendant_of(self)
 
         # Filter events list to get ones that are either
         # running now or start in the future
@@ -537,14 +525,8 @@ class EventPage(Page):
 
     @property
     def event_index(self):
-        # Find event index in ancestors
-        for ancestor in reversed(self.get_ancestors()):
-            if isinstance(ancestor.specific, EventIndexPage):
-                return ancestor
-
-        # No ancestors are event indexes,
-        # just return first event index in database
-        return EventIndexPage.objects.first()
+        # Find closest ancestor which is an event index
+        return self.get_ancestors().type(EventIndexPage).last()
 
     def serve(self, request):
         if "format" in request.GET:
