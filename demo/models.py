@@ -267,7 +267,7 @@ class BlogIndexPage(Page):
     @property
     def blogs(self):
         # Get list of live blog pages that are descendants of this page
-        blogs = BlogPage.objects.live.descendant_of(self)
+        blogs = BlogPage.objects.live().descendant_of(self)
 
         # Order by most recent date first
         blogs = blogs.order_by('-date')
