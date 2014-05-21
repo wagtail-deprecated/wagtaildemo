@@ -22,14 +22,6 @@ from south.signals import post_migrate
 from demo.utils import export_event
 
 
-EVENT_AUDIENCE_CHOICES = (
-    ('public', "Public"),
-    ('private', "Private"),
-)
-
-
-# A couple of abstract classes that contain commonly used fields
-
 class LinkFields(models.Model):
     link_external = models.URLField("External link", blank=True)
     link_page = models.ForeignKey(
@@ -87,8 +79,6 @@ class ContactFields(models.Model):
         abstract = True
 
 
-# Carousel items
-
 class CarouselItem(LinkFields):
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -111,8 +101,6 @@ class CarouselItem(LinkFields):
         abstract = True
 
 
-# Related links
-
 class RelatedLink(LinkFields):
     title = models.CharField(max_length=255, help_text="Link title")
 
@@ -125,12 +113,9 @@ class RelatedLink(LinkFields):
         abstract = True
 
 
-# Advert Snippet
-
 class AdvertPlacement(models.Model):
     page = ParentalKey('wagtailcore.Page', related_name='advert_placements')
     advert = models.ForeignKey('demo.Advert', related_name='+')
-
 
 class Advert(models.Model):
     page = models.ForeignKey(
@@ -154,15 +139,11 @@ class Advert(models.Model):
 register_snippet(Advert)
 
 
-# Home Page
-
 class HomePageCarouselItem(Orderable, CarouselItem):
     page = ParentalKey('demo.HomePage', related_name='carousel_items')
 
-
 class HomePageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('demo.HomePage', related_name='related_links')
-
 
 class HomePage(Page):
     body = RichTextField(blank=True)
@@ -184,11 +165,8 @@ HomePage.promote_panels = [
 ]
 
 
-# Standard index page
-
 class StandardIndexPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('demo.StandardIndexPage', related_name='related_links')
-
 
 class StandardIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -214,15 +192,11 @@ StandardIndexPage.promote_panels = [
 ]
 
 
-# Standard page
-
 class StandardPageCarouselItem(Orderable, CarouselItem):
     page = ParentalKey('demo.StandardPage', related_name='carousel_items')
 
-
 class StandardPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('demo.StandardPage', related_name='related_links')
-
 
 class StandardPage(Page):
     intro = RichTextField(blank=True)
@@ -251,11 +225,8 @@ StandardPage.promote_panels = [
 ]
 
 
-# Blog index page
-
 class BlogIndexPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('demo.BlogIndexPage', related_name='related_links')
-
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -307,19 +278,14 @@ BlogIndexPage.promote_panels = [
 ]
 
 
-# Blog page
-
 class BlogPageCarouselItem(Orderable, CarouselItem):
     page = ParentalKey('demo.BlogPage', related_name='carousel_items')
-
 
 class BlogPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('demo.BlogPage', related_name='related_links')
 
-
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey('demo.BlogPage', related_name='tagged_items')
-
 
 class BlogPage(Page):
     body = RichTextField()
@@ -355,82 +321,8 @@ BlogPage.promote_panels = [
 ]
 
 
-# Person page
-
-class PersonPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('demo.PersonPage', related_name='related_links')
-
-
-class PersonPage(Page, ContactFields):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    intro = RichTextField(blank=True)
-    biography = RichTextField(blank=True)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    indexed_fields = ('first_name', 'last_name', 'intro', 'biography')
-
-PersonPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('first_name'),
-    FieldPanel('last_name'),
-    FieldPanel('intro', classname="full"),
-    FieldPanel('biography', classname="full"),
-    ImageChooserPanel('image'),
-    MultiFieldPanel(ContactFields.panels, "Contact"),
-    InlinePanel(PersonPage, 'related_links', label="Related links"),
-]
-
-PersonPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
-    ImageChooserPanel('feed_image'),
-]
-
-
-# Contact page
-
-class ContactPage(Page, ContactFields):
-    body = RichTextField(blank=True)
-    feed_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    indexed_fields = ('body', )
-
-ContactPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('body', classname="full"),
-    MultiFieldPanel(ContactFields.panels, "Contact"),
-]
-
-ContactPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
-    ImageChooserPanel('feed_image'),
-]
-
-
-# Event index page
-
 class EventIndexPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('demo.EventIndexPage', related_name='related_links')
-
 
 class EventIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -462,15 +354,16 @@ EventIndexPage.promote_panels = [
 ]
 
 
-# Event page
+EVENT_AUDIENCE_CHOICES = (
+    ('public', "Public"),
+    ('private', "Private"),
+)
 
 class EventPageCarouselItem(Orderable, CarouselItem):
     page = ParentalKey('demo.EventPage', related_name='carousel_items')
 
-
 class EventPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('demo.EventPage', related_name='related_links')
-
 
 class EventPageSpeaker(Orderable, LinkFields):
     page = ParentalKey('demo.EventPage', related_name='speakers')
@@ -561,6 +454,72 @@ EventPage.content_panels = [
 ]
 
 EventPage.promote_panels = [
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+    ImageChooserPanel('feed_image'),
+]
+
+
+class PersonPageRelatedLink(Orderable, RelatedLink):
+    page = ParentalKey('demo.PersonPage', related_name='related_links')
+
+class PersonPage(Page, ContactFields):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    intro = RichTextField(blank=True)
+    biography = RichTextField(blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    feed_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    indexed_fields = ('first_name', 'last_name', 'intro', 'biography')
+
+PersonPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('first_name'),
+    FieldPanel('last_name'),
+    FieldPanel('intro', classname="full"),
+    FieldPanel('biography', classname="full"),
+    ImageChooserPanel('image'),
+    MultiFieldPanel(ContactFields.panels, "Contact"),
+    InlinePanel(PersonPage, 'related_links', label="Related links"),
+]
+
+PersonPage.promote_panels = [
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+    ImageChooserPanel('feed_image'),
+]
+
+
+class ContactPage(Page, ContactFields):
+    body = RichTextField(blank=True)
+    feed_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    indexed_fields = ('body', )
+
+ContactPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('body', classname="full"),
+    MultiFieldPanel(ContactFields.panels, "Contact"),
+]
+
+ContactPage.promote_panels = [
     MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
