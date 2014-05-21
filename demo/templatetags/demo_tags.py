@@ -147,7 +147,7 @@ def event_listing_homepage(context, count=2):
 @register.inclusion_tag('demo/tags/adverts.html', takes_context=True)
 def adverts(context):
     return {
-        'adverts': Advert.objects.all(),
+        'adverts': AdvertSnippet.objects.all(),
         'request': context['request'],
     }
 
