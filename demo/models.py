@@ -22,7 +22,9 @@ from south.signals import post_migrate
 from demo.utils import export_event_ical
 
 
-class LinkFields(models.Model):
+# MIXINS
+
+class LinkFieldsMixin(models.Model):
     link_external = models.URLField("External link", blank=True)
     link_page = models.ForeignKey(
         'wagtailcore.Page',
@@ -56,7 +58,7 @@ class LinkFields(models.Model):
         abstract = True
 
 
-class ContactFields(models.Model):
+class ContactFieldsMixin(models.Model):
     telephone = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
     address_1 = models.CharField(max_length=255, blank=True)
@@ -79,7 +81,7 @@ class ContactFields(models.Model):
         abstract = True
 
 
-class CarouselItem(LinkFields):
+class CarouselItemMixin(LinkFieldsMixin):
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -94,30 +96,32 @@ class CarouselItem(LinkFields):
         ImageChooserPanel('image'),
         FieldPanel('embed_url'),
         FieldPanel('caption'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
+        MultiFieldPanel(LinkFieldsMixin.panels, "Link"),
     ]
 
     class Meta:
         abstract = True
 
 
-class RelatedLink(LinkFields):
+class RelatedLinkMixin(LinkFieldsMixin):
     title = models.CharField(max_length=255, help_text="Link title")
 
     panels = [
         FieldPanel('title'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
+        MultiFieldPanel(LinkFieldsMixin.panels, "Link"),
     ]
 
     class Meta:
         abstract = True
 
 
-class AdvertPlacement(models.Model):
-    page = ParentalKey('wagtailcore.Page', related_name='advert_placements')
-    advert = models.ForeignKey('demo.Advert', related_name='+')
+# SNIPPETS
 
-class Advert(models.Model):
+class AdvertSnippetPlacement(models.Model):
+    page = ParentalKey('wagtailcore.Page', related_name='advert_placements')
+    advert = models.ForeignKey('demo.AdvertSnippet', related_name='+')
+
+class AdvertSnippet(models.Model):
     page = models.ForeignKey(
         'wagtailcore.Page',
         related_name='adverts',
@@ -136,13 +140,15 @@ class Advert(models.Model):
     def __unicode__(self):
         return self.text
 
-register_snippet(Advert)
+register_snippet(AdvertSnippet)
 
 
-class HomePageCarouselItem(Orderable, CarouselItem):
+# PAGES
+
+class HomePageCarouselItem(Orderable, CarouselItemMixin):
     page = ParentalKey('demo.HomePage', related_name='carousel_items')
 
-class HomePageRelatedLink(Orderable, RelatedLink):
+class HomePageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.HomePage', related_name='related_links')
 
 class HomePage(Page):
@@ -165,7 +171,7 @@ HomePage.promote_panels = [
 ]
 
 
-class StandardIndexPageRelatedLink(Orderable, RelatedLink):
+class StandardIndexPageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.StandardIndexPage', related_name='related_links')
 
 class StandardIndexPage(Page):
@@ -192,10 +198,10 @@ StandardIndexPage.promote_panels = [
 ]
 
 
-class StandardPageCarouselItem(Orderable, CarouselItem):
+class StandardPageCarouselItem(Orderable, CarouselItemMixin):
     page = ParentalKey('demo.StandardPage', related_name='carousel_items')
 
-class StandardPageRelatedLink(Orderable, RelatedLink):
+class StandardPageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.StandardPage', related_name='related_links')
 
 class StandardPage(Page):
@@ -225,7 +231,7 @@ StandardPage.promote_panels = [
 ]
 
 
-class BlogIndexPageRelatedLink(Orderable, RelatedLink):
+class BlogIndexPageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.BlogIndexPage', related_name='related_links')
 
 class BlogIndexPage(Page):
@@ -278,10 +284,10 @@ BlogIndexPage.promote_panels = [
 ]
 
 
-class BlogPageCarouselItem(Orderable, CarouselItem):
+class BlogPageCarouselItem(Orderable, CarouselItemMixin):
     page = ParentalKey('demo.BlogPage', related_name='carousel_items')
 
-class BlogPageRelatedLink(Orderable, RelatedLink):
+class BlogPageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.BlogPage', related_name='related_links')
 
 class BlogPageTag(TaggedItemBase):
@@ -321,7 +327,7 @@ BlogPage.promote_panels = [
 ]
 
 
-class EventIndexPageRelatedLink(Orderable, RelatedLink):
+class EventIndexPageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.EventIndexPage', related_name='related_links')
 
 class EventIndexPage(Page):
@@ -359,13 +365,13 @@ EVENT_AUDIENCE_CHOICES = (
     ('private', "Private"),
 )
 
-class EventPageCarouselItem(Orderable, CarouselItem):
+class EventPageCarouselItem(Orderable, CarouselItemMixin):
     page = ParentalKey('demo.EventPage', related_name='carousel_items')
 
-class EventPageRelatedLink(Orderable, RelatedLink):
+class EventPageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.EventPage', related_name='related_links')
 
-class EventPageSpeaker(Orderable, LinkFields):
+class EventPageSpeaker(Orderable, LinkFieldsMixin):
     page = ParentalKey('demo.EventPage', related_name='speakers')
     first_name = models.CharField("Name", max_length=255, blank=True)
     last_name = models.CharField("Surname", max_length=255, blank=True)
@@ -385,7 +391,7 @@ class EventPageSpeaker(Orderable, LinkFields):
         FieldPanel('first_name'),
         FieldPanel('last_name'),
         ImageChooserPanel('image'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
+        MultiFieldPanel(LinkFieldsMixin.panels, "Link"),
     ]
 
 
@@ -454,10 +460,10 @@ EventPage.promote_panels = [
 ]
 
 
-class PersonPageRelatedLink(Orderable, RelatedLink):
+class PersonPageRelatedLink(Orderable, RelatedLinkMixin):
     page = ParentalKey('demo.PersonPage', related_name='related_links')
 
-class PersonPage(Page, ContactFields):
+class PersonPage(Page, ContactFieldsMixin):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     intro = RichTextField(blank=True)
@@ -486,7 +492,7 @@ PersonPage.content_panels = [
     FieldPanel('intro', classname="full"),
     FieldPanel('biography', classname="full"),
     ImageChooserPanel('image'),
-    MultiFieldPanel(ContactFields.panels, "Contact"),
+    MultiFieldPanel(ContactFieldsMixin.panels, "Contact"),
     InlinePanel(PersonPage, 'related_links', label="Related links"),
 ]
 
@@ -496,7 +502,7 @@ PersonPage.promote_panels = [
 ]
 
 
-class ContactPage(Page, ContactFields):
+class ContactPage(Page, ContactFieldsMixin):
     body = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -511,7 +517,7 @@ class ContactPage(Page, ContactFields):
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('body', classname="full"),
-    MultiFieldPanel(ContactFields.panels, "Contact"),
+    MultiFieldPanel(ContactFieldsMixin.panels, "Contact"),
 ]
 
 ContactPage.promote_panels = [
