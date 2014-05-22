@@ -578,9 +578,9 @@ class FormPage(AbstractEmailForm):
 
 FormPage.content_panels = [
     FieldPanel('title', classname="full title"),
-    FieldPanel('intro'),
+    FieldPanel('intro', classname="full"),
     InlinePanel(FormPage, 'form_fields', label="Form fields"),
-    FieldPanel('thank_you_text'),
+    FieldPanel('thank_you_text', classname="full"),
     MultiFieldPanel([
         FieldPanel('to_address', classname="full"),
         FieldPanel('from_address', classname="full"),
