@@ -31,14 +31,6 @@ EVENT_AUDIENCE_CHOICES = (
 )
 
 
-COMMON_PANELS = (
-    FieldPanel('slug'),
-    FieldPanel('seo_title'),
-    FieldPanel('show_in_menus'),
-    FieldPanel('search_description'),
-)
-
-
 # A couple of abstract classes that contain commonly used fields
 
 class LinkFields(models.Model):
@@ -179,7 +171,6 @@ class HomePage(Page):
     body = RichTextField(blank=True)
 
     indexed_fields = ('body', )
-    search_name = "Homepage"
 
     class Meta:
         verbose_name = "Homepage"
@@ -192,7 +183,7 @@ HomePage.content_panels = [
 ]
 
 HomePage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -213,7 +204,6 @@ class StandardIndexPage(Page):
     )
 
     indexed_fields = ('intro', )
-    search_name = None
 
 StandardIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -222,7 +212,7 @@ StandardIndexPage.content_panels = [
 ]
 
 StandardIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -249,7 +239,6 @@ class StandardPage(Page):
     )
 
     indexed_fields = ('intro', 'body', )
-    search_name = None
 
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -260,7 +249,7 @@ StandardPage.content_panels = [
 ]
 
 StandardPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -275,22 +264,18 @@ class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
-    search_name = "Blog"
 
     @property
     def blogs(self):
-        # Get list of blog pages that are descendants of this page
-        blogs = BlogPage.objects.filter(
-            live=True,
-            path__startswith=self.path
-        )
+        # Get list of live blog pages that are descendants of this page
+        blogs = BlogPage.objects.live().descendant_of(self)
 
         # Order by most recent date first
         blogs = blogs.order_by('-date')
 
         return blogs
 
-    def serve(self, request):
+    def get_context(self, request):
         # Get blogs
         blogs = self.blogs
 
@@ -309,10 +294,10 @@ class BlogIndexPage(Page):
         except EmptyPage:
             blogs = paginator.page(paginator.num_pages)
 
-        return render(request, self.template, {
-            'self': self,
-            'blogs': blogs,
-        })
+        # Update template context
+        context = super(BlogIndexPage, self).get_context(request)
+        context['blogs'] = blogs
+        return context
 
 BlogIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -321,7 +306,7 @@ BlogIndexPage.content_panels = [
 ]
 
 BlogIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -352,18 +337,11 @@ class BlogPage(Page):
     )
 
     indexed_fields = ('body', )
-    search_name = "Blog Entry"
 
     @property
     def blog_index(self):
-        # Find blog index in ancestors
-        for ancestor in reversed(self.get_ancestors()):
-            if isinstance(ancestor.specific, BlogIndexPage):
-                return ancestor
-
-        # No ancestors are blog indexes,
-        # just return first blog index in database
-        return BlogIndexPage.objects.first()
+        # Find closest ancestor which is a blog index
+        return self.get_ancestors().type(BlogIndexPage).last()
 
 BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -374,7 +352,7 @@ BlogPage.content_panels = [
 ]
 
 BlogPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
     FieldPanel('tags'),
 ]
@@ -407,7 +385,6 @@ class PersonPage(Page, ContactFields):
     )
 
     indexed_fields = ('first_name', 'last_name', 'intro', 'biography')
-    search_name = "Person"
 
 PersonPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -421,7 +398,7 @@ PersonPage.content_panels = [
 ]
 
 PersonPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -439,7 +416,6 @@ class ContactPage(Page, ContactFields):
     )
 
     indexed_fields = ('body', )
-    search_name = "Contact information"
 
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -448,7 +424,7 @@ ContactPage.content_panels = [
 ]
 
 ContactPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
@@ -463,15 +439,11 @@ class EventIndexPage(Page):
     intro = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
-    search_name = "Event index"
 
     @property
     def events(self):
-        # Get list of event pages that are descendants of this page
-        events = EventPage.objects.filter(
-            live=True,
-            path__startswith=self.path
-        )
+        # Get list of live event pages that are descendants of this page
+        events = EventPage.objects.live().descendant_of(self)
 
         # Filter events list to get ones that are either
         # running now or start in the future
@@ -489,7 +461,7 @@ EventIndexPage.content_panels = [
 ]
 
 EventIndexPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
 ]
 
 
@@ -551,18 +523,11 @@ class EventPage(Page):
     )
 
     indexed_fields = ('get_audience_display', 'location', 'body')
-    search_name = "Event"
 
     @property
     def event_index(self):
-        # Find event index in ancestors
-        for ancestor in reversed(self.get_ancestors()):
-            if isinstance(ancestor.specific, EventIndexPage):
-                return ancestor
-
-        # No ancestors are event indexes,
-        # just return first event index in database
-        return EventIndexPage.objects.first()
+        # Find closest ancestor which is an event index
+        return self.get_ancestors().type(EventIndexPage).last()
 
     def serve(self, request):
         if "format" in request.GET:
@@ -599,7 +564,7 @@ EventPage.content_panels = [
 ]
 
 EventPage.promote_panels = [
-    MultiFieldPanel(COMMON_PANELS, "Common page configuration"),
+    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
 
