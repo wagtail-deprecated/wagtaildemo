@@ -13,6 +13,10 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# Default to dummy email backend. Configure dev/production/local backend
+# as per https://docs.djangoproject.com/en/dev/topics/email/#email-backends
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
