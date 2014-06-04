@@ -4,8 +4,8 @@
 Vagrant::Config.run do |config|
 
 	# Base box to build off, and download URL for when it doesn't exist on the user's system already
-	config.vm.box = "wagtail-base-v0.1"
-	config.vm.box_url = "http://downloads.torchbox.com/wagtail-base-v0.1.box"
+#	config.vm.box = "wagtail-base-v0.1"
+#	config.vm.box_url = "http://downloads.torchbox.com/wagtail-base-v0.1.box"
 
 	# You can also build from a vanilla precise32 box, although it'll take longer
 	# config.vm.box = "precise32"
@@ -15,8 +15,9 @@ Vagrant::Config.run do |config|
 	# https://github.com/torchbox/vagrant-django-base , which has more of the necessary server config
 	# baked in and thus takes less time to initialise. To go down this route, you will need to build
 	# and host django-base.box yourself, and substitute your own URL below.
-	#config.vm.box = "django-base-v2.1"
+	config.vm.box = "django-base-ih-v2.1"
 	#config.vm.box_url = "http://vmimages.torchbox.com/django-base-v2.1.box"  # Torchbox-internal URL to django-base.box
+	config.vm.box_url = "file:///usr/local/src/vagrant-django-base/django-base-ih-v2.1.box"
 	
 	# Boot with a GUI so you can see the screen. (Default is headless)
 	# config.vm.boot_mode = :gui
