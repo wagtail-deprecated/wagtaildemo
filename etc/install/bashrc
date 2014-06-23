@@ -100,6 +100,7 @@ fi
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
 alias dj="/home/vagrant/.virtualenvs/wagtaildemo/bin/python /home/vagrant/wagtaildemo/manage.py"

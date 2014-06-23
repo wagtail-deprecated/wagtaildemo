@@ -1,8 +1,7 @@
 Django==1.6.2
 South==0.8.4
 psycopg2==2.5.2
-django-compressor==1.3
-django-modelcluster==0.1
--e git://github.com/torchbox/wagtail.git#egg=wagtail
-django-taggit==0.11.2
-django-libsass==0.1
+-e git://github.com/django-compressor/django-compressor.git@aba8c5f6b59dd78831d2bf1e53222f8475b2f9f8#egg=django_compressor
+-e git://github.com/kaedroho/wagtail@c696cfda10237bd94a288bab3f0ed6a635952ae3#egg=wagtail
+-e git://github.com/kaedroho/django-modelcluster@f2102d6a08ac942914ec682a53361ac6d9dfefd3#egg=django_modelcluster
+-e git://github.com/torchbox/django-libsass@eb60317992b4caa60b2b59d03c71a580b4d7cfe5#egg=django-libsass
