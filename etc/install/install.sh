@@ -60,10 +60,10 @@ su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache"
 # Optional: install ElasticSearch (for higher-performance / more flexible search functionality)
 #
 # if ! command -v /usr/share/elasticsearch/bin/elasticsearch; then
-#     apt-get install -y openjdk-6-jre-headless
+#     apt-get install -y openjdk-7-jre-headless
 #     echo "Downloading ElasticSearch..."
-#     wget -q https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.11.deb
-#     dpkg -i elasticsearch-0.90.11.deb
+#     wget -q https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.2.1.deb
+#     dpkg -i elasticsearch-1.2.1.deb
 #     service elasticsearch start
 # fi
 
