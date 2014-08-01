@@ -1,8 +1,8 @@
 Django>=1.6.2,<1.7
-South>=0.8.4
+South>=1.0.0
 psycopg2>=2.5.2
 django-compressor>=1.4
 django-modelcluster>=0.3
-wagtail>=0.4.1
+wagtail>=0.5
 django-taggit>=0.11.2
 django-libsass>=0.2
