@@ -16,6 +16,7 @@ from wagtail.wagtailimages.models import Image
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
+from wagtail.wagtailsearch import indexed
 
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
@@ -170,7 +171,9 @@ class HomePageRelatedLink(Orderable, RelatedLink):
 class HomePage(Page):
     body = RichTextField(blank=True)
 
-    indexed_fields = ('body', )
+    search_fields = Page.search_fields + (
+        indexed.SearchField('body'),
+    )
 
     class Meta:
         verbose_name = "Homepage"
@@ -203,7 +206,9 @@ class StandardIndexPage(Page):
         related_name='+'
     )
 
-    indexed_fields = ('intro', )
+    search_fields = Page.search_fields + (
+        indexed.SearchField('intro'),
+    )
 
 StandardIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -238,7 +243,10 @@ class StandardPage(Page):
         related_name='+'
     )
 
-    indexed_fields = ('intro', 'body', )
+    search_fields = Page.search_fields + (
+        indexed.SearchField('intro'),
+        indexed.SearchField('body'),
+    )
 
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -263,7 +271,9 @@ class BlogIndexPageRelatedLink(Orderable, RelatedLink):
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
 
-    indexed_fields = ('intro', )
+    search_fields = Page.search_fields + (
+        indexed.SearchField('intro'),
+    )
 
     @property
     def blogs(self):
@@ -336,7 +346,9 @@ class BlogPage(Page):
         related_name='+'
     )
 
-    indexed_fields = ('body', )
+    search_fields = Page.search_fields + (
+        indexed.SearchField('body'),
+    )
 
     @property
     def blog_index(self):
@@ -384,7 +396,12 @@ class PersonPage(Page, ContactFields):
         related_name='+'
     )
 
-    indexed_fields = ('first_name', 'last_name', 'intro', 'biography')
+    search_fields = Page.search_fields + (
+        indexed.SearchField('first_name'),
+        indexed.SearchField('last_name'),
+        indexed.SearchField('intro'),
+        indexed.SearchField('biography'),
+    )
 
 PersonPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -415,7 +432,9 @@ class ContactPage(Page, ContactFields):
         related_name='+'
     )
 
-    indexed_fields = ('body', )
+    search_fields = Page.search_fields + (
+        indexed.SearchField('body'),
+    )
 
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -438,7 +457,9 @@ class EventIndexPageRelatedLink(Orderable, RelatedLink):
 class EventIndexPage(Page):
     intro = RichTextField(blank=True)
 
-    indexed_fields = ('intro', )
+    search_fields = Page.search_fields + (
+        indexed.SearchField('intro'),
+    )
 
     @property
     def events(self):
@@ -522,7 +543,11 @@ class EventPage(Page):
         related_name='+'
     )
 
-    indexed_fields = ('get_audience_display', 'location', 'body')
+    search_fields = Page.search_fields + (
+        indexed.SearchField('get_audience_display'),
+        indexed.SearchField('location'),
+        indexed.SearchField('body'),
+    )
 
     @property
     def event_index(self):
