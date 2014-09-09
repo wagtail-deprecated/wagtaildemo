@@ -1,4 +1,4 @@
-{% load pageurl %}
+{% load wagtailcore_tags %}
 {% for advert in adverts %}
     {% if advert.url %}<a href="{{ advert.url }}">{% elif advert.page %}<a href="{% pageurl advert.page %}">{% endif %}
         <p>{{ advert.text }}</p>

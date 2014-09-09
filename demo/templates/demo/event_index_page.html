@@ -1,5 +1,5 @@
 {% extends "demo/base.html" %}
-{% load pageurl image_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
     {% include "demo/includes/intro.html" with intro=self.intro only %}
