@@ -70,9 +70,6 @@ su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache"
 # postgresql setup for project
 createdb -Upostgres $DB_NAME
 
-# dependencies for lxml (for HTML whitelisting)
-apt-get install -y libxml2-dev libxslt-dev
-
 # virtualenv setup for project
 su - vagrant -c "/usr/local/bin/virtualenv $VIRTUALENV_DIR && \
     echo $PROJECT_DIR > $VIRTUALENV_DIR/.project && \
@@ -84,4 +81,5 @@ echo "workon $VIRTUALENV_NAME" >> /home/vagrant/.bashrc
 chmod a+x $PROJECT_DIR/manage.py
 
 # Django project setup
-su - vagrant -c "source $VIRTUALENV_DIR/bin/activate && cd $PROJECT_DIR && python manage.py syncdb --noinput && python manage.py migrate --noinput"
+su - vagrant -c "$VIRTUALENV_DIR/bin/python $PROJECT_DIR/manage.py migrate --noinput"
+su - vagrant -c "$VIRTUALENV_DIR/bin/python $PROJECT_DIR/manage.py load_initial_data"
