@@ -1,3 +1,4 @@
+from datetime import date
 from django import template
 from django.conf import settings
 
