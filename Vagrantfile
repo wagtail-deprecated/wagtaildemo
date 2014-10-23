@@ -4,8 +4,8 @@
 Vagrant::Config.run do |config|
 
 	# Base box to build off, and download URL for when it doesn't exist on the user's system already
-	config.vm.box = "wagtail-base-v0.1"
-	config.vm.box_url = "http://downloads.torchbox.com/wagtail-base-v0.1.box"
+	config.vm.box = "wagtail-base-v0.3"
+	config.vm.box_url = "http://downloads.torchbox.com/wagtail-base-v0.3.box"
 
 	# You can also build from a vanilla precise32 box, although it'll take longer
 	# config.vm.box = "precise32"
