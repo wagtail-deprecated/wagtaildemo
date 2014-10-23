@@ -16,7 +16,7 @@ from wagtail.wagtailimages.models import Image
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
-from wagtail.wagtailsearch import indexed
+from wagtail.wagtailsearch import index
 
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
@@ -172,7 +172,7 @@ class HomePage(Page):
     body = RichTextField(blank=True)
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('body'),
+        index.SearchField('body'),
     )
 
     class Meta:
@@ -207,7 +207,7 @@ class StandardIndexPage(Page):
     )
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('intro'),
+        index.SearchField('intro'),
     )
 
 StandardIndexPage.content_panels = [
@@ -244,8 +244,8 @@ class StandardPage(Page):
     )
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('intro'),
-        indexed.SearchField('body'),
+        index.SearchField('intro'),
+        index.SearchField('body'),
     )
 
 StandardPage.content_panels = [
@@ -272,7 +272,7 @@ class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('intro'),
+        index.SearchField('intro'),
     )
 
     @property
@@ -347,7 +347,7 @@ class BlogPage(Page):
     )
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('body'),
+        index.SearchField('body'),
     )
 
     @property
@@ -397,10 +397,10 @@ class PersonPage(Page, ContactFields):
     )
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('first_name'),
-        indexed.SearchField('last_name'),
-        indexed.SearchField('intro'),
-        indexed.SearchField('biography'),
+        index.SearchField('first_name'),
+        index.SearchField('last_name'),
+        index.SearchField('intro'),
+        index.SearchField('biography'),
     )
 
 PersonPage.content_panels = [
@@ -433,7 +433,7 @@ class ContactPage(Page, ContactFields):
     )
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('body'),
+        index.SearchField('body'),
     )
 
 ContactPage.content_panels = [
@@ -458,7 +458,7 @@ class EventIndexPage(Page):
     intro = RichTextField(blank=True)
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('intro'),
+        index.SearchField('intro'),
     )
 
     @property
@@ -544,9 +544,9 @@ class EventPage(Page):
     )
 
     search_fields = Page.search_fields + (
-        indexed.SearchField('get_audience_display'),
-        indexed.SearchField('location'),
-        indexed.SearchField('body'),
+        index.SearchField('get_audience_display'),
+        index.SearchField('location'),
+        index.SearchField('body'),
     )
 
     @property
