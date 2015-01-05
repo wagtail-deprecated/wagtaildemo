@@ -64,3 +64,28 @@ With PostgreSQL running (and configured to allow you to connect as the 'postgres
 SQLite is supported as an alternative to PostgreSQL - update the DATABASES setting
 in wagtaildemo/settings/base.py to use 'django.db.backends.sqlite3', as you would
 with a regular Django project.
+
+Upgrade from Django 1.6
+-----
+If you checked out a copy of wagtaildemo prior to 5th January 2015, it will be running under Django 1.6. To upgrade to Django 1.7 while preserving existing data, perform the following steps:
+
+(outside of Vagrant)
+
+    git pull
+    git checkout pre-django1.7
+
+if you have set up your wagtaildemo instance to track the wagtail git repo (as described in "Developing Wagtail" above), you should also check out the 'stable/0.8.x' branch of wagtail at this point.
+
+(within Vagrant)
+
+    pip install -r requirements/dev.txt
+    ./manage.py migrate
+
+(outside Vagrant)
+
+    git checkout master
+
+(within Vagrant)
+
+    pip install -r requirements/dev.txt
+    ./manage.py migrate --fake
