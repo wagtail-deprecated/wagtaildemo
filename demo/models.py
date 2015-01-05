@@ -2,8 +2,6 @@ from datetime import date
 
 from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.management import call_command
-from django.dispatch import receiver
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -21,7 +19,6 @@ from wagtail.wagtailsearch import index
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import Tag, TaggedItemBase
-from south.signals import post_migrate
 
 from demo.utils import export_event
 
@@ -612,40 +609,3 @@ FormPage.content_panels = [
         FieldPanel('subject', classname="full"),
     ], "Email")
 ]
-
-
-# Signal handler to load demo data from fixtures after migrations have completed
-@receiver(post_migrate)
-def import_demo_data(sender, **kwargs):
-    # post_migrate will be fired after every app is migrated; we only want to do the import
-    # after demo has been migrated
-    if kwargs['app'] != 'demo':
-        return
-
-    # Check that there isn't already meaningful data in the db that would be clobbered.
-    # A freshly created databases should contain no images, tags or snippets
-    # and just two page records: root and homepage.
-    if Image.objects.count() or Tag.objects.count() or Advert.objects.count() or Page.objects.count() > 2:
-        return
-
-    # furthermore, if any page has a more specific type than Page, that suggests that meaningful
-    # data has been added
-    for page in Page.objects.all():
-        if page.specific_class != Page:
-            return
-
-    import os, shutil
-    from django.conf import settings
-
-    fixtures_dir = os.path.join(settings.PROJECT_ROOT, 'demo', 'fixtures')
-    fixture_file = os.path.join(fixtures_dir, 'demo.json')
-    image_src_dir = os.path.join(fixtures_dir, 'images')
-    image_dest_dir = os.path.join(settings.MEDIA_ROOT, 'original_images')
-
-    call_command('loaddata', fixture_file, verbosity=0)
-
-    if not os.path.isdir(image_dest_dir):
-        os.makedirs(image_dest_dir)
-
-    for filename in os.listdir(image_src_dir):
-        shutil.copy(os.path.join(image_src_dir, filename), image_dest_dir)

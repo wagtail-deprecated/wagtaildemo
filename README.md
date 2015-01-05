@@ -54,8 +54,8 @@ With PostgreSQL running (and configured to allow you to connect as the 'postgres
     cd wagtaildemo
     pip install -r requirements/dev.txt
     createdb -Upostgres wagtaildemo
-    ./manage.py syncdb
     ./manage.py migrate
+    ./manage.py load_initial_data
     ./manage.py createsuperuser
     ./manage.py runserver
 
