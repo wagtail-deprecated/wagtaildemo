@@ -1,3 +1,5 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/spapas/wagtaildemo)
+
 Wagtail demo
 =======================
 
@@ -35,7 +37,7 @@ The above setup is all you need for trying out the demo site and building Wagtai
         (edit Vagrantfile.local to specify the path to the wagtail codebase, if required)
     cp wagtaildemo/settings/local.py.example wagtaildemo/settings/local.py
         (uncomment the lines from 'import sys' onward, and edit the rest of local.py as appropriate)
-    
+
 If your VM is currently running, you'll then need to run `vagrant halt` followed by `vagrant up` for the changes to take effect.
 
 Setup (without Vagrant)
