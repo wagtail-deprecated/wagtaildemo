@@ -53,7 +53,7 @@ With PostgreSQL running (and configured to allow you to connect as the 'postgres
     git clone https://github.com/torchbox/wagtaildemo.git
     cd wagtaildemo
     pip install -r requirements/dev.txt
-    createdb -Upostgres wagtaildemo
+    createdb -U postgres wagtaildemo
     ./manage.py migrate
     ./manage.py load_initial_data
     ./manage.py createsuperuser
