@@ -8,7 +8,8 @@ from django.http import HttpResponse
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, PageChooserPanel
+    InlinePanel, PageChooserPanel, StreamFieldPanel
+from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
@@ -317,6 +318,22 @@ BlogIndexPage.promote_panels = [
 ]
 
 
+# Block types used in BlogPage's 'content' streamfield
+from django import forms
+class SpeakerBlock(StructBlock):
+    name = FieldBlock(forms.CharField(), label='Full name')
+    job_title = FieldBlock(forms.CharField(), default="just this guy, y'know?", label='Full name')
+    nicknames = ListBlock(FieldBlock(forms.CharField()))
+    image = ChooserBlock()
+    favourite_colours = ListBlock(FieldBlock(forms.CharField(), default="purple"))
+
+    # FIXME: this would be neater in a Meta class
+    template = 'demo/speaker.html'
+
+class ExpertSpeakerBlock(SpeakerBlock):
+    image = None
+    specialist_subject = TextInputBlock()
+
 # Blog page
 
 class BlogPageCarouselItem(Orderable, CarouselItem):
@@ -332,7 +349,7 @@ class BlogPageTag(TaggedItemBase):
 
 
 class BlogPage(Page):
-    body = RichTextField()
+    body = models.TextField()
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
     feed_image = models.ForeignKey(
@@ -355,7 +372,11 @@ class BlogPage(Page):
 BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
-    FieldPanel('body', classname="full"),
+    StreamFieldPanel('body', [
+        ('heading', TextInputBlock()),
+        ('image', ChooserBlock(label='Image')),
+        ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
+    ]),
     InlinePanel(BlogPage, 'carousel_items', label="Carousel items"),
     InlinePanel(BlogPage, 'related_links', label="Related links"),
 ]

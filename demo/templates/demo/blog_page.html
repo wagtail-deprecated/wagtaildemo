@@ -13,7 +13,9 @@
 {% block content %}
     {% include "demo/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
 
-    {% include "demo/includes/body.html" with body=self.body only %}
+    <div class="body-content">
+      {{ self.body }}
+    </div>
 
     {% with self.tags.all as tags %}
         {% if tags %}
