@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock
@@ -349,7 +349,11 @@ class BlogPageTag(TaggedItemBase):
 
 
 class BlogPage(Page):
-    body = models.TextField()
+    body = StreamField([
+        ('heading', FieldBlock(forms.CharField)),
+        ('image', ChooserBlock(label='Image')),
+        ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
+    ])
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
     feed_image = models.ForeignKey(
