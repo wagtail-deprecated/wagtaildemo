@@ -1,1 +1,1 @@
-web: gunicorn wagtaildemo.heroku_wsgi
+web: sh ./heroku.sh

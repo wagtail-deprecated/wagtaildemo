@@ -22,11 +22,10 @@ Run the following commands:
     vagrant up
     vagrant ssh
       (then, within the SSH session:)
-    ./manage.py createsuperuser
     ./manage.py runserver 0.0.0.0:8000
 
 This will make the app accessible on the host machine as http://localhost:8111/ - you can access the Wagtail admin interface at http://localhost:8111/admin/ . The codebase is located on the host
-machine, exported to the VM as a shared folder; code editing and Git operations will generally be done on the host.
+machine, exported to the VM as a shared folder; code editing and Git operations will generally be done on the host. A superuser with the credentials ``admin / changeme`` is automatically created.
 
 ### Developing Wagtail
 The above setup is all you need for trying out the demo site and building Wagtail-powered sites. To develop Wagtail itself, you'll need a working copy of [the Wagtail codebase](https://github.com/torchbox/wagtail) alongside your demo site, shared with your VM so that it is picked up instead of the packaged copy of Wagtail. From the location where you cloned wagtaildemo:
