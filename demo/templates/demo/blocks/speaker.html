@@ -1,0 +1,5 @@
+<h3>
+    {{ self.name }}
+    {% if self.nicknames %}({{ self.nicknames|join:", " }}){% endif %}
+</h3>
+<p>{{ self.job_title }}</p>

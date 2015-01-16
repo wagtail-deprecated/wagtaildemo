@@ -328,7 +328,7 @@ class SpeakerBlock(StructBlock):
     favourite_colours = ListBlock(FieldBlock(forms.CharField(), default="purple"))
 
     # FIXME: this would be neater in a Meta class
-    template = 'demo/speaker.html'
+    template = 'demo/blocks/speaker.html'
 
 class ExpertSpeakerBlock(SpeakerBlock):
     image = None
