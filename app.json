@@ -4,12 +4,8 @@
   "repository": "https://github.com/spapas/wagtaildemo",
   "logo": "http://wagtail.io/static/wagtailsite/images/navlogo2.png",
   "keywords": ["wagtail", "django"],
-
-  "env": {
-    "DJANGO_SETTINGS_MODULE": {
-      "description": "Django settings module (please don't change it)",
-      "value": "wagtaildemo.settings.heroku"
-    }
+  "scripts": {
+    "postdeploy": "DJANGO_SETTINGS_MODULE=wagtaildemo.settings.heroku python manage.py migrate"
   },
   "addons": [
     "heroku-postgresql:hobby-dev"
