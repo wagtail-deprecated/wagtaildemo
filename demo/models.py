@@ -9,7 +9,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock
+from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock, HeadingBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
@@ -321,8 +321,8 @@ BlogIndexPage.promote_panels = [
 # Block types used in BlogPage's 'content' streamfield
 from django import forms
 class SpeakerBlock(StructBlock):
-    name = FieldBlock(forms.CharField(), label='Full name')
-    job_title = FieldBlock(forms.CharField(), default="just this guy, y'know?", label='Full name')
+    name = HeadingBlock(label='Full name')
+    job_title = FieldBlock(forms.CharField(), default="just this guy, y'know?", label='Job title')
     nicknames = ListBlock(FieldBlock(forms.CharField()))
     image = ChooserBlock()
     favourite_colours = ListBlock(FieldBlock(forms.CharField(), default="purple"))
@@ -350,7 +350,7 @@ class BlogPageTag(TaggedItemBase):
 
 class BlogPage(Page):
     body = StreamField([
-        ('heading', FieldBlock(forms.CharField)),
+        ('heading', HeadingBlock()),
         ('image', ChooserBlock(label='Image')),
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
     ])
@@ -377,7 +377,7 @@ BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
     StreamFieldPanel('body', [
-        ('heading', TextInputBlock()),
+        ('heading', HeadingBlock()),
         ('image', ChooserBlock(label='Image')),
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
     ]),
