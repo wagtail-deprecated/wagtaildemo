@@ -1,3 +1,5 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/spapas/wagtaildemo)
+
 Wagtail demo
 =======================
 
@@ -20,11 +22,10 @@ Run the following commands:
     vagrant up
     vagrant ssh
       (then, within the SSH session:)
-    ./manage.py createsuperuser
     ./manage.py runserver 0.0.0.0:8000
 
 This will make the app accessible on the host machine as http://localhost:8111/ - you can access the Wagtail admin interface at http://localhost:8111/admin/ . The codebase is located on the host
-machine, exported to the VM as a shared folder; code editing and Git operations will generally be done on the host.
+machine, exported to the VM as a shared folder; code editing and Git operations will generally be done on the host. A superuser with the credentials ``admin / changeme`` is automatically created.
 
 ### Developing Wagtail
 The above setup is all you need for trying out the demo site and building Wagtail-powered sites. To develop Wagtail itself, you'll need a working copy of [the Wagtail codebase](https://github.com/torchbox/wagtail) alongside your demo site, shared with your VM so that it is picked up instead of the packaged copy of Wagtail. From the location where you cloned wagtaildemo:
@@ -35,7 +36,7 @@ The above setup is all you need for trying out the demo site and building Wagtai
         (edit Vagrantfile.local to specify the path to the wagtail codebase, if required)
     cp wagtaildemo/settings/local.py.example wagtaildemo/settings/local.py
         (uncomment the lines from 'import sys' onward, and edit the rest of local.py as appropriate)
-    
+
 If your VM is currently running, you'll then need to run `vagrant halt` followed by `vagrant up` for the changes to take effect.
 
 Setup (without Vagrant)
