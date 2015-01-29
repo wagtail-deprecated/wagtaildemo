@@ -1,7 +1,7 @@
 {
   "name": "Wagtaildemo",
   "description": "Wagtaildemo",
-  "repository": "https://github.com/spapas/wagtaildemo",
+  "repository": "https://github.com/torchbox/wagtaildemo",
   "logo": "http://wagtail.io/static/wagtailsite/images/navlogo2.png",
   "keywords": ["wagtail", "django"],
   "scripts": {
