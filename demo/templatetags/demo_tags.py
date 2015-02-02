@@ -21,7 +21,7 @@ def get_site_root(context):
 
 
 def has_menu_children(page):
-    return page.get_children().filter(live=True, show_in_menus=True).exists()
+    return page.get_children().live().in_menu().exists()
 
 
 # Retrieves the top menu items - the immediate children of the parent page
@@ -29,10 +29,7 @@ def has_menu_children(page):
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('demo/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
-    menuitems = parent.get_children().filter(
-        live=True,
-        show_in_menus=True
-    )
+    menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
     return {
@@ -47,10 +44,7 @@ def top_menu(context, parent, calling_page=None):
 @register.inclusion_tag('demo/tags/top_menu_children.html', takes_context=True)
 def top_menu_children(context, parent):
     menuitems_children = parent.get_children()
-    menuitems_children = menuitems_children.filter(
-        live=True,
-        show_in_menus=True
-    )
+    menuitems_children = menuitems_children.live().in_menu()
     return {
         'parent': parent,
         'menuitems_children': menuitems_children,
@@ -65,17 +59,11 @@ def top_menu_children(context, parent):
 def secondary_menu(context, calling_page=None):
     pages = []
     if calling_page:
-        pages = calling_page.get_children().filter(
-            live=True,
-            show_in_menus=True
-        )
+        pages = calling_page.get_children().live().in_menu()
 
         # If no children, get siblings instead
         if len(pages) == 0:
-            pages = calling_page.get_siblings(inclusive=False).filter(
-                live=True,
-                show_in_menus=True
-            )
+            pages = calling_page.get_siblings(inclusive=False).live().in_menu()
     return {
         'pages': pages,
         # required by the pageurl tag that we want to use within this template
@@ -90,7 +78,7 @@ def secondary_menu(context, calling_page=None):
     takes_context=True
 )
 def standard_index_listing(context, calling_page):
-    pages = calling_page.get_children().filter(live=True)
+    pages = calling_page.get_children().live()
     return {
         'pages': pages,
         # required by the pageurl tag that we want to use within this template
@@ -104,7 +92,7 @@ def standard_index_listing(context, calling_page):
     takes_context=True
 )
 def person_listing_homepage(context, count=2):
-    people = PersonPage.objects.filter(live=True).order_by('?')
+    people = PersonPage.objects.live().order_by('?')
     return {
         'people': people[:count],
         # required by the pageurl tag that we want to use within this template
@@ -118,7 +106,7 @@ def person_listing_homepage(context, count=2):
     takes_context=True
 )
 def blog_listing_homepage(context, count=2):
-    blogs = BlogPage.objects.filter(live=True).order_by('-date')
+    blogs = BlogPage.objects.live().order_by('-date')
     return {
         'blogs': blogs[:count],
         # required by the pageurl tag that we want to use within this template
@@ -132,7 +120,7 @@ def blog_listing_homepage(context, count=2):
     takes_context=True
 )
 def event_listing_homepage(context, count=2):
-    events = EventPage.objects.filter(live=True)
+    events = EventPage.objects.live()
     events = events.filter(date_from__gte=date.today()).order_by('date_from')
     return {
         'events': events[:count],
