@@ -18,13 +18,9 @@
 
         {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
         {% compress css %}
-            {# Vendor stylesheets stored locally #}
-            <link rel="stylesheet" href="{% static "demo/css/vendor/jquery.bxslider.css" %}" />
-
             {# Custom stylesheets #}
             {# SCSS compilation relies on django compressor #}
             <link rel="stylesheet" type="text/x-scss" href="{% static "demo/css/main.scss" %}" />
-
         {% endcompress %}
 
         {% block extra_css %}{% endblock %} {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
@@ -94,7 +90,6 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
         {% compress js %}
-            <script src="{% static "demo/js/vendor/jquery.bxslider.min.js" %}"></script>
             <script src="{% static "demo/js/vendor/fluidvids.js" %}"></script>
             {# Custom javascript #}
             {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
