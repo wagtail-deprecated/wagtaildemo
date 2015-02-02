@@ -9,7 +9,7 @@ register = template.Library()
 
 # settings value
 @register.assignment_tag
-def get_googe_maps_key():
+def get_google_maps_key():
     return getattr(settings, 'GOOGLE_MAPS_KEY', "")
 
 
@@ -21,10 +21,7 @@ def get_site_root(context):
 
 
 def has_menu_children(page):
-    if page.get_children().filter(live=True, show_in_menus=True):
-        return True
-    else:
-        return False
+    return page.get_children().filter(live=True, show_in_menus=True).exists()
 
 
 # Retrieves the top menu items - the immediate children of the parent page
