@@ -138,3 +138,18 @@ def adverts(context):
         'adverts': Advert.objects.all(),
         'request': context['request'],
     }
+
+
+@register.inclusion_tag('demo/tags/breadcrumbs.html', takes_context=True)
+def breadcrumbs(context):
+    self = context['self']
+    if self.depth <= 2:
+        # When on the home page, displaying breadcrumbs is irrelevant.
+        ancestors = ()
+    else:
+        ancestors = Page.objects.ancestor_of(
+            self, inclusive=True).filter(depth__gt=2)
+    return {
+        'ancestors': ancestors,
+        'request': context['request'],
+    }
