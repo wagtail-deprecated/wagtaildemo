@@ -12,7 +12,9 @@
                 <span class="icon-bar"></span>
             </button>
             {# Link to home page #}
-            <a href="{% pageurl site_root %}" class="navbar-brand">{{ site_root.title }}</a>
+            <a href="{% pageurl site_root %}" class="navbar-brand" title="{{ site_root.title }}" data-placement="bottom">
+                <i class="glyphicon glyphicon-home"></i>
+            </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
