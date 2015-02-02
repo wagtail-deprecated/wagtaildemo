@@ -56,17 +56,10 @@
         {% endblock %}
 
         <div class="container theme-showcase">
-            <div class="jumbotron">
-                <h1>Wagtail Demo</h1>
-                <p>A set of demo templates to show you what Wagtail can do.</p>
-                {% block search_box %}
-                    {% include "demo/includes/search_box.html" only %}
-                {% endblock %}
-            </div>
 
             {% block heading %}
                 <div class="page-header">
-                    <h2>{{ self.title }}</h2>
+                    <h1>{{ self.title }}</h1>
                 </div>
             {% endblock %}
 
