@@ -142,8 +142,8 @@ def adverts(context):
 
 @register.inclusion_tag('demo/tags/breadcrumbs.html', takes_context=True)
 def breadcrumbs(context):
-    self = context['self']
-    if self.depth <= 2:
+    self = context.get('self')
+    if self is None or self.depth <= 2:
         # When on the home page, displaying breadcrumbs is irrelevant.
         ancestors = ()
     else:
