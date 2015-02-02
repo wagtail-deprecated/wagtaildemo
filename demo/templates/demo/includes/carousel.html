@@ -3,11 +3,13 @@
 
 {% if carousel_items %}
   <div id="carousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      {% for carousel_item in carousel_items %}
-        <li data-target="#carousel" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
-      {% endfor %}
-    </ol>
+    {% if carousel_items|length > 1 %}
+      <ol class="carousel-indicators">
+        {% for carousel_item in carousel_items %}
+          <li data-target="#carousel" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+        {% endfor %}
+      </ol>
+    {% endif %}
 
     <div class="carousel-inner" role="listbox">
       {% for carousel_item in carousel_items %}
@@ -29,13 +31,15 @@
       {% endfor %}
     </div>
 
-    <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    {% if carousel_items|length > 1 %}
+      <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    {% endif %}
   </div>
 {% endif %}
