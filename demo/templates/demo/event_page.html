@@ -5,7 +5,7 @@
     <div class="well">
         <p><strong>
             {{ self.date_from|date:"j F Y" }}{% if self.date_to %} to {{ self.date_to|date:"j F Y" }}{% endif %}
-            {% if self.time_from %}{{ self.time_from|time_display }}{% endif %}{% if self.time_to %} to {{ self.time_to|time_display }}{% endif %}
+            {% if self.time_from %}{{ self.time_from|time }}{% endif %}{% if self.time_to %} to {{ self.time_to|time }}{% endif %}
         </strong></p>
         {% if self.location %}<p>Location: {{ self.location }}</p>{% endif %}
         {% if self.audience %}
