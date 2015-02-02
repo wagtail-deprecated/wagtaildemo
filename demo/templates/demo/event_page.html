@@ -4,7 +4,7 @@
 {% block content %}
     <div class="well">
         <p><strong>
-            {{ self.date_from|date:"j F Y" }}{% if self.date_to %} to {{ self.date_to|date:"j F Y" }}{% endif %}
+            {{ self.date_from }}{% if self.date_to %} to {{ self.date_to }}{% endif %}
             {% if self.time_from %}{{ self.time_from|time }}{% endif %}{% if self.time_to %} to {{ self.time_to|time }}{% endif %}
         </strong></p>
         {% if self.location %}<p>Location: {{ self.location }}</p>{% endif %}
