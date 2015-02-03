@@ -4,8 +4,11 @@
   "repository": "https://github.com/torchbox/wagtaildemo",
   "logo": "http://wagtail.io/static/wagtailsite/images/navlogo2.png",
   "keywords": ["wagtail", "django"],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "wagtaildemo.settings.heroku"
+  },
   "scripts": {
-    "postdeploy": "DJANGO_SETTINGS_MODULE=wagtaildemo.settings.heroku python manage.py migrate"
+    "postdeploy": "django-admin.py migrate && echo 'from wagtail.wagtailimages.models import Rendition; Rendition.objects.all().delete()' | django-admin.py shell"
   },
   "addons": [
     "heroku-postgresql:hobby-dev"
