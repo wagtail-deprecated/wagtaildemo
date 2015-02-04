@@ -376,11 +376,7 @@ class BlogPage(Page):
 BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
-    StreamFieldPanel('body', [
-        ('heading', HeadingBlock()),
-        ('image', ChooserBlock(label='Image')),
-        ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
-    ]),
+    StreamFieldPanel('body'),
     InlinePanel(BlogPage, 'carousel_items', label="Carousel items"),
     InlinePanel(BlogPage, 'related_links', label="Related links"),
 ]
