@@ -9,7 +9,7 @@ register = template.Library()
 
 # settings value
 @register.assignment_tag
-def get_googe_maps_key():
+def get_google_maps_key():
     return getattr(settings, 'GOOGLE_MAPS_KEY', "")
 
 
@@ -21,10 +21,7 @@ def get_site_root(context):
 
 
 def has_menu_children(page):
-    if page.get_children().filter(live=True, show_in_menus=True):
-        return True
-    else:
-        return False
+    return page.get_children().live().in_menu().exists()
 
 
 # Retrieves the top menu items - the immediate children of the parent page
@@ -32,17 +29,17 @@ def has_menu_children(page):
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('demo/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
-    menuitems = parent.get_children().filter(
-        live=True,
-        show_in_menus=True
-    )
+    request = context['request']
+    menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
+        menuitem.active = (False if calling_page is None
+                           else calling_page.url.startswith(menuitem.url))
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,
         # required by the pageurl tag that we want to use within this template
-        'request': context['request'],
+        'request': request,
     }
 
 
@@ -50,10 +47,7 @@ def top_menu(context, parent, calling_page=None):
 @register.inclusion_tag('demo/tags/top_menu_children.html', takes_context=True)
 def top_menu_children(context, parent):
     menuitems_children = parent.get_children()
-    menuitems_children = menuitems_children.filter(
-        live=True,
-        show_in_menus=True
-    )
+    menuitems_children = menuitems_children.live().in_menu()
     return {
         'parent': parent,
         'menuitems_children': menuitems_children,
@@ -68,17 +62,11 @@ def top_menu_children(context, parent):
 def secondary_menu(context, calling_page=None):
     pages = []
     if calling_page:
-        pages = calling_page.get_children().filter(
-            live=True,
-            show_in_menus=True
-        )
+        pages = calling_page.get_children().live().in_menu()
 
         # If no children, get siblings instead
         if len(pages) == 0:
-            pages = calling_page.get_siblings(inclusive=False).filter(
-                live=True,
-                show_in_menus=True
-            )
+            pages = calling_page.get_siblings(inclusive=False).live().in_menu()
     return {
         'pages': pages,
         # required by the pageurl tag that we want to use within this template
@@ -93,7 +81,7 @@ def secondary_menu(context, calling_page=None):
     takes_context=True
 )
 def standard_index_listing(context, calling_page):
-    pages = calling_page.get_children().filter(live=True)
+    pages = calling_page.get_children().live()
     return {
         'pages': pages,
         # required by the pageurl tag that we want to use within this template
@@ -107,9 +95,9 @@ def standard_index_listing(context, calling_page):
     takes_context=True
 )
 def person_listing_homepage(context, count=2):
-    people = PersonPage.objects.filter(live=True).order_by('?')
+    people = PersonPage.objects.live().order_by('?')
     return {
-        'people': people[:count],
+        'people': people[:count].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
@@ -121,9 +109,9 @@ def person_listing_homepage(context, count=2):
     takes_context=True
 )
 def blog_listing_homepage(context, count=2):
-    blogs = BlogPage.objects.filter(live=True).order_by('-date')
+    blogs = BlogPage.objects.live().order_by('-date')
     return {
-        'blogs': blogs[:count],
+        'blogs': blogs[:count].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
@@ -135,10 +123,10 @@ def blog_listing_homepage(context, count=2):
     takes_context=True
 )
 def event_listing_homepage(context, count=2):
-    events = EventPage.objects.filter(live=True)
+    events = EventPage.objects.live()
     events = events.filter(date_from__gte=date.today()).order_by('date_from')
     return {
-        'events': events[:count],
+        'events': events[:count].select_related('feed_image'),
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
@@ -153,36 +141,16 @@ def adverts(context):
     }
 
 
-# Format times e.g. on event page
-@register.filter
-def time_display(time):
-    # Get hour and minute from time object
-    hour = time.hour
-    minute = time.minute
-
-    # Convert to 12 hour format
-    if hour >= 12:
-        pm = True
-        hour -= 12
+@register.inclusion_tag('demo/tags/breadcrumbs.html', takes_context=True)
+def breadcrumbs(context):
+    self = context.get('self')
+    if self is None or self.depth <= 2:
+        # When on the home page, displaying breadcrumbs is irrelevant.
+        ancestors = ()
     else:
-        pm = False
-    if hour == 0:
-        hour = 12
-
-    # Hour string
-    hour_string = str(hour)
-
-    # Minute string
-    if minute != 0:
-        minute_string = "." + str(minute)
-    else:
-        minute_string = ""
-
-    # PM string
-    if pm:
-        pm_string = "pm"
-    else:
-        pm_string = "am"
-
-    # Join and return
-    return "".join([hour_string, minute_string, pm_string])
+        ancestors = Page.objects.ancestor_of(
+            self, inclusive=True).filter(depth__gt=2)
+    return {
+        'ancestors': ancestors,
+        'request': context['request'],
+    }

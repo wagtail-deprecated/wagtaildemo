@@ -2,6 +2,17 @@
 {% load demo_tags %}
 
 
+{% block heading %}
+    <div class="jumbotron">
+        <h1>Wagtail Demo</h1>
+        <p>A set of demo templates to show you what Wagtail can do.</p>
+        {% block search_box %}
+            {% include "demo/includes/search_box.html" only %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+
 {% block content %}
     {% include "demo/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
 

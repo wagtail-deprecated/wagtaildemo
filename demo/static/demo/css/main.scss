@@ -1,3 +1,6 @@
+$navbar-height: 51px;
+$padding-vertical: 15px;
+
 /* fonts */
 body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -68,4 +71,12 @@ a.list-group-item {
 
 .col-sm-4.next {
         text-align: right;
+}
+
+.theme-showcase {
+  margin-top: $navbar-height + $padding-vertical;
+}
+
+.carousel {
+  margin-bottom: $padding-vertical;
 }
