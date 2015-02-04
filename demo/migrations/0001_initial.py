@@ -244,8 +244,8 @@ class Migration(migrations.Migration):
                 ('label', models.CharField(help_text='The label of the form field', max_length=255)),
                 ('field_type', models.CharField(max_length=16, choices=[(b'singleline', 'Single line text'), (b'multiline', 'Multi-line text'), (b'email', 'Email'), (b'number', 'Number'), (b'url', 'URL'), (b'checkbox', 'Checkbox'), (b'checkboxes', 'Checkboxes'), (b'dropdown', 'Drop down'), (b'radio', 'Radio buttons'), (b'date', 'Date'), (b'datetime', 'Date/time')])),
                 ('required', models.BooleanField(default=True)),
-                ('choices', models.CharField(help_text='Comma seperated list of choices. Only applicable in checkboxes, radio and dropdown.', max_length=512, blank=True)),
-                ('default_value', models.CharField(help_text='Default value. Comma seperated values supported for checkboxes.', max_length=255, blank=True)),
+                ('choices', models.CharField(help_text='Comma separated list of choices. Only applicable in checkboxes, radio and dropdown.', max_length=512, blank=True)),
+                ('default_value', models.CharField(help_text='Default value. Comma separated values supported for checkboxes.', max_length=255, blank=True)),
                 ('help_text', models.CharField(max_length=255, blank=True)),
             ],
             options={
