@@ -1,0 +1,13 @@
+{
+  "name": "Wagtaildemo",
+  "description": "Wagtaildemo",
+  "repository": "https://github.com/torchbox/wagtaildemo",
+  "logo": "http://wagtail.io/static/wagtailsite/images/navlogo2.png",
+  "keywords": ["wagtail", "django"],
+  "scripts": {
+    "postdeploy": "DJANGO_SETTINGS_MODULE=wagtaildemo.settings.heroku python manage.py migrate"
+  },
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ]
+}
