@@ -33,8 +33,11 @@ def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
-        menuitem.active = (False if calling_page is None
-                           else calling_page.url.startswith(menuitem.url))
+        # We don't directly check if calling_page is None since the template
+        # engine can pass an empty string to calling_page
+        # if the variable passed as calling_page does not exist.
+        menuitem.active = (calling_page.url.startswith(menuitem.url)
+                           if calling_page else False)
     return {
         'calling_page': calling_page,
         'menuitems': menuitems,
