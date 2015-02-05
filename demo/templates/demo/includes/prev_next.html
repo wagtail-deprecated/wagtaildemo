@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 
 {% if self.depth > 3 %}{# Previous and next buttons are not relevant for the home page and categories #}
-  {% with prev=self.get_prev_siblings.live.in_menu.first next=self.get_next_siblings.live.in_menu.first %}
+  {% with prev=self.get_prev_siblings.live.first next=self.get_next_siblings.live.first %}
     <nav>
       <ul class="pager">
         <li class="previous{% if not prev %} disabled{% endif %}">
