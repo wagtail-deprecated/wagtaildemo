@@ -9,7 +9,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock, HeadingBlock
+from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock, CharBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
@@ -321,7 +321,7 @@ BlogIndexPage.promote_panels = [
 # Block types used in BlogPage's 'content' streamfield
 from django import forms
 class SpeakerBlock(StructBlock):
-    name = HeadingBlock(label='Full name')
+    name = CharBlock(label='Full name')
     job_title = FieldBlock(forms.CharField(), default="just this guy, y'know?", label='Job title')
     nicknames = ListBlock(FieldBlock(forms.CharField()))
     image = ChooserBlock()
@@ -350,7 +350,7 @@ class BlogPageTag(TaggedItemBase):
 
 class BlogPage(Page):
     body = StreamField([
-        ('heading', HeadingBlock()),
+        ('heading', CharBlock()),
         ('image', ChooserBlock(label='Image')),
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
     ])
