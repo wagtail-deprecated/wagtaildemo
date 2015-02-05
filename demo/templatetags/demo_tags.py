@@ -58,24 +58,6 @@ def top_menu_children(context, parent):
     }
 
 
-# Retrieves the secondary links for the 'also in this section' links
-# - either the children or siblings of the current page
-@register.inclusion_tag('demo/tags/secondary_menu.html', takes_context=True)
-def secondary_menu(context, calling_page=None):
-    pages = []
-    if calling_page:
-        pages = calling_page.get_children().live().in_menu()
-
-        # If no children, get siblings instead
-        if len(pages) == 0:
-            pages = calling_page.get_siblings(inclusive=False).live().in_menu()
-    return {
-        'pages': pages,
-        # required by the pageurl tag that we want to use within this template
-        'request': context['request'],
-    }
-
-
 # Retrieves all live pages which are children of the calling page
 #for standard index listing
 @register.inclusion_tag(

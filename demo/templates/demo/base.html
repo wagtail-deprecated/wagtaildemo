@@ -69,9 +69,7 @@
 
             {% endblock %}
 
-            {% block secondary_menu %}
-                {% secondary_menu calling_page=self %}
-            {% endblock %}
+            {% include 'demo/includes/prev_next.html' %}
 
             {% block adverts %}
                 {# Uses a snippet - allows adverts to appear on every page #}
