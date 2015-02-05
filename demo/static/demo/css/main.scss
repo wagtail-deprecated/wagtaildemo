@@ -72,7 +72,7 @@ a.list-group-item {
 .carousel {
   margin-bottom: $padding-vertical;
   .carousel-caption {
-    background-color: transparentize($wagtail-color, 0.5);
+    background-color: transparentize($wagtail-color, 0.4);
     padding-top: 0;
     .btn {
       margin-bottom: 10px;
