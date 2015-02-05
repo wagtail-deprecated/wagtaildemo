@@ -29,7 +29,6 @@ def has_menu_children(page):
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('demo/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
-    request = context['request']
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
@@ -42,7 +41,7 @@ def top_menu(context, parent, calling_page=None):
         'calling_page': calling_page,
         'menuitems': menuitems,
         # required by the pageurl tag that we want to use within this template
-        'request': request,
+        'request': context['request'],
     }
 
 
