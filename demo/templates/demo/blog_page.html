@@ -13,8 +13,23 @@
 {% block content %}
     {% include "demo/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
 
+    {% comment %}
+        Rendering the 'body' field using StreamBlock's default rendering:
+        <div class="body-content">
+            {{ self.body }}
+        </div>
+    {% endcomment %}
+
     <div class="body-content">
-      {{ self.body }}
+        {% for child in self.body %}
+            <div class="block-{{ child.block_type }}">
+                {% if child.block_type == 'heading' %}
+                    <h3>{{ child }}</h3>
+                {% else %}
+                    {{ child }}
+                {% endif %}
+            </div>
+        {% endfor %}
     </div>
 
     {% with self.tags.all as tags %}
