@@ -79,3 +79,10 @@ a.list-group-item {
     }
   }
 }
+
+p {
+  text-align: justify;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
