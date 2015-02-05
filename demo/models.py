@@ -334,6 +334,10 @@ class ExpertSpeakerBlock(SpeakerBlock):
     image = None
     specialist_subject = TextInputBlock()
 
+class ShoppingListBlock(ListBlock):
+    template = 'demo/blocks/shopping_list.html'
+
+
 # Blog page
 
 class BlogPageCarouselItem(Orderable, CarouselItem):
@@ -353,6 +357,7 @@ class BlogPage(Page):
         ('heading', CharBlock()),
         ('image', ChooserBlock(label='Image')),
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
+        ('shopping_list', ShoppingListBlock(CharBlock()))
     ])
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
