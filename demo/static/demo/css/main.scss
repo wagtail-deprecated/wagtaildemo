@@ -1,5 +1,6 @@
 $navbar-height: 51px;
 $padding-vertical: 15px;
+$wagtail-color: rgb(0, 127, 127);
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
 
@@ -70,4 +71,11 @@ a.list-group-item {
 
 .carousel {
   margin-bottom: $padding-vertical;
+  .carousel-caption {
+    background-color: transparentize($wagtail-color, 0.5);
+    padding-top: 0;
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
 }
