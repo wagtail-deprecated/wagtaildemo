@@ -9,7 +9,8 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock, CharBlock
+from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, \
+    StreamBlock, FieldBlock, CharBlock, RichTextBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
@@ -357,7 +358,8 @@ class BlogPage(Page):
         ('heading', CharBlock()),
         ('image', ChooserBlock(label='Image')),
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
-        ('shopping_list', ShoppingListBlock(CharBlock()))
+        ('shopping_list', ShoppingListBlock(CharBlock())),
+        ('paragraph', RichTextBlock()),
     ])
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
