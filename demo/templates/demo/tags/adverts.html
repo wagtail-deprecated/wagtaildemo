@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 
 {% if adverts %}
-  <ul class="list-inline text-center">
+  <ul id="advert-list" class="list-inline text-center">
     {% for advert in adverts %}
       <li>
         {% if advert.url %}

@@ -1,8 +1,13 @@
 $navbar-height: 51px;
 $padding-vertical: 15px;
 $wagtail-color: rgb(0, 127, 127);
+$html-background-color: whitesmoke;
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+
+html {
+  background-color: $html-background-color;
+}
 
 /* fonts */
 body {
@@ -65,8 +70,8 @@ a.list-group-item {
   text-align: right;
 }
 
-.theme-showcase {
-  margin-top: $navbar-height + $padding-vertical;
+#main {
+  padding-top: $navbar-height + $padding-vertical;
 }
 
 .carousel {
@@ -85,4 +90,12 @@ p {
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+#advert-list {
+  margin-top: $padding-vertical;
+  margin-bottom: 0;
+  padding: $padding-vertical 0;
+  background-color: $html-background-color;
+  border-top: 1px solid darken($html-background-color, 25%);
 }
