@@ -10,7 +10,7 @@ from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, \
-    StreamBlock, FieldBlock, CharBlock, RichTextBlock
+    StreamBlock, FieldBlock, CharBlock, RichTextBlock, PageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
@@ -325,6 +325,7 @@ class SpeakerBlock(StructBlock):
     name = CharBlock(label='Full name')
     job_title = FieldBlock(forms.CharField(), default="just this guy, y'know?", label='Job title')
     nicknames = ListBlock(FieldBlock(forms.CharField()))
+    profile_page = PageChooserBlock()
     image = ChooserBlock()
     favourite_colours = ListBlock(FieldBlock(forms.CharField(), default="purple"))
 
