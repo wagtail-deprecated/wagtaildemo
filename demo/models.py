@@ -329,15 +329,16 @@ class SpeakerBlock(StructBlock):
     image = ChooserBlock()
     favourite_colours = ListBlock(FieldBlock(forms.CharField(), default="purple"))
 
-    # FIXME: this would be neater in a Meta class
-    template = 'demo/blocks/speaker.html'
+    class Meta:
+        template = 'demo/blocks/speaker.html'
 
 class ExpertSpeakerBlock(SpeakerBlock):
     image = None
     specialist_subject = TextInputBlock()
 
 class ShoppingListBlock(ListBlock):
-    template = 'demo/blocks/shopping_list.html'
+    class Meta:
+        template = 'demo/blocks/shopping_list.html'
 
 
 # Blog page
