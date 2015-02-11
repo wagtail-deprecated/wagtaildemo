@@ -13,6 +13,7 @@ from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBloc
     StreamBlock, FieldBlock, CharBlock, RichTextBlock, PageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
@@ -326,14 +327,15 @@ class SpeakerBlock(StructBlock):
     job_title = FieldBlock(forms.CharField(), default="just this guy, y'know?", label='Job title')
     nicknames = ListBlock(FieldBlock(forms.CharField()))
     profile_page = PageChooserBlock()
-    image = ChooserBlock()
+    image = ImageChooserBlock()
     favourite_colours = ListBlock(FieldBlock(forms.CharField(), default="purple"))
 
     class Meta:
         template = 'demo/blocks/speaker.html'
 
 class ExpertSpeakerBlock(SpeakerBlock):
-    image = None
+    # To undefine a sub-block that was defined on the superclass:
+    # image = None
     specialist_subject = TextInputBlock()
 
 class ShoppingListBlock(ListBlock):
@@ -358,7 +360,7 @@ class BlogPageTag(TaggedItemBase):
 class BlogPage(Page):
     body = StreamField([
         ('heading', CharBlock()),
-        ('image', ChooserBlock(label='Image')),
+        ('image', ImageChooserBlock(label='Image')),
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
         ('shopping_list', ShoppingListBlock(CharBlock())),
         ('paragraph', RichTextBlock()),

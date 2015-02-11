@@ -1,6 +1,13 @@
-<h3>
+{% load wagtailimages_tags %}
+
+{% if self.image %}
+    {% image self.image fill-100x100 style="float:left; margin: 0 1em 0 0;" %}
+{% endif %}
+<h3 style="clear: none;">
     {{ self.name }}
     {% if self.nicknames %}({{ self.nicknames|join:", " }}){% endif %}
 </h3>
+
 {% if self.profile_page %}<p><a href="{{ self.profile_page.url }}">Profile: {{ self.profile_page.title }} &raquo;</a></p>{% endif %}
 <p>{{ self.job_title }}</p>
+<div style="clear: both;"></div>
