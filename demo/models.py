@@ -9,7 +9,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailadmin.blocks import TextInputBlock, StructBlock, ListBlock, \
+from wagtail.wagtailadmin.blocks import StructBlock, ListBlock, \
     StreamBlock, CharBlock, RichTextBlock, PageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
@@ -321,10 +321,9 @@ BlogIndexPage.promote_panels = [
 
 
 # Block types used in BlogPage's 'content' streamfield
-from django import forms
 class SpeakerBlock(StructBlock):
     name = CharBlock(label='Full name')
-    job_title = CharBlock(default="just this guy, y'know?", label='Job title')
+    job_title = CharBlock(required=False, default="just this guy, y'know?", label='Job title')
     nicknames = ListBlock(CharBlock())
     profile_page = PageChooserBlock()
     image = ImageChooserBlock()
@@ -336,7 +335,7 @@ class SpeakerBlock(StructBlock):
 class ExpertSpeakerBlock(SpeakerBlock):
     # To undefine a sub-block that was defined on the superclass:
     # image = None
-    specialist_subject = TextInputBlock()
+    specialist_subject = CharBlock(required=False)
 
 class ShoppingListBlock(ListBlock):
     class Meta:
@@ -361,7 +360,7 @@ class BlogPage(Page):
     body = StreamField([
         ('heading', CharBlock()),
         ('image', ImageChooserBlock(label='Image')),
-        ('speaker', ExpertSpeakerBlock([('another_specialist_subject', TextInputBlock())], label='Featured speaker')),
+        ('speaker', ExpertSpeakerBlock([('another_specialist_subject', CharBlock(required=False))], label='Featured speaker')),
         ('shopping_list', ShoppingListBlock(CharBlock())),
         ('paragraph', RichTextBlock()),
     ])
