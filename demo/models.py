@@ -9,8 +9,8 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailadmin.blocks import TextInputBlock, ChooserBlock, StructBlock, ListBlock, \
-    StreamBlock, FieldBlock, CharBlock, RichTextBlock, PageChooserBlock
+from wagtail.wagtailadmin.blocks import TextInputBlock, StructBlock, ListBlock, \
+    StreamBlock, CharBlock, RichTextBlock, PageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -324,11 +324,11 @@ BlogIndexPage.promote_panels = [
 from django import forms
 class SpeakerBlock(StructBlock):
     name = CharBlock(label='Full name')
-    job_title = FieldBlock(forms.CharField(), default="just this guy, y'know?", label='Job title')
-    nicknames = ListBlock(FieldBlock(forms.CharField()))
+    job_title = CharBlock(default="just this guy, y'know?", label='Job title')
+    nicknames = ListBlock(CharBlock())
     profile_page = PageChooserBlock()
     image = ImageChooserBlock()
-    favourite_colours = ListBlock(FieldBlock(forms.CharField(), default="purple"))
+    favourite_colours = ListBlock(CharBlock(default="purple"))
 
     class Meta:
         template = 'demo/blocks/speaker.html'
