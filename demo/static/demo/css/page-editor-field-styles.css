@@ -1,21 +1,43 @@
-.fieldname-h3 input,
-.fieldname-h3 textarea,
-.fieldname-h3 .richtext{
-    font-size:1.8em;
+.fieldname-quote .input{
+    position:relative;
+    padding-left:3em;
+    padding-right:3em;
 }
+    .fieldname-quote .input:before{
+        content:'“';
+        position:absolute;
+        font-family:Bitter, Georgia, Serif;
+        font-size:5em;
+        line-height:1em;
+        left:0;
+        color:#CCC;
+    }
+    .fieldname-quote .input:after{
+        content:'”';
+        position:absolute;
+        font-family:Bitter, Georgia, Serif;
+        font-size:5em;
+        line-height:1em;
+        right:0;
+        top:0;
+        color:#CCC;
+    }
+    .fieldname-quote input{
+        font-style: italic;
+        font-size:2em;
+        padding-bottom:0;
+    }
 
-.fieldname-h4 input,
-.fieldname-h4 textarea,
-.fieldname-h4 .richtext{
-    font-size:1.5em;
-}
 
-.fieldname-intro input,
-.fieldname-intro textarea,
-.fieldname-intro .richtext{
-    font-size:1.4em;
+.fieldname-attribution .input{
+    padding-left:1em;
+    position:relative;
 }
-
-.fieldname-quote input{
-    font-style: italic;
-}
+    .fieldname-attribution .input:before{
+        content: "—";
+        position: absolute;
+        left: 0;
+    }
+    .fieldname-attribution .field-content{
+        margin-left:2em;
+    }

@@ -342,6 +342,11 @@ class ShoppingListBlock(ListBlock):
         template = 'demo/blocks/shopping_list.html'
 
 
+class PullQuoteBlock(StructBlock):
+    quote = CharBlock(classname="quote title")
+    attribution = CharBlock()
+
+
 # Blog page
 
 class BlogPageCarouselItem(Orderable, CarouselItem):
@@ -359,6 +364,7 @@ class BlogPageTag(TaggedItemBase):
 class BlogPage(Page):
     body = StreamField([
         ('heading', CharBlock()),
+        ('pullquote', PullQuoteBlock()),
         ('image', ImageChooserBlock(label='Image')),
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', CharBlock(required=False))], label='Featured speaker')),
         ('shopping_list', ShoppingListBlock(CharBlock())),
