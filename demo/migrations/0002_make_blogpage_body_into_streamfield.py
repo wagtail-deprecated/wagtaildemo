@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blogpage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField(block_types=[(b'heading', wagtail.wagtailadmin.blocks.CharBlock()), (b'image', wagtail.wagtailadmin.blocks.ChooserBlock(label=b'Image')), (b'speaker', demo.models.ExpertSpeakerBlock([(b'another_specialist_subject', wagtail.wagtailadmin.blocks.TextInputBlock())], label=b'Featured speaker'))]),
+            field=wagtail.wagtailcore.fields.StreamField(block_types=[(b'heading', wagtail.wagtailadmin.blocks.CharBlock()), (b'image', wagtail.wagtailadmin.blocks.ChooserBlock(label=b'Image')), (b'speaker', demo.models.ExpertSpeakerBlock([(b'another_specialist_subject', wagtail.wagtailadmin.blocks.CharBlock(required=False))], label=b'Featured speaker'))]),
             preserve_default=True,
         ),
     ]
