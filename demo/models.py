@@ -7,10 +7,10 @@ from django.http import HttpResponse
 
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailcore.blocks import StructBlock, ListBlock, \
+    StreamBlock, CharBlock, RichTextBlock, PageChooserBlock, RawHTMLBlock
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailadmin.blocks import StructBlock, ListBlock, \
-    StreamBlock, CharBlock, RichTextBlock, PageChooserBlock, RawHTMLBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtailimages.blocks import ImageChooserBlock

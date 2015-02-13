@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import wagtail.wagtailcore.fields
-import wagtail.wagtailadmin.blocks
+import wagtail.wagtailcore.blocks
 import demo.models
 import wagtail.wagtailimages.blocks
 
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blogpage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField(block_types=[(b'heading', wagtail.wagtailadmin.blocks.CharBlock()), (b'pullquote', demo.models.PullQuoteBlock()), (b'image', wagtail.wagtailimages.blocks.ImageChooserBlock(label=b'Image')), (b'speaker', demo.models.ExpertSpeakerBlock([(b'another_specialist_subject', wagtail.wagtailadmin.blocks.CharBlock(required=False))], label=b'Featured speaker')), (b'shopping_list', demo.models.ShoppingListBlock(wagtail.wagtailadmin.blocks.CharBlock())), (b'paragraph', wagtail.wagtailadmin.blocks.RichTextBlock())]),
+            field=wagtail.wagtailcore.fields.StreamField(block_types=[(b'heading', wagtail.wagtailcore.blocks.CharBlock()), (b'pullquote', demo.models.PullQuoteBlock()), (b'image', wagtail.wagtailimages.blocks.ImageChooserBlock(label=b'Image')), (b'speaker', demo.models.ExpertSpeakerBlock([(b'another_specialist_subject', wagtail.wagtailcore.blocks.CharBlock(required=False))], label=b'Featured speaker')), (b'shopping_list', demo.models.ShoppingListBlock(wagtail.wagtailcore.blocks.CharBlock())), (b'paragraph', wagtail.wagtailcore.blocks.RichTextBlock())]),
             preserve_default=True,
         ),
     ]
