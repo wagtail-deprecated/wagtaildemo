@@ -325,8 +325,8 @@ class SpeakerBlock(StructBlock):
     name = CharBlock(label='Full name')
     job_title = CharBlock(required=False, default="just this guy, y'know?", label='Job title')
     nicknames = ListBlock(CharBlock())
-    profile_page = PageChooserBlock()
-    image = ImageChooserBlock()
+    profile_page = PageChooserBlock(required=False)
+    image = ImageChooserBlock(required=False)
     favourite_colours = ListBlock(CharBlock(default="purple"))
 
     class Meta:
