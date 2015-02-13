@@ -10,7 +10,7 @@ from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailadmin.blocks import StructBlock, ListBlock, \
-    StreamBlock, CharBlock, RichTextBlock, PageChooserBlock
+    StreamBlock, CharBlock, RichTextBlock, PageChooserBlock, RawHTMLBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.models import Image
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -360,7 +360,6 @@ class BlogPageRelatedLink(Orderable, RelatedLink):
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey('demo.BlogPage', related_name='tagged_items')
 
-
 class BlogPage(Page):
     body = StreamField([
         ('heading', CharBlock()),
@@ -369,6 +368,7 @@ class BlogPage(Page):
         ('speaker', ExpertSpeakerBlock([('another_specialist_subject', CharBlock(required=False))], label='Featured speaker')),
         ('shopping_list', ShoppingListBlock(CharBlock())),
         ('paragraph', RichTextBlock()),
+        ('raw_html', RawHTMLBlock(label='Raw HTML')),
     ])
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
