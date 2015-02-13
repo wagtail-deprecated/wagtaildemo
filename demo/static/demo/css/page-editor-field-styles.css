@@ -1,0 +1,21 @@
+.fieldname-h3 input,
+.fieldname-h3 textarea,
+.fieldname-h3 .richtext{
+    font-size:1.8em;
+}
+
+.fieldname-h4 input,
+.fieldname-h4 textarea,
+.fieldname-h4 .richtext{
+    font-size:1.5em;
+}
+
+.fieldname-intro input,
+.fieldname-intro textarea,
+.fieldname-intro .richtext{
+    font-size:1.4em;
+}
+
+.fieldname-quote input{
+    font-style: italic;
+}
