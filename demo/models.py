@@ -182,9 +182,7 @@ HomePage.content_panels = [
     InlinePanel(HomePage, 'related_links', label="Related links"),
 ]
 
-HomePage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
-]
+HomePage.promote_panels = Page.promote_panels
 
 
 # Standard index page
@@ -213,8 +211,7 @@ StandardIndexPage.content_panels = [
     InlinePanel(StandardIndexPage, 'related_links', label="Related links"),
 ]
 
-StandardIndexPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+StandardIndexPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
 ]
 
@@ -253,8 +250,7 @@ StandardPage.content_panels = [
     InlinePanel(StandardPage, 'related_links', label="Related links"),
 ]
 
-StandardPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+StandardPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
 ]
 
@@ -312,9 +308,7 @@ BlogIndexPage.content_panels = [
     InlinePanel(BlogIndexPage, 'related_links', label="Related links"),
 ]
 
-BlogIndexPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
-]
+BlogIndexPage.promote_panels = Page.promote_panels
 
 
 # Blog page
@@ -360,8 +354,7 @@ BlogPage.content_panels = [
     InlinePanel(BlogPage, 'related_links', label="Related links"),
 ]
 
-BlogPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+BlogPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
     FieldPanel('tags'),
 ]
@@ -411,8 +404,7 @@ PersonPage.content_panels = [
     InlinePanel(PersonPage, 'related_links', label="Related links"),
 ]
 
-PersonPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+PersonPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
 ]
 
@@ -439,8 +431,7 @@ ContactPage.content_panels = [
     MultiFieldPanel(ContactFields.panels, "Contact"),
 ]
 
-ContactPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+ContactPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
 ]
 
@@ -478,9 +469,7 @@ EventIndexPage.content_panels = [
     InlinePanel(EventIndexPage, 'related_links', label="Related links"),
 ]
 
-EventIndexPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
-]
+EventIndexPage.promote_panels = Page.promote_panels
 
 
 # Event page
@@ -585,8 +574,7 @@ EventPage.content_panels = [
     InlinePanel(EventPage, 'related_links', label="Related links"),
 ]
 
-EventPage.promote_panels = [
-    MultiFieldPanel(Page.promote_panels, "Common page configuration"),
+EventPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
 ]
 
