@@ -20,7 +20,7 @@ from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import Tag, TaggedItemBase
 
-from demo.utils import export_event
+from wagtaildemo.demo.utils import export_event
 
 
 EVENT_AUDIENCE_CHOICES = (

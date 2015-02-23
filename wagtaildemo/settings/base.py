@@ -167,7 +167,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailforms',
     'wagtail.wagtailsites',
 
-    'demo',
+    'wagtaildemo.demo',
 )
 
 EMAIL_SUBJECT_PREFIX = '[wagtaildemo] '
