@@ -3,11 +3,12 @@ import os, shutil
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
 from django.core.management import call_command
+from wagtaildemo import demo
 
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
-        fixtures_dir = os.path.join(settings.PROJECT_ROOT, 'demo', 'fixtures')
+        fixtures_dir = os.path.join(os.path.dirname(demo.__file__), 'fixtures')
         fixture_file = os.path.join(fixtures_dir, 'demo.json')
         image_src_dir = os.path.join(fixtures_dir, 'images')
         image_dest_dir = os.path.join(settings.MEDIA_ROOT, 'original_images')
