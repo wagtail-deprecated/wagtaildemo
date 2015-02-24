@@ -2,26 +2,25 @@ from datetime import date
 
 from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
 from django.http import HttpResponse
 
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailcore.blocks import StructBlock, ListBlock, \
-    StreamBlock, CharBlock, RichTextBlock, PageChooserBlock, RawHTMLBlock
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailimages.models import Image
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailsearch import index
 
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
+    InlinePanel, PageChooserPanel, StreamFieldPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
-from taggit.models import Tag, TaggedItemBase
+from taggit.models import TaggedItemBase
 
 from demo.utils import export_event
 
@@ -321,13 +320,13 @@ BlogIndexPage.promote_panels = [
 
 
 # Block types used in BlogPage's 'content' streamfield
-class SpeakerBlock(StructBlock):
-    name = CharBlock(label='Full name')
-    job_title = CharBlock(required=False, default="just this guy, y'know?", label='Job title')
-    nicknames = ListBlock(CharBlock())
-    profile_page = PageChooserBlock(required=False)
+class SpeakerBlock(blocks.StructBlock):
+    name = blocks.CharBlock(label='Full name')
+    job_title = blocks.CharBlock(required=False, default="just this guy, y'know?", label='Job title')
+    nicknames = blocks.ListBlock(blocks.CharBlock())
+    profile_page = blocks.PageChooserBlock(required=False)
     image = ImageChooserBlock(required=False)
-    favourite_colours = ListBlock(CharBlock(default="purple"))
+    favourite_colours = blocks.ListBlock(blocks.CharBlock(default="purple"))
 
     class Meta:
         template = 'demo/blocks/speaker.html'
@@ -335,16 +334,16 @@ class SpeakerBlock(StructBlock):
 class ExpertSpeakerBlock(SpeakerBlock):
     # To undefine a sub-block that was defined on the superclass:
     # image = None
-    specialist_subject = CharBlock(required=False)
+    specialist_subject = blocks.CharBlock(required=False)
 
-class ShoppingListBlock(ListBlock):
+class ShoppingListBlock(blocks.ListBlock):
     class Meta:
         template = 'demo/blocks/shopping_list.html'
 
 
-class PullQuoteBlock(StructBlock):
-    quote = CharBlock(classname="quote title")
-    attribution = CharBlock()
+class PullQuoteBlock(blocks.StructBlock):
+    quote = blocks.CharBlock(classname="quote title")
+    attribution = blocks.CharBlock()
 
 
 # Blog page
@@ -362,13 +361,13 @@ class BlogPageTag(TaggedItemBase):
 
 class BlogPage(Page):
     body = StreamField([
-        ('heading', CharBlock()),
+        ('heading', blocks.CharBlock()),
         ('pullquote', PullQuoteBlock()),
         ('image', ImageChooserBlock(label='Image')),
-        ('speaker', ExpertSpeakerBlock([('another_specialist_subject', CharBlock(required=False))], label='Featured speaker')),
-        ('shopping_list', ShoppingListBlock(CharBlock())),
-        ('paragraph', RichTextBlock()),
-        ('raw_html', RawHTMLBlock(label='Raw HTML')),
+        ('speaker', ExpertSpeakerBlock([('another_specialist_subject', blocks.CharBlock(required=False))], label='Featured speaker')),
+        ('shopping_list', ShoppingListBlock(blocks.CharBlock())),
+        ('paragraph', blocks.RichTextBlock()),
+        ('raw_html', blocks.RawHTMLBlock(label='Raw HTML')),
     ])
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
