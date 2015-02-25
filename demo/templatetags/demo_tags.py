@@ -2,7 +2,7 @@ from datetime import date
 from django import template
 from django.conf import settings
 
-from demo.models import *
+from demo.models import PersonPage, BlogPage, EventPage, Advert, Page
 
 register = template.Library()
 
@@ -29,7 +29,6 @@ def has_menu_children(page):
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('demo/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
-    request = context['request']
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
@@ -42,7 +41,7 @@ def top_menu(context, parent, calling_page=None):
         'calling_page': calling_page,
         'menuitems': menuitems,
         # required by the pageurl tag that we want to use within this template
-        'request': request,
+        'request': context['request'],
     }
 
 
@@ -54,24 +53,6 @@ def top_menu_children(context, parent):
     return {
         'parent': parent,
         'menuitems_children': menuitems_children,
-        # required by the pageurl tag that we want to use within this template
-        'request': context['request'],
-    }
-
-
-# Retrieves the secondary links for the 'also in this section' links
-# - either the children or siblings of the current page
-@register.inclusion_tag('demo/tags/secondary_menu.html', takes_context=True)
-def secondary_menu(context, calling_page=None):
-    pages = []
-    if calling_page:
-        pages = calling_page.get_children().live().in_menu()
-
-        # If no children, get siblings instead
-        if len(pages) == 0:
-            pages = calling_page.get_siblings(inclusive=False).live().in_menu()
-    return {
-        'pages': pages,
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
@@ -139,7 +120,7 @@ def event_listing_homepage(context, count=2):
 @register.inclusion_tag('demo/tags/adverts.html', takes_context=True)
 def adverts(context):
     return {
-        'adverts': Advert.objects.all(),
+        'adverts': Advert.objects.select_related('page'),
         'request': context['request'],
     }
 
