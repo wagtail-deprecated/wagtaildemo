@@ -71,7 +71,7 @@ a.list-group-item {
     text-align: right;
 }
 
-#main {
+.main {
     padding-top: $navbar-height + $padding-vertical;
     min-height: 700px;
 }
@@ -94,7 +94,7 @@ p {
     }
 }
 
-#advert-list {
+.advert-list {
     margin-top: $padding-vertical;
     margin-bottom: 0;
     padding: $padding-vertical 0;
