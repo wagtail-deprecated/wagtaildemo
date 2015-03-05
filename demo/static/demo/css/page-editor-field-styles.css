@@ -4,7 +4,7 @@
     padding-right:3em;
 }
     .fieldname-quote .input:before{
-        content:'“';
+        content:"\201C";
         position:absolute;
         font-family:Bitter, Georgia, Serif;
         font-size:5em;
@@ -13,7 +13,7 @@
         color:#CCC;
     }
     .fieldname-quote .input:after{
-        content:'”';
+        content:"\201C";
         position:absolute;
         font-family:Bitter, Georgia, Serif;
         font-size:5em;
@@ -22,7 +22,8 @@
         top:0;
         color:#CCC;
     }
-    .fieldname-quote input{
+    .fieldname-quote input,
+    .fieldname-quote textarea{
         font-style: italic;
         font-size:2em;
         padding-bottom:0;
@@ -34,7 +35,7 @@
     position:relative;
 }
     .fieldname-attribution .input:before{
-        content: "—";
+        content: "\2014";
         position: absolute;
         left: 0;
     }

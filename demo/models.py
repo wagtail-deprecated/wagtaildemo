@@ -342,7 +342,7 @@ class ShoppingListBlock(blocks.ListBlock):
 
 
 class PullQuoteBlock(blocks.StructBlock):
-    quote = blocks.CharBlock(classname="quote title")
+    quote = blocks.TextBlock(classname="quote title")
     attribution = blocks.CharBlock()
 
 
