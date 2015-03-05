@@ -593,6 +593,15 @@
     }
 },
 {
+    "pk": 2,
+    "model": "demo.advert",
+    "fields": {
+        "url": "",
+        "text": "Contact",
+        "page": 12
+    }
+},
+{
     "pk": 5, 
     "model": "demo.blogindexpage", 
     "fields": {
