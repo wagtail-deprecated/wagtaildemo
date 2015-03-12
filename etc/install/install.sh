@@ -73,7 +73,7 @@ createdb -Upostgres $DB_NAME
 # virtualenv setup for project
 su - vagrant -c "/usr/local/bin/virtualenv $VIRTUALENV_DIR && \
     echo $PROJECT_DIR > $VIRTUALENV_DIR/.project && \
-    PIP_DOWNLOAD_CACHE=/home/vagrant/.pip_download_cache $VIRTUALENV_DIR/bin/pip install -r $PROJECT_DIR/requirements/dev.txt"
+    PIP_DOWNLOAD_CACHE=/home/vagrant/.pip_download_cache $VIRTUALENV_DIR/bin/pip install -e $PROJECT_DIR -r $PROJECT_DIR/requirements/dev.txt"
 
 echo "workon $VIRTUALENV_NAME" >> /home/vagrant/.bashrc
 
@@ -81,5 +81,5 @@ echo "workon $VIRTUALENV_NAME" >> /home/vagrant/.bashrc
 chmod a+x $PROJECT_DIR/manage.py
 
 # Django project setup
-su - vagrant -c "$VIRTUALENV_DIR/bin/python $PROJECT_DIR/manage.py migrate --noinput"
-su - vagrant -c "$VIRTUALENV_DIR/bin/python $PROJECT_DIR/manage.py load_initial_data"
+su - vagrant -c "$VIRTUALENV_DIR/bin/manage.py migrate --noinput"
+su - vagrant -c "$VIRTUALENV_DIR/bin/manage.py load_initial_data"

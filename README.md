@@ -52,13 +52,12 @@ Don't want to set up a whole VM to try out Wagtail? No problem.
 With PostgreSQL running (and configured to allow you to connect as the 'postgres' user - if not, you'll need to adjust the `createdb` line and the database settings in wagtaildemo/settings/base.py accordingly), run the following commands:
 
     git clone https://github.com/torchbox/wagtaildemo.git
-    cd wagtaildemo
-    pip install -r requirements/dev.txt
+    pip install -e wagtaildemo -r wagtaildemo/requirements/dev.txt
     createdb -Upostgres wagtaildemo
-    ./manage.py migrate
-    ./manage.py load_initial_data
-    ./manage.py createsuperuser
-    ./manage.py runserver
+    manage.py migrate
+    manage.py load_initial_data
+    manage.py createsuperuser
+    manage.py runserver
 
 ### SQLite support
 
