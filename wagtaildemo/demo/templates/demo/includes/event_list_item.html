@@ -13,7 +13,7 @@
       <h4 class="media-heading">{{ event.title }}</h4>
       <p><strong>{{ event.date_from }}{% if event.date_to %} to {{ event.date_to }}{% endif %}</strong></p>
       {% if event.search_description %}
-        {{ event.search_description }}
+        <p>{{ event.search_description }}</p>
       {% endif %}
     </div>
   </div>
