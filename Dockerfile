@@ -19,3 +19,7 @@ RUN django-admin.py load_initial_data
 # Compress static files
 RUN django-admin.py collectstatic --noinput
 RUN django-admin.py compress
+RUN python -m whitenoise.gzip /app/static/
+
+CMD uwsgi --ini uwsgi.ini
+EXPOSE 80
