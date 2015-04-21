@@ -7,6 +7,8 @@ ALLOWED_HOSTS = ['localhost', 'demo.wagtail.io']
 
 COMPRESS_OFFLINE = True
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
