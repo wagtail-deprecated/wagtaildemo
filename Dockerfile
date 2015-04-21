@@ -8,5 +8,14 @@ RUN pip install -r requirements/docker.txt
 ADD . /app/
 WORKDIR /app/
 
+# Environment variables
 ENV PYTHONPATH=/app/
-ENV DJANGO_SETTINGS_MODULE=wagtaildemo.settings.production
+ENV DJANGO_SETTINGS_MODULE=wagtaildemo.settings.docker
+
+# Create database
+RUN django-admin.py migrate --noinput
+RUN django-admin.py load_initial_data
+
+# Compress static files
+RUN django-admin.py collectstatic --noinput
+RUN django-admin.py compress
