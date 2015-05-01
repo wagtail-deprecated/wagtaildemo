@@ -2,6 +2,15 @@ from datetime import datetime, time, timedelta
 import hashlib
 
 
+def add_slashes(string):
+    string = string.replace('"', '\\"')
+    string = string.replace('\\', '\\\\')
+    string = string.replace(',', '\\,')
+    string = string.replace(':', '\\:')
+    string = string.replace(';', '\\;')
+    string = string.replace('\n', '\\n')
+    return string
+
 def export_event(event, format='ical'):
     # Only ical format supported at the moment
     if format != 'ical':
@@ -41,15 +50,6 @@ def export_event(event, format='ical'):
             start_time
         )
         end_datetime = datetime.combine(date, end_time)
-
-        def add_slashes(string):
-            string.replace('"', '\\"')
-            string.replace('\\', '\\\\')
-            string.replace(',', '\\,')
-            string.replace(':', '\\:')
-            string.replace(';', '\\;')
-            string.replace('\n', '\\n')
-            return string
 
         # Make a uid
         uid = hashlib.sha1(event.url + str(start_datetime)).hexdigest() + '@wagtaildemo'
