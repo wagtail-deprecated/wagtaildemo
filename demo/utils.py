@@ -1,14 +1,10 @@
 from datetime import datetime, time, timedelta
 import hashlib
+import re
 
 
 def add_slashes(string):
-    string = string.replace('"', '\\"')
-    string = string.replace('\\', '\\\\')
-    string = string.replace(',', '\\,')
-    string = string.replace(':', '\\:')
-    string = string.replace(';', '\\;')
-    string = string.replace('\n', '\\n')
+    string = re.escape(string)
     return string
 
 def export_event(event, format='ical'):
