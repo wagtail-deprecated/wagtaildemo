@@ -9,9 +9,6 @@ from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 
 
-admin.autodiscover()
-
-
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
 
