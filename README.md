@@ -3,7 +3,9 @@
 Wagtail demo
 =======================
 
-[Wagtail](http://wagtail.io) is distributed as a Python package, to be incorporated into a Django project via the INSTALLED_APPS setting. To get you up and running quickly, we provide a demo site with all the configuration in place, including a set of example page types.
+This is a demo site implemented with [Wagtail CMS](http://wagtail.io) to provide examples of how to develop your own site. 
+
+To create a new site from scratch we strongly recommend the ``wagtail start`` command, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/creating_your_project.html) however this demo site may prove a useful source of how to achieve certain things with Wagtail. 
 
 Setup with Vagrant (recommended)
 -----
