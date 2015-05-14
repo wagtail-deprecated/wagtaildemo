@@ -14,7 +14,7 @@ We recommend running Wagtail in a virtual machine using Vagrant, as this ensures
 
 ### Dependencies
 * [VirtualBox](https://www.virtualbox.org/)
-* [Vagrant 1.1+](http://www.vagrantup.com)
+* [Vagrant 1.5+](http://www.vagrantup.com)
 
 ### Installation
 Run the following commands:
