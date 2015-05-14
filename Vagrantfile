@@ -73,4 +73,11 @@ Vagrant.configure(2) do |config|
 
   # Enable agent forwarding over SSH connections.
   config.ssh.forward_agent = true
+
+  # If a 'Vagrantfile.local' file exists, import any configuration settings
+  # defined there into here. Vagrantfile.local is ignored in version control,
+  # so this can be used to add configuration specific to this computer.
+  if File.exist? "Vagrantfile.local"
+    instance_eval File.read("Vagrantfile.local"), "Vagrantfile.local"
+  end
 end
