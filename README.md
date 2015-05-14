@@ -3,9 +3,9 @@
 Wagtail demo
 =======================
 
-This is a demo site implemented with [Wagtail CMS](http://wagtail.io) to provide examples of how to develop your own site. 
+This is a demonstration site implemented with [Wagtail CMS](http://wagtail.io).
 
-To create a new site from scratch we strongly recommend the ``wagtail start`` command, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/creating_your_project.html) however this demo site may prove a useful source of how to achieve certain things with Wagtail. 
+To create your own site from scratch we strongly recommend the ``wagtail start`` command, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/creating_your_project.html) however this demo provides some useful examples.
 
 Setup with Vagrant (recommended)
 -----
@@ -26,7 +26,7 @@ Run the following commands:
       (then, within the SSH session:)
     ./manage.py runserver 0.0.0.0:8000
 
-The demo site will now be accessible at http://localhost:8000/ and the Wagtail admin interface at http://localhost:8000/admin/ . Log into the admin with the credentials ``admin / changeme``.
+The demo site will now be accessible at [http://localhost:8000/](http://localhost:8000/) and the Wagtail admin interface at [http://localhost:8000/admin/](http://localhost:8000/admin/) . Log into the admin with the credentials ``admin / changeme``.
 
 Setup without Vagrant
 -----
