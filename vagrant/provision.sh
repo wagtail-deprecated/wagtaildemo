@@ -2,7 +2,7 @@
 
 PROJECT_NAME="wagtaildemo"
 
-PROJECT_DIR=/vagrant
+PROJECT_DIR=/home/vagrant/wagtaildemo
 VIRTUALENV_DIR=/home/vagrant/.virtualenvs/$PROJECT_NAME
 
 PYTHON=$VIRTUALENV_DIR/bin/python
