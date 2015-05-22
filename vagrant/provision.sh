@@ -22,7 +22,7 @@ su - vagrant -c "echo $PROJECT_DIR > $VIRTUALENV_DIR/.project"
 
 
 # Install PIP requirements
-su - vagrant -c "$PIP install -r $PROJECT_DIR/requirements.txt"
+su - vagrant -c "$PIP install -r $PROJECT_DIR/requirements.txt -f /home/vagrant/wheelhouse"
 
 
 # Set execute permissions on manage.py as they get lost if we build from a zip file
