@@ -5,7 +5,7 @@ Wagtail demo
 
 This is a demonstration site implemented with [Wagtail CMS](http://wagtail.io).
 
-To create your own site from scratch we strongly recommend the ``wagtail start`` command, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/creating_your_project.html) however this demo provides some useful examples.
+To create your own site from scratch we strongly recommend the ``wagtail start`` command, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/) however this demo provides some useful examples.
 
 Setup with Vagrant (recommended)
 -----
