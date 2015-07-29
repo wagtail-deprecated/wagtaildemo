@@ -1,16 +1,18 @@
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/torchbox/wagtaildemo)
 
-Wagtail demo
+Wagtail demo project
 =======================
 
-This is a demonstration site implemented with [Wagtail CMS](http://wagtail.io).
+This is a demonstration project for [Wagtail CMS](http://wagtail.io).
 
-To create your own site from scratch we strongly recommend the ``wagtail start`` command, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/) however this demo provides some useful examples.
+*We do __not__ recommend using this project to start your own site*. This project is only to provide some examples of implementing common features. 
 
-Setup with Vagrant (recommended)
------
+If you're reasonably new to Python/Django, we suggest you run this project on a Virtual Machine using Vagrant, which helps  resolve common software dependency issues. However for more experienced developers, instructions to start this project without Vagrant follow below. 
 
-We recommend running Wagtail in a virtual machine using Vagrant, as this ensures that the correct dependencies are in place regardless of how your host machine is set up.
+Once you're familiar with the examples in this project and you want to start a real site, we strongly recommend running the ``wagtail start`` command in a fresh virtual environment, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/). 
+
+Setup with Vagrant
+------------------
 
 ### Dependencies
 * [VirtualBox](https://www.virtualbox.org/)
