@@ -5,7 +5,7 @@ Wagtail demo project
 
 This is a demonstration project for [Wagtail CMS](http://wagtail.io).
 
-*We do __not__ recommend using this project to start your own site*. This project is only to provide some examples of implementing common features. 
+*We do __not__ recommend using this project to start your own site*. This project is only to provide some examples of implementing common features, it is not an exemplar of Django or Wagtail best practice.
 
 If you're reasonably new to Python/Django, we suggest you run this project on a Virtual Machine using Vagrant, which helps  resolve common software dependency issues. However for more experienced developers, instructions to start this project without Vagrant follow below. 
 
