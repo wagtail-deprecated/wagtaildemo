@@ -20,11 +20,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'wagtaildemo',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',  # Set to empty string for localhost.
-        'PORT': '',  # Set to empty string for default.
-        'CONN_MAX_AGE': 600,  # number of seconds database connections should persist for
     }
 }
 
@@ -170,6 +165,15 @@ INSTALLED_APPS = (
     'demo',
 )
 
+# Add wagtail.contrib.wagtailsearchpromotions to INSTALLED_APPS
+# if we're on Wagtail 1.1 or later.
+# NB this is a quick-and-dirty version check that won't work with
+# full generality (double-digit versions, alpha/beta releases)
+from wagtail.wagtailcore import __version__
+if __version__.split('.') > ['1', '0']:
+    INSTALLED_APPS = list(INSTALLED_APPS) + ['wagtail.contrib.wagtailsearchpromotions']
+
+
 EMAIL_SUBJECT_PREFIX = '[wagtaildemo] '
 
 INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
@@ -178,10 +182,6 @@ INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
-
-# Auth settings
-LOGIN_URL = 'django.contrib.auth.views.login'
-LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -216,6 +216,3 @@ LOGGING = {
 # WAGTAIL SETTINGS
 
 WAGTAIL_SITE_NAME = 'wagtaildemo'
-
-# Override the search results template for wagtailsearch
-WAGTAILSEARCH_RESULTS_TEMPLATE = 'demo/search_results.html'

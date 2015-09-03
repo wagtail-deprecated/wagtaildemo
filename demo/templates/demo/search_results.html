@@ -11,21 +11,19 @@
 
 
 {% block content %}
-    {% with query.editors_picks.all as editors_picks %}
-        {% if editors_picks %}
-            <div class="well">
+    {% if search_picks %}
+        <div class="well">
             <h3>Editors picks</h3>
-                <ul>
-                    {% for editors_pick in editors_picks %}
-                        <li>
-                            <h4><a href="{% pageurl editors_pick.page %}">{{ editors_pick.page.title }}</a></h4>
-                            <p>{{ editors_pick.description|safe }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    {% endwith %}
+            <ul>
+                {% for pick in search_picks %}
+                    <li>
+                        <h4><a href="{% pageurl pick.page %}">{{ pick.page.title }}</a></h4>
+                        <p>{{ pick.description|safe }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
     {% if search_results %}
         <ul>
@@ -38,7 +36,7 @@
                 </li>
             {% endfor %}
         </ul>
-    {% elif request.GET.q %}
+    {% elif search_query %}
         No results found
     {% else %}
         You didn’t search anything!

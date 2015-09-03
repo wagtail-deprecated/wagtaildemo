@@ -29,9 +29,9 @@
                     </li>       
                 {% endfor %}
             </ul>
-            <form class="navbar-form navbar-right" role="search" action="{% url 'wagtailsearch_search' %}" method="get">
+            <form class="navbar-form navbar-right" role="search" action="{% url 'search' %}" method="get">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search…" value="{{ request.GET.q}}" />
+                    <input type="text" name="query" class="form-control" placeholder="Search…" value="{{ search_query }}" />
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-default">
                             <i class="glyphicon glyphicon-search"></i>

@@ -180,8 +180,8 @@ class HomePage(Page):
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('body', classname="full"),
-    InlinePanel(HomePage, 'carousel_items', label="Carousel items"),
-    InlinePanel(HomePage, 'related_links', label="Related links"),
+    InlinePanel('carousel_items', label="Carousel items"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 HomePage.promote_panels = Page.promote_panels
@@ -210,7 +210,7 @@ class StandardIndexPage(Page):
 StandardIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(StandardIndexPage, 'related_links', label="Related links"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 StandardIndexPage.promote_panels = Page.promote_panels + [
@@ -247,9 +247,9 @@ class StandardPage(Page):
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(StandardPage, 'carousel_items', label="Carousel items"),
+    InlinePanel('carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
-    InlinePanel(StandardPage, 'related_links', label="Related links"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 StandardPage.promote_panels = Page.promote_panels + [
@@ -307,7 +307,7 @@ class BlogIndexPage(Page):
 BlogIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(BlogIndexPage, 'related_links', label="Related links"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 BlogIndexPage.promote_panels = Page.promote_panels
@@ -386,8 +386,8 @@ BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
     StreamFieldPanel('body'),
-    InlinePanel(BlogPage, 'carousel_items', label="Carousel items"),
-    InlinePanel(BlogPage, 'related_links', label="Related links"),
+    InlinePanel('carousel_items', label="Carousel items"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 BlogPage.promote_panels = Page.promote_panels + [
@@ -437,7 +437,7 @@ PersonPage.content_panels = [
     FieldPanel('biography', classname="full"),
     ImageChooserPanel('image'),
     MultiFieldPanel(ContactFields.panels, "Contact"),
-    InlinePanel(PersonPage, 'related_links', label="Related links"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 PersonPage.promote_panels = Page.promote_panels + [
@@ -502,7 +502,7 @@ class EventIndexPage(Page):
 EventIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(EventIndexPage, 'related_links', label="Related links"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 EventIndexPage.promote_panels = Page.promote_panels
@@ -604,10 +604,10 @@ EventPage.content_panels = [
     FieldPanel('audience'),
     FieldPanel('cost'),
     FieldPanel('signup_link'),
-    InlinePanel(EventPage, 'carousel_items', label="Carousel items"),
+    InlinePanel('carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
-    InlinePanel(EventPage, 'speakers', label="Speakers"),
-    InlinePanel(EventPage, 'related_links', label="Related links"),
+    InlinePanel('speakers', label="Speakers"),
+    InlinePanel('related_links', label="Related links"),
 ]
 
 EventPage.promote_panels = Page.promote_panels + [
@@ -618,6 +618,7 @@ EventPage.promote_panels = Page.promote_panels + [
 class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')
 
+
 class FormPage(AbstractEmailForm):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
@@ -625,7 +626,7 @@ class FormPage(AbstractEmailForm):
 FormPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel(FormPage, 'form_fields', label="Form fields"),
+    InlinePanel('form_fields', label="Form fields"),
     FieldPanel('thank_you_text', classname="full"),
     MultiFieldPanel([
         FieldPanel('to_address', classname="full"),
