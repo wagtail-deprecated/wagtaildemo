@@ -112,6 +112,8 @@ class LinkFields(models.Model):
         DocumentChooserPanel('link_document'),
     ]
 
+    api_fields = ('link', )
+
     class Meta:
         abstract = True
 
@@ -134,6 +136,16 @@ class ContactFields(models.Model):
         FieldPanel('country'),
         FieldPanel('post_code'),
     ]
+
+    api_fields = (
+        'telephone',
+        'email',
+        'address_1',
+        'address_2',
+        'city',
+        'country',
+        'post_code',
+    )
 
     class Meta:
         abstract = True
@@ -159,6 +171,12 @@ class CarouselItem(LinkFields):
         MultiFieldPanel(LinkFields.panels, "Link"),
     ]
 
+    api_fields = (
+        'image',
+        'embed_url',
+        'caption',
+    ) + LinkFields.api_fields
+
     class Meta:
         abstract = True
 
@@ -172,6 +190,10 @@ class RelatedLink(LinkFields):
         FieldPanel('title'),
         MultiFieldPanel(LinkFields.panels, "Link"),
     ]
+
+    api_fields = (
+        'title',
+    ) + LinkFields.api_fields
 
     class Meta:
         abstract = True
@@ -222,6 +244,12 @@ class HomePage(Page):
         index.SearchField('body'),
     )
 
+    api_fields = (
+        'body',
+        'carousel_items',
+        'related_links',
+    )
+
     class Meta:
         verbose_name = "Homepage"
 
@@ -253,6 +281,12 @@ class StandardIndexPage(Page):
 
     search_fields = Page.search_fields + (
         index.SearchField('intro'),
+    )
+
+    api_fields = (
+        'intro',
+        'feed_image',
+        'related_links',
     )
 
 StandardIndexPage.content_panels = [
@@ -292,6 +326,14 @@ class StandardPage(Page):
         index.SearchField('body'),
     )
 
+    api_fields = (
+        'intro',
+        'body',
+        'feed_image',
+        'carousel_items',
+        'related_links',
+    )
+
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
@@ -316,6 +358,11 @@ class BlogIndexPage(Page):
 
     search_fields = Page.search_fields + (
         index.SearchField('intro'),
+    )
+
+    api_fields = (
+        'intro',
+        'related_links',
     )
 
     @property
@@ -391,6 +438,15 @@ class BlogPage(Page):
         index.SearchField('body'),
     )
 
+    api_fields = (
+        'body',
+        'tags',
+        'date',
+        'feed_Image',
+        'carousel_items',
+        'related_links',
+    )
+
     @property
     def blog_index(self):
         # Find closest ancestor which is a blog index
@@ -443,6 +499,17 @@ class PersonPage(Page, ContactFields):
         index.SearchField('biography'),
     )
 
+    api_fields = (
+        'first_name',
+        'last_name',
+        'intro',
+        'biography',
+        'image',
+        'feed_image',
+    ) + ContactFields.api_fields + (
+        'related_links',
+    )
+
 PersonPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('first_name'),
@@ -475,6 +542,11 @@ class ContactPage(Page, ContactFields):
         index.SearchField('body'),
     )
 
+    api_fields = (
+        'body',
+        'feed_image',
+    ) + ContactFields.api_fields
+
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('body', classname="full"),
@@ -497,6 +569,11 @@ class EventIndexPage(Page):
 
     search_fields = Page.search_fields + (
         index.SearchField('intro'),
+    )
+
+    api_fields = (
+        'intro',
+        'related_links',
     )
 
     @property
@@ -544,6 +621,12 @@ class EventPageSpeaker(Orderable, LinkFields):
         related_name='+'
     )
 
+    api_fields = (
+        'first_name',
+        'last_name',
+        'image',
+    ) + LinkFields.api_fields
+
     @property
     def name_display(self):
         return self.first_name + " " + self.last_name
@@ -583,6 +666,22 @@ class EventPage(Page):
         index.SearchField('get_audience_display'),
         index.SearchField('location'),
         index.SearchField('body'),
+    )
+
+    api_fields = (
+        'date_from',
+        'date_to',
+        'time_from',
+        'time_to',
+        'audience',
+        'location',
+        'cost',
+        'body',
+        'signup_link',
+        'feed_image',
+        'speakers',
+        'carousel_items',
+        'related_links',
     )
 
     @property
