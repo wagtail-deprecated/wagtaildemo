@@ -53,6 +53,5 @@ With PostgreSQL running (and configured to allow you to connect as the 'postgres
 
 ### SQLite support
 
-SQLite is supported as an alternative to PostgreSQL - update the DATABASES setting
-in wagtaildemo/settings/base.py to use 'django.db.backends.sqlite3', as you would
-with a regular Django project.
+SQLite is supported as an alternative to PostgreSQL - update the `DATABASES` setting
+in wagtaildemo/settings/base.py to use `'django.db.backends.sqlite3'` and set `NAME` to be the full path of your database file, as you would with a regular Django project.
