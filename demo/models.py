@@ -23,7 +23,7 @@ from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
-from demo.utils import export_event
+from demo.utils import export_event, generate_image_url
 
 
 EVENT_AUDIENCE_CHOICES = (
@@ -173,9 +173,15 @@ class CarouselItem(LinkFields):
 
     api_fields = (
         'image',
+        'image_url',
         'embed_url',
         'caption',
     ) + LinkFields.api_fields
+
+    @property
+    def image_url(self):
+        if self.image:
+            return generate_image_url(self.image, 'width-1000')
 
     class Meta:
         abstract = True
@@ -442,10 +448,16 @@ class BlogPage(Page):
         'body',
         'tags',
         'date',
-        'feed_Image',
+        'feed_image',
+        'feed_image_url',
         'carousel_items',
         'related_links',
     )
+
+    @property
+    def feed_image_url(self):
+        if self.feed_image:
+            return generate_image_url(self.feed_image, 'width-200')
 
     @property
     def blog_index(self):
@@ -505,10 +517,22 @@ class PersonPage(Page, ContactFields):
         'intro',
         'biography',
         'image',
+        'image_url',
         'feed_image',
+        'feed_image_url',
     ) + ContactFields.api_fields + (
         'related_links',
     )
+
+    @property
+    def image_url(self):
+        if self.image:
+            return generate_image_url(self.image, 'width-300')
+
+    @property
+    def feed_image_url(self):
+        if self.feed_image:
+            return generate_image_url(self.feed_image, 'width-200')
 
 PersonPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -679,10 +703,16 @@ class EventPage(Page):
         'body',
         'signup_link',
         'feed_image',
+        'feed_image_url',
         'speakers',
         'carousel_items',
         'related_links',
     )
+
+    @property
+    def feed_image_url(self):
+        if self.feed_image:
+            return generate_image_url(self.feed_image, 'width-200')
 
     @property
     def event_index(self):
