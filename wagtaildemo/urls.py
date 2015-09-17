@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
-from wagtail.wagtailimages import urls as wagtailimages_urls
+from wagtail.wagtailimages.views.frontend import serve as serve_image
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.api.v2 import urls as wagtailapi_urls
 
@@ -17,7 +17,7 @@ urlpatterns = [
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^images/', include(wagtailimages_urls)),
+    url(r'^images/(.*)/(\d*)/([^/]*)/.*$', serve_image, name='wagtailimages_serve'),
 
     url(r'search/$', views.search, name='search'),
     url(r'^api/', include(wagtailapi_urls)),
