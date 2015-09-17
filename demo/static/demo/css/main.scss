@@ -14,6 +14,7 @@ body {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
+
 /* body image styles - classes supplied by rich text editor */
 .body-content {
     width: 100%;
@@ -29,13 +30,13 @@ body {
         width: 100%;
     }
 
-    img.left {
+    img.left{
         width: 45%;
         margin-right: 5%;
         float: left;
     }
 
-    img.right {
+    img.right{
         width: 45%;
         margin-left: 5%;
         float: right;
@@ -45,6 +46,63 @@ body {
         clear: both;
     }
 }
+
+
+.img-wrapper {
+    margin-bottom: 1em;
+    position: relative;
+    
+    img {
+        display: block;
+        width: 100%;
+        margin-bottom:0;
+    }
+
+    &.left {
+        float:left;
+        width: 45%;
+        margin-right: 5%;
+    }
+    &.right {
+        float:right;
+        width: 45%;
+        margin-left: 5%;
+    }
+}
+
+.intro{
+    font-size:1.4em;
+}
+
+.caption {
+    padding: 0.2em 1em 0.2em 0.5em;
+    margin: 0;
+    font-weight: 400;
+    background: #F2f2f2;
+    font-style: italic;
+    display: inline-block;
+    z-index: 2;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 0.9em;
+    max-width: calc(100% - 10px);
+
+    p{
+        margin:0 !important;
+    }
+}
+
+blockquote{
+    margin:2em 0;
+
+    span{
+        display:block;
+        color: #AAA;
+        font-size:0.8em;
+    }
+}
+
 
 /* List styling - tweaks to include images */
 
@@ -89,6 +147,7 @@ a.list-group-item {
 
 p {
     text-align: justify;
+    
     &:last-child {
         margin-bottom: 0;
     }

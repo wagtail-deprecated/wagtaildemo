@@ -3,16 +3,21 @@ from datetime import date
 from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
+from django import forms
 
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, PageChooserPanel
+    InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailsearch import index
+
+from wagtail.wagtailcore.blocks import TextBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock, CharBlock, RichTextBlock, PageChooserBlock, RawHTMLBlock
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
 from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
@@ -25,6 +30,44 @@ EVENT_AUDIENCE_CHOICES = (
     ('public', "Public"),
     ('private', "Private"),
 )
+
+# Global Streamfield definition
+
+class PullQuoteBlock(StructBlock):
+    quote = TextBlock("quote title")
+    attribution = CharBlock()
+
+    class Meta:
+        icon = "openquote"
+
+class ImageFormatChoiceBlock(FieldBlock):
+    field = forms.ChoiceField(choices=(('left','Wrap left'),('right','Wrap right'),('mid','Mid width'),('full','Full width'),))
+
+class HTMLAlignmentChoiceBlock(FieldBlock):
+    field = forms.ChoiceField(choices=(('normal','Normal'),('full','Full width'),))
+
+class ImageBlock(StructBlock):
+    image = ImageChooserBlock()
+    caption = RichTextBlock()
+    alignment = ImageFormatChoiceBlock()
+
+class AlignedHTMLBlock(StructBlock):
+    html = RawHTMLBlock()
+    alignment = HTMLAlignmentChoiceBlock()
+
+    class Meta:
+        icon = "code"
+
+class DemoStreamBlock(StreamBlock):
+    h2 = CharBlock(icon="title", classname="title")
+    h3 = CharBlock(icon="title", classname="title")
+    h4 = CharBlock(icon="title", classname="title")
+    intro = RichTextBlock(icon="pilcrow")
+    paragraph = RichTextBlock(icon="pilcrow")
+    aligned_image = ImageBlock(label="Aligned image", icon="image")
+    pullquote = PullQuoteBlock()
+    aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
+    document = DocumentChooserBlock(icon="doc-full-inverse")
 
 
 # A couple of abstract classes that contain commonly used fields
@@ -164,8 +207,7 @@ class HomePageRelatedLink(Orderable, RelatedLink):
 
 
 class HomePage(Page):
-    body = RichTextField(blank=True)
-
+    body = StreamField(DemoStreamBlock())
     search_fields = Page.search_fields + (
         index.SearchField('body'),
     )
@@ -175,7 +217,7 @@ class HomePage(Page):
 
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
-    FieldPanel('body', classname="full"),
+    StreamFieldPanel('body'),
     InlinePanel('carousel_items', label="Carousel items"),
     InlinePanel('related_links', label="Related links"),
 ]
@@ -324,7 +366,7 @@ class BlogPageTag(TaggedItemBase):
 
 
 class BlogPage(Page):
-    body = RichTextField()
+    body = StreamField(DemoStreamBlock())
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     date = models.DateField("Post date")
     feed_image = models.ForeignKey(
@@ -347,7 +389,7 @@ class BlogPage(Page):
 BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('date'),
-    FieldPanel('body', classname="full"),
+    StreamFieldPanel('body'),
     InlinePanel('carousel_items', label="Carousel items"),
     InlinePanel('related_links', label="Related links"),
 ]
