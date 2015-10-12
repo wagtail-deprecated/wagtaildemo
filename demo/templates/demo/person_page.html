@@ -1,5 +1,5 @@
 {% extends "demo/base.html" %}
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
     {% include "demo/includes/intro.html" with intro=self.intro only %}
@@ -14,7 +14,11 @@
         <div class="page-header"><h3>Biography</h3></div>
     {% endif %}
 
-    {% include "demo/includes/body.html" with body=self.biography only %}
+    {% if self.body %}
+        <div class="body-content">
+            {{ self.body|richtext }}
+        </div>
+    {% endif %}
 
     {% include "demo/includes/contact.html" with contact=self only %}
 
