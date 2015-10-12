@@ -1,9 +1,13 @@
 {% extends "demo/base.html" %}
 
-{% load demo_tags %}
+{% load demo_tags wagtailcore_tags %}
 
 {% block content %}
-    {% include "demo/includes/body.html" with body=self.body only %}
+    {% if self.body %}
+        <div class="body-content">
+            {{ self.body|richtext }}
+        </div>
+    {% endif %}
 
     {% include "demo/includes/contact.html" with contact=self only %}
 
