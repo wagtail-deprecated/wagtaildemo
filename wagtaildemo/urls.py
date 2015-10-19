@@ -6,6 +6,7 @@ from django.contrib import admin
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
+from wagtail.contrib.wagtailapi import urls as wagtailapi_urls
 
 from demo import views
 
@@ -17,6 +18,7 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'search/$', views.search, name='search'),
+    url(r'^api/', include(wagtailapi_urls)),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's serving mechanism
