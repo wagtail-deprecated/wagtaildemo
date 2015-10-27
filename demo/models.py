@@ -15,7 +15,7 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailsearch import index
 
-from wagtail.wagtailcore.blocks import TextBlock, ChooserBlock, StructBlock, ListBlock, StreamBlock, FieldBlock, CharBlock, RichTextBlock, PageChooserBlock, RawHTMLBlock
+from wagtail.wagtailcore.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, CharBlock, RichTextBlock, RawHTMLBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
@@ -33,6 +33,7 @@ EVENT_AUDIENCE_CHOICES = (
 
 # Global Streamfield definition
 
+
 class PullQuoteBlock(StructBlock):
     quote = TextBlock("quote title")
     attribution = CharBlock()
@@ -40,16 +41,24 @@ class PullQuoteBlock(StructBlock):
     class Meta:
         icon = "openquote"
 
+
 class ImageFormatChoiceBlock(FieldBlock):
-    field = forms.ChoiceField(choices=(('left','Wrap left'),('right','Wrap right'),('mid','Mid width'),('full','Full width'),))
+    field = forms.ChoiceField(choices=(
+        ('left', 'Wrap left'), ('right', 'Wrap right'), ('mid', 'Mid width'), ('full', 'Full width'),
+    ))
+
 
 class HTMLAlignmentChoiceBlock(FieldBlock):
-    field = forms.ChoiceField(choices=(('normal','Normal'),('full','Full width'),))
+    field = forms.ChoiceField(choices=(
+        ('normal', 'Normal'), ('full', 'Full width'),
+    ))
+
 
 class ImageBlock(StructBlock):
     image = ImageChooserBlock()
     caption = RichTextBlock()
     alignment = ImageFormatChoiceBlock()
+
 
 class AlignedHTMLBlock(StructBlock):
     html = RawHTMLBlock()
@@ -57,6 +66,7 @@ class AlignedHTMLBlock(StructBlock):
 
     class Meta:
         icon = "code"
+
 
 class DemoStreamBlock(StreamBlock):
     h2 = CharBlock(icon="title", classname="title")
