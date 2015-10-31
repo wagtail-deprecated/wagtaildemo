@@ -1,3 +1,0 @@
--r base.txt
-django-redis==3.8.2
-elasticsearch==1.2.0
