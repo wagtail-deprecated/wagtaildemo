@@ -14,5 +14,5 @@ elasticsearch==1.2.0
 
 # Dependencies for Heroku deployment
 dj-database-url==0.3.0
-dj-static==0.0.6
-gunicorn==19.1.1
+whitenoise==2.0.4
+uwsgi==2.0.11.2
