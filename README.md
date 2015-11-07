@@ -7,9 +7,9 @@ This is a demonstration project for [Wagtail CMS](http://wagtail.io).
 
 *We do __not__ recommend using this project to start your own site*. This project is only to provide some examples of implementing common features, it is not an exemplar of Django or Wagtail best practice.
 
-If you're reasonably new to Python/Django, we suggest you run this project on a Virtual Machine using Vagrant, which helps  resolve common software dependency issues. However for more experienced developers, instructions to start this project without Vagrant follow below. 
+If you're reasonably new to Python/Django, we suggest you run this project on a Virtual Machine using Vagrant, which helps  resolve common software dependency issues. However for more experienced developers, instructions to start this project without Vagrant follow below.
 
-Once you're familiar with the examples in this project and you want to start a real site, we strongly recommend running the ``wagtail start`` command in a fresh virtual environment, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/). 
+Once you're familiar with the examples in this project and you want to start a real site, we strongly recommend running the ``wagtail start`` command in a fresh virtual environment, explained in the [Wagtail CMS Documentation](http://wagtail.readthedocs.org/en/latest/getting_started/).
 
 Setup with Vagrant
 ------------------
@@ -44,7 +44,7 @@ With PostgreSQL running (and configured to allow you to connect as the 'postgres
 
     git clone https://github.com/torchbox/wagtaildemo.git
     cd wagtaildemo
-    pip install -r requirements/dev.txt
+    pip install -r requirements.txt
     createdb -Upostgres wagtaildemo
     ./manage.py migrate
     ./manage.py load_initial_data
