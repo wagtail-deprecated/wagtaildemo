@@ -5,9 +5,7 @@
     {% include "demo/includes/intro.html" with intro=self.intro only %}
 
     {% if self.image %}
-        {# Person image - first store image as a variable in order to construct an image tag with a class applied #}
-        {% image self.image width-300 as photo %}
-        <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" class="img-thumbnail" />
+        {% image self.image width-300 class="img-thumbnail" %}
     {% endif %}
 
     {% if self.biography %}
