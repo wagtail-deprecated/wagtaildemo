@@ -2,7 +2,7 @@ Django==1.8.2
 psycopg2==2.6
 django-compressor>=1.4
 django-modelcluster>=0.6
-wagtail>=1.0,<1.2
+wagtail>=1.0,<1.4
 django-taggit>=0.14.0
 django-libsass>=0.2
 libsass==0.8.2
