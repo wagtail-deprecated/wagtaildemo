@@ -5,7 +5,7 @@
 
 {% block heading %}
   <h1 class="page-header">
-    Search results{% if request.GET.q %} for “{{ request.GET.q }}”{% endif %}
+    Search results{% if request.GET.query %} for “{{ request.GET.query }}”{% endif %}
   </h1>
 {% endblock %}
 
