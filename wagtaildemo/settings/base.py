@@ -48,10 +48,7 @@ USE_I18N = True
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-# Note that with this set to True, Wagtail will fall back on using numeric dates
-# in date fields, as opposed to 'friendly' dates like "24 Sep 2013", because
-# Python's strptime doesn't support localised month names: https://code.djangoproject.com/ticket/13339
-USE_L10N = False
+USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
