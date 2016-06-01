@@ -28,7 +28,7 @@ Run the following commands:
       (then, within the SSH session:)
     ./manage.py runserver 0.0.0.0:8000
 
-The demo site will now be accessible at [http://localhost:8000/](http://localhost:8000/) and the Wagtail admin interface at [http://localhost:8000/admin/](http://localhost:8000/admin/) . Log into the admin with the credentials ``admin / changeme``.
+The demo site will now be accessible at [http://localhost:8000/](http://localhost:8000/) and the Wagtail admin interface at [http://localhost:8000/admin/](http://localhost:8000/admin/) . You will need to create a super user before you can log in ([see below](#installation-1)).
 
 Setup without Vagrant
 -----
