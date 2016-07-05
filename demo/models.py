@@ -7,7 +7,7 @@ from django import forms
 
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
@@ -643,8 +643,10 @@ FormPage.content_panels = [
     InlinePanel('form_fields', label="Form fields"),
     FieldPanel('thank_you_text', classname="full"),
     MultiFieldPanel([
-        FieldPanel('to_address', classname="full"),
-        FieldPanel('from_address', classname="full"),
-        FieldPanel('subject', classname="full"),
-    ], "Email")
+        FieldRowPanel([
+            FieldPanel('from_address', classname="col6"),
+            FieldPanel('to_address', classname="col6"),
+        ]),
+        FieldPanel('subject'),
+    ], "Email"),
 ]
