@@ -53,5 +53,4 @@ With PostgreSQL running (and configured to allow you to connect as the 'postgres
 
 ### SQLite support
 
-SQLite is supported as an alternative to PostgreSQL - update the `DATABASES` setting
-in wagtaildemo/settings/base.py to use `'django.db.backends.sqlite3'` and set `NAME` to be the full path of your database file, as you would with a regular Django project.
+SQLite is supported as an alternative to PostgreSQL. Before running the `pip install -r requirements.txt` step above, delete the `psycopg2` line in requirements.txt; then, in wagtaildemo/settings/base.py, update the `DATABASES` setting to use `'django.db.backends.sqlite3'` and set `NAME` to be the full path of your database file, as you would with a regular Django project.
