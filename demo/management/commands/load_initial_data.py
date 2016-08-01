@@ -1,12 +1,12 @@
 import os, shutil
 
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.core.management import call_command
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, **options):
         fixtures_dir = os.path.join(settings.PROJECT_ROOT, 'demo', 'fixtures')
         fixture_file = os.path.join(fixtures_dir, 'demo.json')
         image_src_dir = os.path.join(fixtures_dir, 'images')
