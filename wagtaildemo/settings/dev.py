@@ -8,6 +8,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 BASE_URL = 'http://localhost:8111'
 
 try:
-	from .local import *
+    from .local import *
 except ImportError:
-	pass
+    pass

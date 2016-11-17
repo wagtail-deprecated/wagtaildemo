@@ -47,6 +47,6 @@ CELERYD_LOG_COLOR = False
 
 
 try:
-	from .local import *
+    from .local import *
 except ImportError:
-	pass
+    pass
