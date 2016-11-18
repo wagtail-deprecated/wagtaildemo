@@ -32,6 +32,6 @@ TEMPLATE_LOADERS = (
 
 
 try:
-	from .local import *
+    from .local import *
 except ImportError:
-	pass
+    pass
