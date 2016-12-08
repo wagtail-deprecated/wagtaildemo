@@ -7,8 +7,18 @@ from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.contrib.wagtailapi import urls as wagtailapi_urls
+from wagtail.api.v2.router import WagtailAPIRouter
+from wagtail.api.v2.endpoints import PagesAPIEndpoint
+from wagtail.wagtaildocs.api.v2.endpoints import DocumentsAPIEndpoint
+from wagtail.wagtailimages.api.v2.endpoints import ImagesAPIEndpoint
 
 from demo import views
+
+
+api = WagtailAPIRouter('api')
+api.register_endpoint('pages', PagesAPIEndpoint)
+api.register_endpoint('images', ImagesAPIEndpoint)
+api.register_endpoint('documents', DocumentsAPIEndpoint)
 
 
 urlpatterns = [
@@ -19,6 +29,7 @@ urlpatterns = [
 
     url(r'search/$', views.search, name='search'),
     url(r'^api/', include(wagtailapi_urls)),
+    url(r'^api/v2beta/', include(api.urls)),
 
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's serving mechanism
