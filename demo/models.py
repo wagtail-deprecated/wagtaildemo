@@ -3,6 +3,7 @@ from datetime import date
 from django.db import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
+from django.utils.encoding import python_2_unicode_compatible
 from django import forms
 
 from wagtail.wagtailcore.models import Page, Orderable
@@ -184,6 +185,7 @@ class AdvertPlacement(models.Model):
     advert = models.ForeignKey('demo.Advert', related_name='+')
 
 
+@python_2_unicode_compatible
 class Advert(models.Model):
     page = models.ForeignKey(
         'wagtailcore.Page',
@@ -200,7 +202,7 @@ class Advert(models.Model):
         FieldPanel('text'),
     ]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
 register_snippet(Advert)
