@@ -20,6 +20,8 @@ su - vagrant -c "pyvenv $VIRTUALENV_DIR"
 
 su - vagrant -c "echo $PROJECT_DIR > $VIRTUALENV_DIR/.project"
 
+#Update pip
+su - vagrant -c "$PIP install -U pip"
 
 # Install PIP requirements
 su - vagrant -c "$PIP install -r $PROJECT_DIR/requirements.txt -f /home/vagrant/wheelhouse"
