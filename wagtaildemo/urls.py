@@ -19,10 +19,6 @@ urlpatterns = [
 
     url(r'search/$', views.search, name='search'),
     url(r'^api/', include(wagtailapi_urls)),
-
-    # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's serving mechanism
-    url(r'', include(wagtail_urls)),
 ]
 
 
@@ -35,3 +31,18 @@ if settings.DEBUG:
     urlpatterns += [
         url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'demo/images/favicon.ico'))
     ]
+
+    # Uncomment the lines below to enable django-debug-toolbar (along with the
+    # corresponding lines in settings/local.py):
+    # import debug_toolbar
+
+    # urlpatterns += [
+    #     url(r'^__debug__/', include(debug_toolbar.urls)),
+    # ]
+
+
+# For anything not caught by a more specific rule above, hand over to
+# Wagtail's serving mechanism (must come last)
+urlpatterns += [
+    url(r'', include(wagtail_urls)),
+]
