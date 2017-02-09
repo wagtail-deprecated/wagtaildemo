@@ -12,16 +12,16 @@ SECRET_KEY = 'enter-a-long-unguessable-string-here'
 
 # When developing Wagtail templates, we recommend django-debug-toolbar
 # for keeping track of page rendering times. To use it:
-#     pip install django-debug-toolbar==1.0.1
-# and uncomment the lines below.
+#     pip install django-debug-toolbar
+# uncomment the lines below, and uncomment the corresponding lines in urls.py
 
 # from .base import INSTALLED_APPS, MIDDLEWARE_CLASSES
 # INSTALLED_APPS += (
 #     'debug_toolbar',
 # )
-# MIDDLEWARE_CLASSES += (
+# MIDDLEWARE_CLASSES = [
 #     'debug_toolbar.middleware.DebugToolbarMiddleware',
-# )
+# ] + list(MIDDLEWARE_CLASSES)
 # # django-debug-toolbar settings
 # DEBUG_TOOLBAR_CONFIG = {
 #     'INTERCEPT_REDIRECTS': False,
