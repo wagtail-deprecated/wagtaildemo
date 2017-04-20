@@ -8,6 +8,14 @@ django-libsass>=0.2
 libsass==0.8.2
 Pillow==3.2.0
 html5lib==0.999999
+Willow
+djangorestframework
+django-appconf
+django-treebeard
+Unidecode
+bs4
+
+
 
 # Dependencies for hosting
 django-redis==3.8.2
