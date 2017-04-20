@@ -18,7 +18,7 @@
                 {% for pick in search_picks %}
                     <li>
                         <h4><a href="{% pageurl pick.page %}">{{ pick.page.title }}</a></h4>
-                        <p>{{ pick.description|safe }}</p>
+                        <p>{{ pick.description }}</p>
                     </li>
                 {% endfor %}
             </ul>
@@ -31,7 +31,7 @@
                 <li>
                     <h4><a href="{% pageurl result.specific %}">{{ result.specific }}</a></h4>
                     {% if result.specific.search_description %}
-                        {{ result.specific.search_description|safe }}
+                        {{ result.specific.search_description }}
                     {% endif %}
                 </li>
             {% endfor %}
