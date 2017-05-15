@@ -45,11 +45,11 @@ if settings.DEBUG:
 
     # Uncomment the lines below to enable django-debug-toolbar (along with the
     # corresponding lines in settings/local.py):
-    # import debug_toolbar
+    #import debug_toolbar
 
-    # urlpatterns += [
-    #     url(r'^__debug__/', include(debug_toolbar.urls)),
-    # ]
+    #urlpatterns += [
+    #    url(r'^__debug__/', include(debug_toolbar.urls)),
+    #]
 
 
 # For anything not caught by a more specific rule above, hand over to
