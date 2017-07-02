@@ -32,10 +32,18 @@ def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
+        # use get_url to enable caching of site_root_paths, if possible
+        try:
+            calling_page_url = calling_page.get_url(request=context.get('request'))
+            menuitem_url = menuitem.get_url(request=context.get('request'))
+        except AttributeError:
+            # We're still using Wagtail 1.9 or older
+            calling_page_url = calling_page.url
+            menuitem_url = menuitem.url
         # We don't directly check if calling_page is None since the template
         # engine can pass an empty string to calling_page
         # if the variable passed as calling_page does not exist.
-        menuitem.active = (calling_page.url.startswith(menuitem.url)
+        menuitem.active = (calling_page_url.startswith(menuitem_url)
                            if calling_page else False)
     return {
         'calling_page': calling_page,
