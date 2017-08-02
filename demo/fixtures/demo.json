@@ -1,10 +1,11 @@
 [
 {
     "pk": 1, 
-    "model": "wagtailcore.page", 
+    "model": "wagtailcore.page",
     "fields": {
-        "title": "Root", 
-        "numchild": 1, 
+        "title": "Root",
+        "draft_title": "Root",
+        "numchild": 1,
         "show_in_menus": false, 
         "live": true, 
         "seo_title": "", 
@@ -26,7 +27,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Home page", 
-        "numchild": 5, 
+        "draft_title": "Home page",
+        "numchild": 5,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -48,7 +50,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Events index", 
-        "numchild": 2, 
+        "draft_title": "Events index",
+        "numchild": 2,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -70,7 +73,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Blog index", 
-        "numchild": 3, 
+        "draft_title": "Blog index",
+        "numchild": 3,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -92,7 +96,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Standard index", 
-        "numchild": 4, 
+        "draft_title": "Standard index",
+        "numchild": 4,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -114,7 +119,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Event 1", 
-        "numchild": 0, 
+        "draft_title": "Event 1",
+        "numchild": 0,
         "show_in_menus": false, 
         "live": true, 
         "seo_title": "", 
@@ -136,7 +142,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Event 2", 
-        "numchild": 0, 
+        "draft_title": "Event 2",
+        "numchild": 0,
         "show_in_menus": false, 
         "live": true, 
         "seo_title": "", 
@@ -158,7 +165,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Standard page 1", 
-        "numchild": 0, 
+        "draft_title": "Standard page 1",
+        "numchild": 0,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -180,7 +188,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Contact page", 
-        "numchild": 0, 
+        "draft_title": "Contact page",
+        "numchild": 0,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -202,7 +211,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "James Joyce", 
-        "numchild": 0, 
+        "draft_title": "James Joyce",
+        "numchild": 0,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -224,7 +234,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "David Mitchell", 
-        "numchild": 0, 
+        "draft_title": "David Mitchell",
+        "numchild": 0,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -246,7 +257,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Standard page 2", 
-        "numchild": 0, 
+        "draft_title": "Standard page 2",
+        "numchild": 0,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -268,7 +280,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Blog post", 
-        "numchild": 0, 
+        "draft_title": "Blog post",
+        "numchild": 0,
         "show_in_menus": false, 
         "live": true, 
         "seo_title": "", 
@@ -290,7 +303,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Photo credits", 
-        "numchild": 0, 
+        "draft_title": "Photo credits",
+        "numchild": 0,
         "show_in_menus": false, 
         "live": true, 
         "seo_title": "", 
@@ -312,7 +326,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Blog post again", 
-        "numchild": 0, 
+        "draft_title": "Blog post again",
+        "numchild": 0,
         "show_in_menus": false, 
         "live": true, 
         "seo_title": "", 
@@ -334,7 +349,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Another blog post", 
-        "numchild": 0, 
+        "draft_title": "Another blog post",
+        "numchild": 0,
         "show_in_menus": false, 
         "live": true, 
         "seo_title": "", 
@@ -356,7 +372,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "People", 
-        "numchild": 2, 
+        "draft_title": "People",
+        "numchild": 2,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -378,7 +395,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "A deeper menu level", 
-        "numchild": 2, 
+        "draft_title": "A deeper menu level",
+        "numchild": 2,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -400,7 +418,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "A grandchild page", 
-        "numchild": 0, 
+        "draft_title": "A grandchild page",
+        "numchild": 0,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
@@ -422,7 +441,8 @@
     "model": "wagtailcore.page", 
     "fields": {
         "title": "Another grandchild page", 
-        "numchild": 0, 
+        "draft_title": "Another grandchild page",
+        "numchild": 0,
         "show_in_menus": true, 
         "live": true, 
         "seo_title": "", 
