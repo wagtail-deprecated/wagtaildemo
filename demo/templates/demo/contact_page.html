@@ -17,6 +17,6 @@
 
         <div class="page-header"><h3>Map</h3></div>
 
-        <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ self.post_code }}&amp;zoom=13&amp;size=800x400&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:green|{{ self.post_code }}{% if google_maps_key %}&amp;key={{ google_maps_key }}{% endif %}" />
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ self.post_code }}&amp;zoom=13&amp;size=800x400&amp;maptype=roadmap&amp;sensor=false&amp;markers=color:green|{{ self.post_code }}{% if google_maps_key %}&amp;key={{ google_maps_key }}{% endif %}" />
     {% endif %}
 {% endblock %}
