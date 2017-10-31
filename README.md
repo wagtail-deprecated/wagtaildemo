@@ -3,6 +3,8 @@
 Wagtail demo project
 =======================
 
+**This demo site is deprecated, and will not be updated for Wagtail 2.0. For an up-to-date demo site, please see: https://github.com/wagtail/bakerydemo**
+
 This is a demonstration project for [Wagtail CMS](http://wagtail.io).
 
 *We do __not__ recommend using this project to start your own site*. This project is only to provide some examples of implementing common features, it is not an exemplar of Django or Wagtail best practice.
