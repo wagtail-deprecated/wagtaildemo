@@ -1,6 +1,11 @@
 from datetime import datetime, time, timedelta
 import hashlib
+import re
 
+
+def add_slashes(string):
+    string = re.escape(string)
+    return string
 
 def export_event(event, format='ical'):
     # Only ical format supported at the moment
@@ -41,15 +46,6 @@ def export_event(event, format='ical'):
             start_time
         )
         end_datetime = datetime.combine(date, end_time)
-
-        def add_slashes(string):
-            string.replace('"', '\\"')
-            string.replace('\\', '\\\\')
-            string.replace(',', '\\,')
-            string.replace(':', '\\:')
-            string.replace(';', '\\;')
-            string.replace('\n', '\\n')
-            return string
 
         # Make a uid
         event_string = event.url + str(start_datetime)
